@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Build output
+dist/
+build/
+out/
+release/
+target/
+
+# Logs and local evidence
+*.log
+*.tmp
+*.trace
+security-research/raw/
+security-research/local/
+research/private/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.example.json
+
+# Local caches
+.cache/
+.npm/
+.yarn/cache/
+.yarn/install-state.gz
