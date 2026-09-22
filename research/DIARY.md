@@ -50,3 +50,10 @@ The public HTML guide now reads repository metadata, GitHub Actions Pages status
 
 ### [RUDRA] Public guide access
 The live guide is available at `https://rudra-khandelwal.github.io/hydra/` for direct access.
+
+### [CHATGPT] GitHub Pages deployment verified
+The latest Pages workflow run (#7) for commit `171fc032305750e1c35bad7952073cb8c3877155` completed successfully. The earlier failed deployment remains visible as historical deployment history in GitHub.
+
+### [CHATGPT] Live guide data model
+The live HTML now treats GitHub as the source of truth: public repository metadata, recent commits, GitHub Actions status, repository file tree, and research diary/agenda/findings are fetched from GitHub when the page loads.
+

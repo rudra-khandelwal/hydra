@@ -20,8 +20,8 @@
 
 ## Next phases
 
-1. Enable/configure GitHub Pages for the public repository.
-2. Rerun the Pages workflow and verify the published site.
+1. ~~Enable/configure GitHub Pages for the public repository.~~ Completed 22 September 2026.
+2. ~~Rerun the Pages workflow and verify the deployment workflow.~~ Completed 22 September 2026; latest run #7 succeeded.
 3. Verify local Git remote and repository history.
 4. Synchronize the validated local Hydra source into the repository without unnecessary generated artifacts.
 5. Add reproducible evidence templates and dated checkpoints.

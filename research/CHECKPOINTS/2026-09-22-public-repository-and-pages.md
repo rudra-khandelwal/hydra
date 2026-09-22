@@ -40,7 +40,7 @@ The failure is a GitHub Pages configuration/enablement issue rather than an HTML
 
 ## Finding
 
-No successful Pages deployment has yet been established from the observed run.
+The initial Pages run failed because Pages was not yet enabled/configured. A later deployment succeeded: workflow run #6 completed successfully after Pages was enabled, and the latest run #7 for the GitHub-backed HTML update also completed successfully.
 
 The repository's public state was independently verified after the publication decision.
 
@@ -59,9 +59,19 @@ This is an infrastructure/deployment observation, not a security conclusion abou
 - Chose to make the research repository fully public.
 - Confirmed the intended public publication scope.
 
+## Deployment status update
+
+GitHub Pages is now enabled and the deployment workflow is succeeding. The latest observed workflow run is **#7**, for commit `171fc032305750e1c35bad7952073cb8c3877155`, with conclusion **success**.
+
+The GitHub deployment page may still show earlier red entries. Those are historical failed deployment records; they do not indicate that the current Pages workflow is failing.
+
 ## Next action
 
-Enable/configure GitHub Pages to use GitHub Actions, rerun the workflow, and record the resulting deployment status in the next dated checkpoint.
+Continue the controlled security research cycle and record each substantive test as a dated checkpoint.
+
+## Live guide note
+
+The public HTML guide now reads live repository/research data from GitHub. This means today's diary entries and future committed research updates can appear on the published guide without duplicating the complete diary inside the HTML source.
 
 ## Public-release note
 
