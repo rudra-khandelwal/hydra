@@ -77,3 +77,27 @@ Restored the earlier Claude visual design language for the public guide: dark br
 
 ### [CHATGPT] Single live README link
 The main README now contains one direct live-guide link, rather than a large banner or multiple repeated live-guide links.
+
+### [CHATGPT] Research notes editor redesign
+The public guide's Research Notes section was upgraded from a plain text note workflow to a rich editor. A saved note now creates a new numbered section after the original guide sections (17, 18, 19, …), with a user-defined section title and a corresponding sidebar entry.
+
+### [CHATGPT] Created-section navigation
+Created research notes now render as full research-panel sections and are added to a dedicated sidebar group. New entries use the same navigation/entry animation language as the guide, and saving a note automatically scrolls to the newly created section. Only user-created sections can be deleted; the original guide sections remain protected.
+
+### [CHATGPT] Rich research-note formatting
+The note editor now supports bold text, underline, direct clickable URLs, and named clickable links. Link handling is restricted to HTTP/HTTPS URLs, with safe external-link attributes applied when notes are rendered.
+
+### [CHATGPT] Security research navigation simplification
+The previous 12A/12B/12C/12D navigation was consolidated into section 12, `security-check`, with a `security research` subtopic and the checkpoint, one-go, status, and diary items grouped beneath it.
+
+### [CHATGPT] Legacy note migration
+Existing browser-saved research notes from the earlier plain-text format were migrated into the new rich-note structure, preserving their text and line breaks instead of discarding prior notes.
+
+### [CHATGPT] Research-note validation
+The updated client-side JavaScript was syntax-checked after the migration fix and passed validation. The public guide changes were committed to the repository in sequential updates, including the final legacy line-break migration fix.
+
+### [RUDRA] End-of-day checkpoint
+Today's guide/editor work is considered complete for the day. Historical diary entries remain preserved, the public guide contains the current research-note workflow, and no private vault credentials or authentication material were added to the public repository.
+
+### Next checkpoint
+Verify the latest GitHub Pages deployment in a browser, test creating/formatting/deleting a research note on the live guide, then continue the controlled Hydra security research cycle and record the next substantive runtime test.
