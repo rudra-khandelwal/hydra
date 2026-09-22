@@ -122,9 +122,11 @@ See `upstream/UPSTREAM.md` for provenance and synchronization notes.
 
 The repository contains the public `index.html` research guide and a GitHub Actions workflow that deploys it with GitHub Pages.
 
-The first deployment attempt on 22 September 2026 failed at the Pages configuration step because Pages was not yet enabled. After Pages was enabled, subsequent deployments succeeded. The repository contains a public GitHub Pages research guide.
+The first deployment attempt on 22 September 2026 failed at the Pages configuration step because Pages was not yet enabled. After Pages was enabled, subsequent deployments succeeded.
 
-The live guide reads repository/research data from GitHub, so GitHub is the source of truth for the published research record.
+**Live research guide:** [Open the live guide](https://rudra-khandelwal.github.io/hydra/)
+
+The guide preserves the earlier Claude visual design while incorporating the current verified build environment, research checkpoint, diary attribution, security workflow, and one-paste setup path. Private credentials and vault material are intentionally excluded from the public page.
 
 ## Disclaimer
 
