@@ -57,3 +57,8 @@ The latest Pages workflow run (#7) for commit `171fc032305750e1c35bad7952073cb8c
 ### [CHATGPT] Live guide data model
 The live HTML now treats GitHub as the source of truth: public repository metadata, recent commits, GitHub Actions status, repository file tree, and research diary/agenda/findings are fetched from GitHub when the page loads.
 
+### [RUDRA] Main repository live-guide link
+The main GitHub repository README now exposes the public research guide directly at `https://rudra-khandelwal.github.io/hydra/` for easy visitor access.
+
+### [CHATGPT] README publication update
+The repository README was updated to prominently link the live GitHub Pages guide and document that GitHub is the source of truth for the live research record.
