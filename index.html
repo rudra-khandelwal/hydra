@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hydra Launcher — Windows Build & Security Research Guide</title>
+<style>
+:root{
+  --bg:#15110c;--bg2:#0f0c09;--panel:#1d1811;--panel-soft:#1a1610;
+  --line:#3a2f1f;--line-soft:#2a2318;
+  --text:#f2e8d5;--muted:#a8987c;--dim:#6e6250;
+  --accent:#e8a33d;--accent-soft:#8a6526;
+  --good:#7db894;--warn:#e0b24f;--danger:#d9755f;
+  --mono:Consolas,"Cascadia Code","Courier New",monospace;
+  --sans:"Segoe UI",Inter,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--text);font:15.5px/1.75 var(--sans);
+  background:var(--bg2);
+}
+
+/* ---------- title bar ---------- */
+.titlebar{
+  position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:10px;
+  padding:10px 18px;background:#0c0a07;border-bottom:1px solid var(--line);
+}
+.dots{display:flex;align-items:center;gap:6px}
+.dots .dot{
+  width:10px;height:10px;border-radius:50%;
+  background:#3a3225;display:block;flex:none;
+}
+.dots .decor-dot{
+  animation:dotPulse 1.8s ease-in-out infinite;
+}
+.dots .decor-dot:nth-child(3){animation-delay:.25s}
+@keyframes dotPulse{
+  0%,100%{opacity:.55;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.08)}
+}
+.titlebar .path{font:12.5px/1 var(--mono);color:var(--dim)}
+.titlebar .path b{color:var(--muted);font-weight:400}
+
+/* ---------- shell layout ---------- */
+.shell{display:flex;max-width:1180px;margin:0 auto;align-items:flex-start}
+.nav{
+  width:250px;flex:none;position:sticky;top:41px;
+  max-height:calc(100vh - 41px);overflow-y:auto;
+  padding:22px 10px 40px 18px;border-right:1px solid var(--line);
+}
+.nav-group-label{font:11.5px var(--mono);color:var(--dim);margin:18px 0 6px 10px}
+.nav-group-label:first-child{margin-top:0}
+.nav a{
+  display:flex;gap:8px;align-items:baseline;text-decoration:none;color:var(--muted);
+  font:13px var(--mono);padding:6px 10px;border-radius:5px;border-left:2px solid transparent;
+}
+.nav a .idx{color:var(--dim)}
+.nav a:hover{background:var(--panel-soft);color:var(--text)}
+.nav a.active{background:var(--panel-soft);color:var(--accent);border-left-color:var(--accent)}
+
+.content{flex:1;min-width:0;padding:0 26px 90px}
+
+/* ---------- banner ---------- */
+.banner{padding:52px 6px 30px;max-width:640px}
+.banner .kicker{font:12.5px var(--mono);color:var(--accent);margin:0 0 14px}
+.banner h1{font:600 42px/1.15 var(--sans);letter-spacing:-.5px;margin:0 0 14px;color:var(--text)}
+.banner p{color:var(--muted);font-size:16px;margin:0 0 20px}
+.envrow{display:flex;flex-wrap:wrap;gap:8px 10px;font:12.5px var(--mono)}
+.envrow span{color:var(--dim)}
+.envrow span b{color:var(--muted);font-weight:400}
+.banner-note{
+  margin-top:24px;padding:14px 16px;border:1px solid var(--line);border-left:3px solid var(--good);
+  background:var(--panel-soft);font-size:14px;color:var(--muted);border-radius:0 6px 6px 0
+}
+.banner-note strong{color:var(--text)}
+
+/* ---------- sections ---------- */
+section{margin:0 0 6px;padding:30px 0;border-top:1px solid var(--line-soft)}
+section:first-of-type{border-top:none}
+h2{
+  font:600 20px/1.3 var(--sans);letter-spacing:-.2px;margin:0 0 16px;
+  display:flex;align-items:baseline;gap:10px
+}
+h2 .tag{font:12.5px var(--mono);color:var(--dim)}
+h3{margin:24px 0 10px;font:600 15px var(--sans);color:var(--text)}
+p{margin:10px 0 15px;color:var(--text)}
+.sub,.mini{color:var(--muted)}
+.mini{font-size:13px}
+a{color:var(--accent)}
+
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14.5px}
+th,td{border-bottom:1px solid var(--line-soft);padding:10px 12px;text-align:left;vertical-align:top}
+th{color:var(--dim);font:13px var(--mono);font-weight:400}
+td strong{color:var(--text)}
+
+code:not(pre code){background:var(--panel-soft);color:var(--accent);padding:2px 6px;border-radius:4px;font-size:13.5px;font-family:var(--mono)}
+
+pre{
+  position:relative;background:#0c0a07;border:1px solid var(--line);border-radius:6px;
+  padding:18px 16px;margin:14px 0;overflow:auto;
+}
+pre code{font:13.5px/1.65 var(--mono);white-space:pre;color:#e4d9c3}
+.copy{
+  position:absolute;right:9px;top:9px;background:transparent;color:var(--dim);border:1px solid var(--line);
+  border-radius:4px;padding:4px 9px;cursor:pointer;font:12px var(--mono);
+}
+.copy:hover{border-color:var(--accent);color:var(--accent)}
+
+.callout{margin:14px 0;padding:14px 16px;border:1px solid var(--line);border-left:3px solid var(--dim);border-radius:0 6px 6px 0;background:var(--panel-soft);font-size:14.5px}
+.callout strong{color:var(--text)}
+.good{border-left-color:var(--good)}
+.warn{border-left-color:var(--warn)}
+.danger{border-left-color:var(--danger)}
+
+.step{display:grid;grid-template-columns:52px 1fr;gap:14px;margin:16px 0}
+.step-tag{font:12px var(--mono);color:var(--accent);padding-top:3px}
+.step-tag i{display:block;color:var(--dim);font-style:normal}
+
+.grid6{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);margin:16px 0;border-radius:6px;overflow:hidden}
+.grid6 .cell{background:var(--panel);padding:15px 16px}
+.grid6 .cell b{display:block;font:13px var(--mono);color:var(--accent);margin-bottom:4px}
+.grid6 .cell span{color:var(--muted);font-size:13.5px}
+
+textarea{
+  width:100%;min-height:230px;resize:vertical;background:#0c0a07;color:var(--text);
+  border:1px solid var(--line);border-radius:6px;padding:15px;font:13.5px/1.6 var(--mono);outline:none
+}
+textarea:focus{border-color:var(--accent-soft)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.action{
+  border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:5px;
+  padding:8px 14px;cursor:pointer;font:13px var(--sans);font-weight:600
+}
+.action:hover{border-color:var(--accent-soft);color:var(--text)}
+.action.primary{background:var(--accent);border-color:var(--accent);color:#1a1206}
+.action.primary:hover{filter:brightness(1.08)}
+.action.danger{color:var(--danger);border-color:#4a2c22}
+.status{font-size:12.5px;color:var(--dim);margin-top:10px;min-height:16px;font-family:var(--mono)}
+
+.checklist td:last-child{color:var(--dim)}
+
+.foot{max-width:640px;padding:20px 6px 60px;color:var(--dim);font-size:13px}
+
+.navtoggle{display:none}
+
+@media(max-width:880px){
+  .nav{
+    position:sticky;top:41px;width:100%;max-height:none;overflow:visible;
+    display:flex;overflow-x:auto;gap:2px;border-right:none;border-bottom:1px solid var(--line);
+    padding:10px 14px;background:var(--bg2);white-space:nowrap
+  }
+  .nav-group-label{display:none}
+  .nav a{flex:none}
+  .shell{flex-direction:column}
+  .content{padding:0 18px 70px}
+  .banner{padding:30px 4px 22px}
+  .banner h1{font-size:32px}
+}
+
+
+
+</style>
+</head>
+<body>
+<!-- Public GitHub Pages copy: private vault, encrypted vault payload, and vault controls intentionally removed. -->
+
+
+<div class="titlebar">
+  <div class="dots" aria-label="Window controls">
+    <span class="dot decor-dot" aria-hidden="true"></span>
+    <span class="dot decor-dot" aria-hidden="true"></span>
+    <span class="dot decor-dot" aria-hidden="true"></span>
+  </div>
+  <div class="path"><b>hydra-launcher /</b> build-guide + research-diary</div>
+</div>
+
+<div class="shell">
+<nav class="nav" id="sideNav">
+  <div class="nav-group-label">hydra launcher</div>
+  <a href="#overview"><span class="idx">00</span>overview</a>
+  <div class="nav-group-label">setup</div>
+  <a href="#requirements"><span class="idx">01</span>requirements</a>
+  <a href="#git"><span class="idx">02</span>git</a>
+  <a href="#node"><span class="idx">03</span>node</a>
+  <a href="#yarn"><span class="idx">04</span>yarn</a>
+  <a href="#rust"><span class="idx">05</span>rust</a>
+  <a href="#vs"><span class="idx">06</span>vs-build-tools</a>
+  <div class="nav-group-label">build</div>
+  <a href="#clone"><span class="idx">07</span>clone</a>
+  <a href="#terminal"><span class="idx">08</span>terminal</a>
+  <a href="#install"><span class="idx">09</span>install</a>
+  <a href="#env"><span class="idx">10</span>env</a>
+  <a href="#dev"><span class="idx">11</span>run-dev</a>
+  <div class="nav-group-label">research</div>
+  <a href="#security"><span class="idx">12</span>security-check</a>
+  <a href="#firewall"><span class="idx">13</span>firewall</a>
+  <a href="#errors"><span class="idx">14</span>troubleshooting</a>
+  <a href="#package"><span class="idx">15</span>package</a>
+  <a href="#notes"><span class="idx">16</span>notes</a>
+  <a href="#diary"><span class="idx">17</span>research-diary</a>
+</nav>
+
+<main class="content">
+
+<div class="banner">
+  <p class="kicker">windows · source build · security-minded workflow</p>
+  <h1>Hydra Launcher</h1>
+  <p>A clean, beginner-friendly path from source code to a working development build — and a plan for checking what the build actually does before you trust it.</p>
+  <div class="envrow">
+    <span><b>os:</b> windows 11</span>
+    <span><b>toolchain:</b> vs2022 build tools</span>
+    <span><b>rust:</b> msvc</span>
+    <span><b>yarn:</b> 1.22.22</span>
+  </div>
+  <div class="banner-note">
+    <strong>Why run it from a terminal first?</strong> This guide deliberately keeps Hydra in development mode while we test it. The terminal shows build errors, Electron messages and runtime warnings instead of hiding them behind a finished installer. Once the behavior is understood, you can package the Windows application.
+  </div>
+</div>
+
+<section id="overview">
+<h2>Overview <span class="tag">00</span></h2>
+
+<h3>About this project</h3>
+<p>Maintained by <strong>Rudra Khandelwal</strong> — B.Tech Computer Science &amp; Engineering student. This guide is a personal working document for building and evaluating <a href="https://github.com/hydralauncher/hydra" target="_blank" rel="noopener">Hydra Launcher</a>, the open-source game launcher, from source on Windows.</p>
+
+<h3>Agenda</h3>
+<p>Two goals, in order:</p>
+<div class="grid6">
+<div class="cell"><b>build it</b><span>Get a working development build of Hydra Launcher from the official source, using a clean, reproducible Windows toolchain.</span></div>
+<div class="cell"><b>vet it</b><span>Before trusting or packaging the build, do a defensive security pass — dependencies, runtime behavior, network activity, and scanner results — and keep a written record of what was checked.</span></div>
+</div>
+<p class="sub">This is a personal learning project in applied software evaluation: practicing the same due-diligence steps a careful developer would run before installing any third-party desktop application, using a real open-source codebase as the subject.</p>
+
+<h3>Guide for an AI assistant helping on this project</h3>
+<p class="sub">If you're an AI (ChatGPT or otherwise) picking this project up, here's the scope and the approach that keeps this guide useful:</p>
+<ul>
+<li><strong>Subject:</strong> this project is about <code>github.com/hydralauncher/hydra</code>, an open-source Electron-based game launcher. It is unrelated to network login/credential-cracking tools that share the "Hydra" name — don't conflate the two.</li>
+<li><strong>What's in scope:</strong> build troubleshooting (Node/Yarn/Rust/MSVC toolchain issues), dependency auditing, reading `.env`/config, and defensive checks — process monitoring, network capture, Defender/VirusTotal scans — run against the built application.</li>
+<li><strong>What's out of scope:</strong> anything for cracking, brute-forcing, or gaining unauthorized access to accounts or systems. If a request drifts toward that, it doesn't belong in this guide.</li>
+<li><strong>Credentials and secrets:</strong> never design a hidden, password-gated, or hotkey-triggered section for storing credentials, API keys, or "findings" inside this HTML file. Keep the guide fully visible — no concealment mechanics. Real secrets belong in a dedicated password manager (Bitwarden, 1Password) or the OS credential store, referenced by name only, never pasted in here.</li>
+<li><strong>Style:</strong> keep instructions concrete and copy-pasteable (terminal commands, exact file contents), record findings factually rather than drawing early conclusions, and flag anything uncertain instead of guessing.</li>
+</ul>
+</section>
+
+<section id="requirements">
+<h2>What you need <span class="tag">01</span></h2>
+<table>
+<tr><th>component</th><th>recommended setup</th></tr>
+<tr><td>Git</td><td><strong>Current 64-bit Git for Windows</strong></td></tr>
+<tr><td>Node.js</td><td><strong>22 LTS</strong> for a reproducible setup</td></tr>
+<tr><td>Yarn</td><td><strong>1.22.22</strong></td></tr>
+<tr><td>Rust</td><td><strong>Stable MSVC toolchain</strong></td></tr>
+<tr><td>Visual Studio</td><td><strong>Build Tools 2022 only</strong></td></tr>
+<tr><td>MSVC</td><td><strong>v143</strong></td></tr>
+<tr><td>Windows SDK</td><td><strong>Windows 11 SDK</strong></td></tr>
+<tr><td>Hydra</td><td><strong>Official GitHub repository</strong></td></tr>
+</table>
+<div class="callout warn"><strong>Toolchain rule:</strong> keep the native build consistently on VS2022/v143. Mixing VS2026 and VS2022 toolsets caused linker errors during the original setup.</div>
+</section>
+
+<section id="git">
+<h2>Install Git <span class="tag">02</span></h2>
+<p><a href="https://git-scm.com/download/win" target="_blank" rel="noopener">Official Git for Windows</a></p>
+<pre><button class="copy">copy</button><code>git --version</code></pre>
+</section>
+
+<section id="node">
+<h2>Install Node.js 22 LTS <span class="tag">03</span></h2>
+<p>Use Node.js 22 LTS for the reproducible guide. The current source build may also work with other versions, but this guide keeps the environment predictable.</p>
+<p><a href="https://nodejs.org/" target="_blank" rel="noopener">Official Node.js</a></p>
+<pre><button class="copy">copy</button><code>node --version
+npm --version</code></pre>
+</section>
+
+<section id="yarn">
+<h2>Install Yarn 1 <span class="tag">04</span></h2>
+<pre><button class="copy">copy</button><code>npm install --global yarn@1.22.22
+yarn --version</code></pre>
+<p>Expected: <code>1.22.22</code></p>
+</section>
+
+<section id="rust">
+<h2>Install Rust <span class="tag">05</span></h2>
+<p><a href="https://www.rust-lang.org/tools/install" target="_blank" rel="noopener">Official Rust installer</a></p>
+<pre><button class="copy">copy</button><code>rustc --version
+cargo --version
+rustup show</code></pre>
+<p>Make sure the Windows target is MSVC, such as <code>x86_64-pc-windows-msvc</code>.</p>
+</section>
+
+<section id="vs">
+<h2>Install Visual Studio 2022 Build Tools <span class="tag">06</span></h2>
+<p><a href="https://visualstudio.microsoft.com/downloads/" target="_blank" rel="noopener">Microsoft Visual Studio downloads</a></p>
+<div class="callout"><strong>Install:</strong> Desktop development with C++ → MSVC v143 → Windows 11 SDK.</div>
+<p><strong>You do not need the full Visual Studio IDE.</strong> Build Tools are enough for this workflow.</p>
+</section>
+
+<section id="clone">
+<h2>Clone the official Hydra repository <span class="tag">07</span></h2>
+<p><a href="https://github.com/hydralauncher/hydra" target="_blank" rel="noopener">Official Hydra GitHub repository</a></p>
+<pre><button class="copy">copy</button><code>cd /d C:\Users\%USERNAME%\Downloads
+git clone https://github.com/hydralauncher/hydra.git
+cd hydra
+git remote -v</code></pre>
+<h3>Optional: use v4.1.4</h3>
+<pre><button class="copy">copy</button><code>git fetch --tags
+git checkout v4.1.4
+git describe --tags</code></pre>
+</section>
+
+<section id="terminal">
+<h2>The terminal approach — how &amp; why <span class="tag">08</span></h2>
+
+<div class="step">
+  <div class="step-tag">step<i>1</i></div>
+  <div><strong>Open the correct terminal.</strong><br>
+  Start → search <strong>Developer Command Prompt for VS 2022</strong> → open it.</div>
+</div>
+
+<div class="step">
+  <div class="step-tag">step<i>2</i></div>
+  <div><strong>Move into the Hydra folder.</strong>
+  <pre><button class="copy">copy</button><code>cd /d C:\Users\%USERNAME%\Downloads\hydra</code></pre></div>
+</div>
+
+<div class="step">
+  <div class="step-tag">step<i>3</i></div>
+  <div><strong>Force the build to use VS2022/v143.</strong>
+  <pre><button class="copy">copy</button><code>set CMAKE_GENERATOR=Visual Studio 17 2022
+set CMAKE_GENERATOR_PLATFORM=x64
+set VCPKG_VISUAL_STUDIO_PATH=C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools
+set VCPKG_PLATFORM_TOOLSET=v143
+
+echo %CMAKE_GENERATOR%
+where cl</code></pre>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-tag">step<i>4</i></div>
+  <div><strong>Start Hydra in development mode.</strong>
+  <pre><button class="copy">copy</button><code>yarn dev</code></pre></div>
+</div>
+
+<div class="callout good">
+<strong>Why keep the terminal open?</strong>
+<ul>
+<li>Hydra's development process is running from that terminal.</li>
+<li>You can see Electron, Vite, native-addon and runtime messages.</li>
+<li>If something fails, the error is visible immediately.</li>
+<li>You can stop everything cleanly with <strong>Ctrl + C</strong>.</li>
+</ul>
+</div>
+
+<div class="callout warn">
+<strong>Important:</strong> an open terminal is <em>not</em> a security feature by itself. We use it because it gives us visibility while we investigate the application. The actual security work comes from checking the source, dependencies, network activity, files/processes and scan results.
+</div>
+</section>
+
+<section id="install">
+<h2>Install Hydra dependencies <span class="tag">09</span></h2>
+<pre><button class="copy">copy</button><code>yarn install</code></pre>
+<p>Let it finish completely. The postinstall builds the native Hydra addon and prepares native Electron dependencies.</p>
+<div class="callout warn">
+<strong>Do not follow old Python/libtorrent instructions.</strong><br>
+For this native build, do not run <code>pip install -r requirements.txt</code> just to install the torrent component. That older route caused a Python 3.14/libtorrent compatibility error during the earlier setup.
+</div>
+<h3>Check Electron</h3>
+<pre><button class="copy">copy</button><code>if exist node_modules\electron\dist\electron.exe (echo Electron OK) else (echo Electron MISSING)</code></pre>
+<p>If Electron is missing for the v4.1.4 setup:</p>
+<pre><button class="copy">copy</button><code>yarn add electron@40.9.3 --dev</code></pre>
+</section>
+
+<section id="env">
+<h2>Create the .env file <span class="tag">10</span></h2>
+<p>The development build needs its environment variables before <code>yarn dev</code>. In particular, the API and authentication URLs must not be blank.</p>
+<pre><button class="copy">copy</button><code>(
+echo MAIN_VITE_API_URL=https://hydra-api-us-east-1.losbroxas.org
+echo MAIN_VITE_AUTH_URL=https://auth.hydralauncher.gg
+echo MAIN_VITE_WS_URL=
+echo MAIN_VITE_NIMBUS_API_URL=
+echo RENDERER_VITE_REAL_DEBRID_REFERRAL_ID=
+echo RENDERER_VITE_TORBOX_REFERRAL_CODE=
+echo MAIN_VITE_LAUNCHER_SUBDOMAIN=
+) > .env</code></pre>
+<p>Verify:</p>
+<pre><button class="copy">copy</button><code>findstr /N /I "MAIN_VITE_API_URL MAIN_VITE_AUTH_URL" .env</code></pre>
+<div class="callout good"><strong>Expected:</strong><br>
+<code>MAIN_VITE_API_URL=https://hydra-api-us-east-1.losbroxas.org</code><br>
+<code>MAIN_VITE_AUTH_URL=https://auth.hydralauncher.gg</code>
+</div>
+<div class="callout warn">
+<strong>Keep secrets out of this file for anything sensitive.</strong> The values above are Hydra's own public API/auth endpoints, not personal credentials. For any personal login, token, or API key, use a password manager (e.g. Bitwarden) or the Windows Credential Manager instead of writing it into <code>.env</code> or any HTML file.
+</div>
+</section>
+
+<section id="dev">
+<h2>Run Hydra from the terminal <span class="tag">11</span></h2>
+<pre><button class="copy">copy</button><code>yarn dev</code></pre>
+
+<div class="callout">
+<strong>While Hydra is open:</strong> keep this terminal open. Use Hydra normally and watch the terminal for unexpected errors.
+</div>
+
+<h3>When you are finished</h3>
+<pre><button class="copy">copy</button><code>Ctrl + C</code></pre>
+
+<p>That stops the development process. Closing the terminal also stops a source-run Hydra session.</p>
+
+<div class="callout good">
+<strong>Healthy startup signs:</strong>
+<ul>
+<li><code>Hydra native addon ready</code></li>
+<li><code>100% tests passed</code> during the native build</li>
+<li>Electron main/preload builds successfully</li>
+<li>Renderer development server starts</li>
+<li>Hydra window opens normally</li>
+</ul>
+</div>
+</section>
+
+<section id="security">
+<h2>Security check workflow <span class="tag">12</span></h2>
+<p>This is the research phase before making a production installer. The goal is to understand what the program is doing rather than assuming that a successful build automatically means everything is safe.</p>
+
+<div class="grid6">
+<div class="cell"><b>source</b><span>Use the official repository. Check commits, dependencies and scripts.</span></div>
+<div class="cell"><b>build</b><span>Watch terminal output for unexpected downloads, scripts or failures.</span></div>
+<div class="cell"><b>network</b><span>Record domains and connections made while Hydra is running.</span></div>
+<div class="cell"><b>processes</b><span>Check child processes and anything launched in the background.</span></div>
+<div class="cell"><b>files</b><span>Look for unusual files created outside expected application folders.</span></div>
+<div class="cell"><b>scans</b><span>Use reputable antivirus/malware scanners and record exact results.</span></div>
+</div>
+
+<div class="callout warn">
+<strong>Research rule:</strong> a warning, detection or unknown connection is something to investigate — not automatic proof of malware. Record the exact file, process, domain, timestamp and scanner result before drawing conclusions.
+</div>
+
+<h3>Future checks to add to this guide</h3>
+<ul>
+<li>Windows Defender / Microsoft Security scan results</li>
+<li>VirusTotal results for the exact built artifact</li>
+<li>Windows process tree observations</li>
+<li>Network connection observations</li>
+<li>Installed dependency audit</li>
+<li>Unexpected startup/background process findings</li>
+<li>Hash values for released artifacts</li>
+</ul>
+</section>
+
+<section id="firewall">
+<h2>Windows firewall <span class="tag">13</span></h2>
+<table>
+<tr><th>network</th><th>recommended during development</th></tr>
+<tr><td>Private networks</td><td>Allow only if the application actually needs it.</td></tr>
+<tr><td>Public networks</td><td>Do not allow unless there is a specific, understood requirement.</td></tr>
+</table>
+<p>If Windows asks about network access and you are unsure, <strong>Cancel/Block</strong> first. Do not expose a development server to the public internet.</p>
+</section>
+
+<section id="errors">
+<h2>Troubleshooting <span class="tag">14</span></h2>
+
+<h3>A. <code>spawn cargo ENOENT</code></h3>
+<p>Rust is not available to the current terminal.</p>
+<pre><button class="copy">copy</button><code>where cargo
+where rustc</code></pre>
+<p>Open a new VS2022 Developer Command Prompt.</p>
+
+<h3>B. CMake says <code>Visual Studio 18</code></h3>
+<p>The environment is using VS2026.</p>
+<pre><button class="copy">copy</button><code>set CMAKE_GENERATOR=Visual Studio 17 2022
+set CMAKE_GENERATOR_PLATFORM=x64
+set VCPKG_VISUAL_STUDIO_PATH=C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools
+set VCPKG_PLATFORM_TOOLSET=v143</code></pre>
+
+<h3>C. <code>__std_*</code> unresolved linker errors</h3>
+<p>This indicates mixed MSVC toolsets. Check:</p>
+<pre><button class="copy">copy</button><code>where cl</code></pre>
+<p>It should point to VS2022 Build Tools.</p>
+
+<h3>D. node-gyp rejects Visual Studio</h3>
+<p>Use VS2022 Build Tools and run the install from its Developer Command Prompt.</p>
+
+<h3>E. <code>undefined.includes("staging")</code></h3>
+<p>Check the environment:</p>
+<pre><button class="copy">copy</button><code>findstr /N /I "MAIN_VITE_API_URL MAIN_VITE_AUTH_URL" .env</code></pre>
+<p>Both values should be populated as shown in the .env section. Restart Hydra after changing .env.</p>
+
+<h3>F. Sign-in window / DevTools disconnect</h3>
+<p>In development mode Hydra can open DevTools for the separate authentication window. If the auth window disconnects or is blank, first verify <code>MAIN_VITE_AUTH_URL=https://auth.hydralauncher.gg</code>, then restart <code>yarn dev</code>.</p>
+
+<h3>G. "No downloads available"</h3>
+<p>This is separate from the compiler/build process. Hydra's catalogue and download sources are separate. Third-party download sources should be treated as independent trust decisions.</p>
+
+<h3>H. Vite dynamic-import warnings</h3>
+<p>Messages about dynamic imports not moving modules into another chunk can be bundling warnings rather than fatal failures.</p>
+</section>
+
+<section id="package">
+<h2>Build the Windows application <span class="tag">15</span></h2>
+<p>Only do this after the development build has been tested.</p>
+<pre><button class="copy">copy</button><code>Ctrl + C
+yarn build:win</code></pre>
+<div class="callout">
+<strong>Development:</strong>
+<pre><button class="copy">copy</button><code>yarn dev</code></pre>
+<strong>Production packaging:</strong>
+<pre><button class="copy">copy</button><code>yarn build:win</code></pre>
+</div>
+<p>After packaging, you can run the generated Windows application without keeping the development terminal open.</p>
+
+<h3>Final clean command sequence</h3>
+<p>Use this as the compact setup path after the prerequisites are installed.</p>
+<pre><button class="copy">copy</button><code>cd /d C:\Users\%USERNAME%\Downloads
+git clone https://github.com/hydralauncher/hydra.git
+cd hydra
+git fetch --tags
+git checkout v4.1.4
+
+set CMAKE_GENERATOR=Visual Studio 17 2022
+set CMAKE_GENERATOR_PLATFORM=x64
+set VCPKG_VISUAL_STUDIO_PATH=C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools
+set VCPKG_PLATFORM_TOOLSET=v143
+
+node --version
+yarn --version
+rustc --version
+cargo --version
+where cl
+
+yarn install</code></pre>
+</section>
+
+<section id="notes">
+<h2>Research notes <span class="tag">16</span></h2>
+<p class="sub">Record facts, commands, scan results, process names, domains, hashes, timestamps and follow-up items. Saved locally in this browser only — nothing is uploaded anywhere. Do not paste passwords, API tokens or private keys here; keep those in a password manager instead.</p>
+<textarea id="researchNotes" placeholder="Research log...
+
+Date / time:
+Build version:
+Command:
+Observation:
+Process:
+Domain / connection:
+File:
+Scanner result:
+Follow-up:
+
+Add your notes here..."></textarea>
+<div class="actions">
+<button class="action primary" onclick="saveNotes()">Save notes</button>
+<button class="action" onclick="copyNotes()">Copy notes</button>
+<button class="action" onclick="downloadNotes()">Export .txt</button>
+<button class="action danger" onclick="clearNotes()">Clear notes</button>
+</div>
+<div id="noteStatus" class="status"></div>
+
+<h3>Security investigation checklist</h3>
+<table class="checklist">
+<tr><th>item</th><th>status</th></tr>
+<tr><td>Official repository verified</td><td>☐</td></tr>
+<tr><td>Build completed without unexpected errors</td><td>☐</td></tr>
+<tr><td>Dependencies reviewed</td><td>☐</td></tr>
+<tr><td>Background processes checked</td><td>☐</td></tr>
+<tr><td>Network connections checked</td><td>☐</td></tr>
+<tr><td>Windows Defender scan recorded</td><td>☐</td></tr>
+<tr><td>VirusTotal result recorded</td><td>☐</td></tr>
+<tr><td>Final artifact hash recorded</td><td>☐</td></tr>
+</table>
+</section>
+
+
+<section id="diary">
+<h2>Research diary <span class="tag">17</span></h2>
+<p class="sub">This section records the project as a dated investigation, not only as a tutorial. Evidence is attributed to the person or AI that supplied it. ChatGPT entries are marked <code>CHATGPT</code>; material supplied as Claude's work is marked <code>CLAUDE</code>. No event is recorded as completed unless the project evidence supports it.</p>
+
+<div class="callout good">
+<strong>Diary rule:</strong> preserve history. Do not silently rewrite an earlier result when a later test changes the interpretation. Record the new evidence as a new dated entry.
+</div>
+
+<div class="diary-day">
+  <div class="diary-date start">21 Sep<br>2026</div>
+
+  <article class="diary-entry claude">
+    <div class="diary-source"><code>CLAUDE</code> / project document</div>
+    <div>Existing guide structure, security methodology, research checklist and checkpoint were prepared. The guide states that the investigation should cover source, build, dependencies, processes, network, filesystem and scanning.</div>
+  </article>
+
+  <article class="diary-entry">
+    <div class="diary-source"><code>CHATGPT</code></div>
+    <div>Hydra source-build environment and successful VS2022/v143 native build state were carried forward into the security investigation. Hydra was running from source in Electron development mode.</div>
+  </article>
+
+  <article class="diary-entry">
+    <div class="diary-source"><code>CHATGPT</code></div>
+    <div>Runtime baseline was collected in <code>security-research</code>: process, established-network and filesystem snapshots. Hydra Electron processes were identified by their project-local Electron executable path.</div>
+  </article>
+
+  <article class="diary-entry">
+    <div class="diary-source"><code>CHATGPT</code></div>
+    <div>Hydra-owned HTTPS connections were observed from the identified Electron processes. The evidence was treated as an observation requiring attribution, not as proof of malicious activity.</div>
+  </article>
+
+  <article class="diary-entry">
+    <div class="diary-source"><code>CHATGPT</code></div>
+    <div>The community download source <code>https://hydralinks.cloud/sources/fitgirl.json</code> was identified as a third-party source. Its trust was kept separate from the trust assessment of Hydra itself. Direct web retrieval returned HTTP 403, so the current JSON contents were not independently verified from that fetch.</div>
+  </article>
+
+  <div class="diary-date end">21 Sep<br>2026</div>
+</div>
+
+<div class="diary-separator">Next session</div>
+
+<div class="diary-day">
+  <div class="diary-date start">22 Sep<br>2026</div>
+
+  <article class="diary-entry">
+    <div class="diary-source"><code>CHATGPT</code></div>
+    <div><strong>Fresh-session checkpoint.</strong> Previous evidence remains historical. Today's investigation is to start with a clean runtime/process/network baseline before continuing. No new download or execution result is recorded yet.</div>
+  </article>
+
+  <div class="diary-date end">22 Sep<br>2026</div>
+</div>
+
+<h3>Planned research agenda</h3>
+<div class="grid6">
+<div class="cell"><b>01 · source</b><span>Review repository, scripts, dependencies, Electron configuration and native components.</span></div>
+<div class="cell"><b>02 · clean runtime</b><span>Fresh process, network and filesystem baseline.</span></div>
+<div class="cell"><b>03 · authentication</b><span>Document expected authentication endpoints and runtime behavior without exposing credentials.</span></div>
+<div class="cell"><b>04 · download source</b><span>Investigate configured third-party source behavior and attribution separately from Hydra.</span></div>
+<div class="cell"><b>05 · download/install</b><span>Observe network, processes, files and hashes around a controlled test. Do not assume an offline game has zero network activity.</span></div>
+<div class="cell"><b>06 · execution</b><span>Compare process/network/filesystem state before and after launching the test software.</span></div>
+<div class="cell"><b>07 · scanning</b><span>Defender, hashes and reputable malware scanning where appropriate.</span></div>
+<div class="cell"><b>08 · production</b><span>Only after the development behavior is understood, build and independently inspect the Windows artifact.</span></div>
+</div>
+</section>
+
+<p class="foot">Open this HTML file in Edge or Chrome. Code blocks have copy buttons. The Research Diary records dated evidence and attributes entries to CHATGPT or CLAUDE.</p>
+
+</main>
+</div>
+
+
+<script>
+function wireCopyButtons(){
+  document.querySelectorAll(".copy").forEach(btn=>{
+    btn.onclick=async()=>{
+      const code=btn.parentElement.querySelector("code");
+      if(!code)return;
+      const text=code.innerText;
+      try{ await navigator.clipboard.writeText(text); }
+      catch(e){
+        const t=document.createElement("textarea");
+        t.value=text;document.body.appendChild(t);t.select();
+        document.execCommand("copy");t.remove();
+      }
+      const old=btn.textContent;btn.textContent="copied";
+      setTimeout(()=>btn.textContent=old,1200);
+    };
+  });
+}
+wireCopyButtons();
+
+const notesKey="hydraResearchNotes";
+function saveNotes(){
+  const notes=document.getElementById("researchNotes").value;
+  localStorage.setItem(notesKey,notes);
+  document.getElementById("noteStatus").textContent="saved locally in this browser";
+}
+async function copyNotes(){
+  const notes=document.getElementById("researchNotes").value;
+  try{await navigator.clipboard.writeText(notes)}
+  catch(e){
+    const t=document.createElement("textarea");t.value=notes;document.body.appendChild(t);
+    t.select();document.execCommand("copy");t.remove();
+  }
+  document.getElementById("noteStatus").textContent="research notes copied";
+}
+function downloadNotes(){
+  const notes=document.getElementById("researchNotes").value;
+  const blob=new Blob([notes],{type:"text/plain;charset=utf-8"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="Hydra-Research-Notes.txt";a.click();URL.revokeObjectURL(url);
+  document.getElementById("noteStatus").textContent="research notes exported";
+}
+function clearNotes(){
+  if(!confirm("Clear the saved research notes from this browser?"))return;
+  localStorage.removeItem(notesKey);document.getElementById("researchNotes").value="";
+  document.getElementById("noteStatus").textContent="local research notes cleared";
+}
+(function loadNotes(){
+  const saved=localStorage.getItem(notesKey);
+  if(saved!==null)document.getElementById("researchNotes").value=saved;
+})();
+
+// scroll-spy for sidebar nav
+const navLinks=[...document.querySelectorAll("#sideNav a")];
+const sections=navLinks.map(a=>document.querySelector(a.getAttribute("href")));
+const spy=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    const link=document.querySelector('#sideNav a[href="#'+entry.target.id+'"]');
+    if(!link)return;
+    if(entry.isIntersecting) link.classList.add("active");
+    else link.classList.remove("active");
+  });
+},{rootMargin:"-20% 0px -70% 0px"});
+sections.forEach(s=>{ if(s) spy.observe(s); });
+
+
+</script>
+</body>
+</html>
