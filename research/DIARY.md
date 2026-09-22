@@ -44,3 +44,9 @@ The research repository is intended to remain fully public. Future commits must 
 
 ### Next checkpoint
 Enable/configure GitHub Pages for the public repository, rerun the deployment workflow, verify the published site, then continue the controlled security research cycle and record each substantive test as a dated checkpoint.
+
+### [CHATGPT] Live GitHub data integration
+The public HTML guide now reads repository metadata, GitHub Actions Pages status, recent commits, the public file tree, and the research diary/agenda/findings from GitHub at page load. GitHub is the source of truth for the live research record.
+
+### [RUDRA] Public guide access
+The live guide is available at `https://rudra-khandelwal.github.io/hydra/` for direct access.

@@ -160,6 +160,26 @@ textarea:focus{border-color:var(--accent-soft)}
 
 
 
+/* ---------- live GitHub data ---------- */
+.live-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);margin:16px 0;border-radius:6px;overflow:hidden}
+.live-card{background:var(--panel);padding:16px}
+.live-card h3{margin:0 0 8px;font:600 14px var(--sans);color:var(--text)}
+.live-value{font:600 22px/1.2 var(--sans);color:var(--text)}
+.live-label{font:12px var(--mono);color:var(--dim);margin-top:4px}
+.live-toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0 16px}
+.live-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.live-status{display:inline-flex;align-items:center;gap:7px;font:12.5px var(--mono);padding:5px 9px;border:1px solid var(--line);border-radius:999px;color:var(--muted);background:var(--panel-soft)}
+.live-status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--dim)}
+.live-status.good{color:var(--good);border-color:#2f4b3a}.live-status.good::before{background:var(--good)}
+.live-status.warn{color:var(--warn);border-color:#514323}.live-status.warn::before{background:var(--warn)}
+.live-status.bad{color:var(--danger);border-color:#513025}.live-status.bad::before{background:var(--danger)}
+.repo-tree{max-height:390px;overflow:auto;border:1px solid var(--line);border-radius:6px;background:#0c0a07;padding:9px}
+.repo-tree a{display:block;padding:6px 9px;border-bottom:1px solid var(--line-soft);font:12.5px/1.45 var(--mono);text-decoration:none;color:var(--muted)}
+.repo-tree a:last-child{border-bottom:none}.repo-tree a:hover{background:var(--panel-soft);color:var(--accent)}
+.repo-tree .kind{display:inline-block;width:35px;color:var(--dim)}
+.live-markdown{white-space:pre-wrap;word-break:break-word;border:1px solid var(--line);border-radius:6px;background:#0c0a07;padding:14px;font:12.5px/1.65 var(--mono);color:var(--muted);max-height:420px;overflow:auto}
+.live-source{font:12px var(--mono);color:var(--dim)}
+
 </style>
 </head>
 <body>
@@ -199,6 +219,7 @@ textarea:focus{border-color:var(--accent-soft)}
   <a href="#package"><span class="idx">15</span>package</a>
   <a href="#notes"><span class="idx">16</span>notes</a>
   <a href="#diary"><span class="idx">17</span>research-diary</a>
+  <a href="#github-live"><span class="idx">18</span>live-github</a>
 </nav>
 
 <main class="content">
@@ -215,6 +236,10 @@ textarea:focus{border-color:var(--accent-soft)}
   </div>
   <div class="banner-note">
     <strong>Why run it from a terminal first?</strong> This guide deliberately keeps Hydra in development mode while we test it. The terminal shows build errors, Electron messages and runtime warnings instead of hiding them behind a finished installer. Once the behavior is understood, you can package the Windows application.
+  </div>
+  <div class="live-links">
+    <a class="action primary" href="https://rudra-khandelwal.github.io/hydra/" target="_blank" rel="noopener">Open live research guide ↗</a>
+    <a class="action" href="https://github.com/rudra-khandelwal/hydra" target="_blank" rel="noopener">Open GitHub repository ↗</a>
   </div>
 </div>
 
@@ -572,72 +597,54 @@ Add your notes here..."></textarea>
 </section>
 
 
+
 <section id="diary">
 <h2>Research diary <span class="tag">17</span></h2>
-<p class="sub">This section records the project as a dated investigation, not only as a tutorial. Evidence is attributed to the person or AI that supplied it. ChatGPT entries are marked <code>CHATGPT</code>; material supplied as Claude's work is marked <code>CLAUDE</code>. No event is recorded as completed unless the project evidence supports it.</p>
-
-<div class="callout good">
-<strong>Diary rule:</strong> preserve history. Do not silently rewrite an earlier result when a later test changes the interpretation. Record the new evidence as a new dated entry.
+<p class="sub">The diary, agenda and findings shown here are loaded directly from the public GitHub repository. GitHub is the source of truth for the live research record.</p>
+<div class="callout good"><strong>Live research record.</strong> New dated entries committed to <code>research/DIARY.md</code> appear here automatically after GitHub Pages publishes the repository.</div>
+<div class="live-card">
+  <h3>research/DIARY.md</h3>
+  <pre id="githubDiaryLive" class="live-markdown">Loading the latest diary from GitHub…</pre>
+  <p class="live-source"><a href="https://github.com/rudra-khandelwal/hydra/blob/main/research/DIARY.md" target="_blank" rel="noopener">Open diary in GitHub ↗</a></p>
 </div>
-
-<div class="diary-day">
-  <div class="diary-date start">21 Sep<br>2026</div>
-
-  <article class="diary-entry claude">
-    <div class="diary-source"><code>CLAUDE</code> / project document</div>
-    <div>Existing guide structure, security methodology, research checklist and checkpoint were prepared. The guide states that the investigation should cover source, build, dependencies, processes, network, filesystem and scanning.</div>
-  </article>
-
-  <article class="diary-entry">
-    <div class="diary-source"><code>CHATGPT</code></div>
-    <div>Hydra source-build environment and successful VS2022/v143 native build state were carried forward into the security investigation. Hydra was running from source in Electron development mode.</div>
-  </article>
-
-  <article class="diary-entry">
-    <div class="diary-source"><code>CHATGPT</code></div>
-    <div>Runtime baseline was collected in <code>security-research</code>: process, established-network and filesystem snapshots. Hydra Electron processes were identified by their project-local Electron executable path.</div>
-  </article>
-
-  <article class="diary-entry">
-    <div class="diary-source"><code>CHATGPT</code></div>
-    <div>Hydra-owned HTTPS connections were observed from the identified Electron processes. The evidence was treated as an observation requiring attribution, not as proof of malicious activity.</div>
-  </article>
-
-  <article class="diary-entry">
-    <div class="diary-source"><code>CHATGPT</code></div>
-    <div>The community download source <code>https://hydralinks.cloud/sources/fitgirl.json</code> was identified as a third-party source. Its trust was kept separate from the trust assessment of Hydra itself. Direct web retrieval returned HTTP 403, so the current JSON contents were not independently verified from that fetch.</div>
-  </article>
-
-  <div class="diary-date end">21 Sep<br>2026</div>
-</div>
-
-<div class="diary-separator">Next session</div>
-
-<div class="diary-day">
-  <div class="diary-date start">22 Sep<br>2026</div>
-
-  <article class="diary-entry">
-    <div class="diary-source"><code>CHATGPT</code></div>
-    <div><strong>Fresh-session checkpoint.</strong> Previous evidence remains historical. Today's investigation is to start with a clean runtime/process/network baseline before continuing. No new download or execution result is recorded yet.</div>
-  </article>
-
-  <div class="diary-date end">22 Sep<br>2026</div>
-</div>
-
-<h3>Planned research agenda</h3>
-<div class="grid6">
-<div class="cell"><b>01 · source</b><span>Review repository, scripts, dependencies, Electron configuration and native components.</span></div>
-<div class="cell"><b>02 · clean runtime</b><span>Fresh process, network and filesystem baseline.</span></div>
-<div class="cell"><b>03 · authentication</b><span>Document expected authentication endpoints and runtime behavior without exposing credentials.</span></div>
-<div class="cell"><b>04 · download source</b><span>Investigate configured third-party source behavior and attribution separately from Hydra.</span></div>
-<div class="cell"><b>05 · download/install</b><span>Observe network, processes, files and hashes around a controlled test. Do not assume an offline game has zero network activity.</span></div>
-<div class="cell"><b>06 · execution</b><span>Compare process/network/filesystem state before and after launching the test software.</span></div>
-<div class="cell"><b>07 · scanning</b><span>Defender, hashes and reputable malware scanning where appropriate.</span></div>
-<div class="cell"><b>08 · production</b><span>Only after the development behavior is understood, build and independently inspect the Windows artifact.</span></div>
+<div class="live-grid">
+  <div class="live-card">
+    <h3>research/AGENDA.md</h3>
+    <pre id="githubAgendaLive" class="live-markdown">Loading agenda…</pre>
+    <p class="live-source"><a href="https://github.com/rudra-khandelwal/hydra/blob/main/research/AGENDA.md" target="_blank" rel="noopener">Open agenda in GitHub ↗</a></p>
+  </div>
+  <div class="live-card">
+    <h3>research/FINDINGS.md</h3>
+    <pre id="githubFindingsLive" class="live-markdown">Loading findings…</pre>
+    <p class="live-source"><a href="https://github.com/rudra-khandelwal/hydra/blob/main/research/FINDINGS.md" target="_blank" rel="noopener">Open findings in GitHub ↗</a></p>
+  </div>
 </div>
 </section>
 
-<p class="foot">Open this HTML file in Edge or Chrome. Code blocks have copy buttons. The Research Diary records dated evidence and attributes entries to CHATGPT or CLAUDE.</p>
+<section id="github-live">
+<h2>Live GitHub repository data <span class="tag">18</span></h2>
+<p class="sub">Repository metadata, recent commits, GitHub Pages status, languages and the complete public file tree are queried from GitHub when this page loads. No GitHub token is embedded in the page.</p>
+<div class="live-toolbar">
+  <span id="githubLiveStatus" class="live-status">Connecting to GitHub…</span>
+  <button class="action" id="githubRefresh" type="button">Refresh GitHub data</button>
+</div>
+<div id="githubRepoStats" class="live-grid">
+  <div class="live-card"><div class="live-value">—</div><div class="live-label">stars</div></div>
+  <div class="live-card"><div class="live-value">—</div><div class="live-label">forks</div></div>
+  <div class="live-card"><div class="live-value">—</div><div class="live-label">open issues / PRs</div></div>
+  <div class="live-card"><div class="live-value">—</div><div class="live-label">repository files</div></div>
+</div>
+<div class="live-grid">
+  <div class="live-card"><h3>Repository</h3><div id="githubRepoMeta">Loading…</div></div>
+  <div class="live-card"><h3>Latest GitHub Pages workflow</h3><div id="githubPagesMeta">Loading…</div></div>
+  <div class="live-card"><h3>Latest commits</h3><div id="githubCommitsMeta">Loading…</div></div>
+</div>
+<h3>Repository file tree</h3>
+<div id="githubTree" class="repo-tree">Loading the public repository tree…</div>
+<p class="live-source">Data source: GitHub API · <a href="https://github.com/rudra-khandelwal/hydra" target="_blank" rel="noopener">repository ↗</a></p>
+</section>
+
+<p class="foot">Open this guide in Edge or Chrome. Code blocks have copy buttons. Research records and repository status are loaded from the public GitHub repository. <a href="https://rudra-khandelwal.github.io/hydra/" target="_blank" rel="noopener">Live guide ↗</a> · <a href="https://github.com/rudra-khandelwal/hydra" target="_blank" rel="noopener">GitHub repository ↗</a></p>
 
 </main>
 </div>
@@ -694,6 +701,127 @@ function clearNotes(){
   const saved=localStorage.getItem(notesKey);
   if(saved!==null)document.getElementById("researchNotes").value=saved;
 })();
+
+
+/* ---------- GitHub-backed live data ---------- */
+const GH_OWNER='rudra-khandelwal';
+const GH_REPO='hydra';
+const GH_API='https://api.github.com';
+const GH_RAW='https://raw.githubusercontent.com/'+GH_OWNER+'/'+GH_REPO+'/main/';
+
+function ghEscape(value){
+  return String(value==null?'':value).replace(/[&<>"']/g,function(ch){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];
+  });
+}
+function ghNumber(value){return Number(value||0).toLocaleString();}
+async function ghGet(path){
+  const response=await fetch(GH_API+path,{headers:{Accept:'application/vnd.github+json'},cache:'no-store'});
+  if(!response.ok)throw new Error('GitHub API '+response.status+' for '+path);
+  return response.json();
+}
+async function ghGetText(path){
+  const response=await fetch(GH_RAW+path,{cache:'no-store'});
+  if(!response.ok)throw new Error('GitHub raw '+response.status+' for '+path);
+  return response.text();
+}
+function setLiveText(id,text){
+  const el=document.getElementById(id);
+  if(el)el.textContent=text;
+}
+function renderRepoTree(tree){
+  const target=document.getElementById('githubTree');
+  if(!target)return;
+  target.replaceChildren();
+  for(const item of (tree||[])){
+    if(item.type!=='blob' && item.type!=='tree')continue;
+    const link=document.createElement('a');
+    link.href='https://github.com/'+GH_OWNER+'/'+GH_REPO+(item.type==='tree'?'/tree/main/':'/blob/main/')+item.path;
+    link.target='_blank';link.rel='noopener';
+    const kind=document.createElement('span');kind.className='kind';kind.textContent=item.type==='tree'?'DIR':'FILE';
+    link.appendChild(kind);link.appendChild(document.createTextNode(item.path));target.appendChild(link);
+  }
+}
+function renderCommits(commits){
+  const target=document.getElementById('githubCommitsMeta');
+  if(!target)return;
+  target.replaceChildren();
+  for(const commit of (commits||[]).slice(0,6)){
+    const row=document.createElement('div');row.style.marginBottom='10px';
+    const link=document.createElement('a');link.href=commit.html_url;link.target='_blank';link.rel='noopener';
+    link.textContent=(commit.commit&&commit.commit.message||'').split('\n')[0]||commit.sha.slice(0,8);
+    row.appendChild(link);
+    const meta=document.createElement('div');meta.className='live-source';
+    const author=(commit.commit&&commit.commit.author&&commit.commit.author.name)||'unknown';
+    const date=(commit.commit&&commit.commit.author&&commit.commit.author.date)||'';
+    meta.textContent=commit.sha.slice(0,12)+' · '+author+' · '+(date?new Date(date).toLocaleString():'');
+    row.appendChild(meta);target.appendChild(row);
+  }
+}
+async function loadGithubLive(){
+  const status=document.getElementById('githubLiveStatus');
+  if(status){status.className='live-status';status.textContent='Loading GitHub data…';}
+  try{
+    const results=await Promise.all([
+      ghGet('/repos/'+GH_OWNER+'/'+GH_REPO),
+      ghGet('/repos/'+GH_OWNER+'/'+GH_REPO+'/commits?per_page=6'),
+      ghGet('/repos/'+GH_OWNER+'/'+GH_REPO+'/git/trees/main?recursive=1'),
+      ghGet('/repos/'+GH_OWNER+'/'+GH_REPO+'/languages'),
+      ghGet('/repos/'+GH_OWNER+'/'+GH_REPO+'/actions/runs?per_page=1&branch=main')
+    ]);
+    const repo=results[0],commits=results[1],tree=results[2],languages=results[3],runs=results[4];
+    const fileCount=(tree.tree||[]).filter(function(item){return item.type==='blob';}).length;
+    document.getElementById('githubRepoStats').innerHTML=
+      '<div class="live-card"><div class="live-value">'+ghNumber(repo.stargazers_count)+'</div><div class="live-label">stars</div></div>'+
+      '<div class="live-card"><div class="live-value">'+ghNumber(repo.forks_count)+'</div><div class="live-label">forks</div></div>'+
+      '<div class="live-card"><div class="live-value">'+ghNumber(repo.open_issues_count)+'</div><div class="live-label">open issues / PRs</div></div>'+
+      '<div class="live-card"><div class="live-value">'+ghNumber(fileCount)+'</div><div class="live-label">repository files</div></div>';
+    const repoMeta=document.getElementById('githubRepoMeta');
+    repoMeta.replaceChildren();
+    const name=document.createElement('strong');name.textContent=repo.full_name;repoMeta.appendChild(name);
+    const meta=document.createElement('div');meta.className='live-source';meta.style.marginTop='6px';
+    meta.textContent='default branch: '+repo.default_branch+' · visibility: '+(repo.visibility||'public')+' · license: '+((repo.license&&repo.license.spdx_id)||'not reported');
+    repoMeta.appendChild(meta);
+    const lang=document.createElement('div');lang.className='live-source';lang.style.marginTop='6px';
+    lang.textContent='languages: '+Object.keys(languages||{}).join(', ');
+    repoMeta.appendChild(lang);
+    const link=document.createElement('a');link.href=repo.html_url;link.target='_blank';link.rel='noopener';link.textContent='Open repository ↗';link.style.display='inline-block';link.style.marginTop='8px';repoMeta.appendChild(link);
+    const pages=document.getElementById('githubPagesMeta');
+    pages.replaceChildren();
+    const run=runs.workflow_runs&&runs.workflow_runs[0];
+    if(run){
+      const pill=document.createElement('span');
+      pill.className=run.conclusion==='success'?'live-status good':run.conclusion==='failure'?'live-status bad':'live-status warn';
+      pill.textContent=run.conclusion||run.status;pages.appendChild(pill);
+      const pmeta=document.createElement('div');pmeta.className='live-source';pmeta.style.marginTop='8px';
+      pmeta.textContent=(run.name||'workflow')+' · run #'+run.run_number+' · '+new Date(run.updated_at).toLocaleString();
+      pages.appendChild(pmeta);
+      const plink=document.createElement('a');plink.href=run.html_url;plink.target='_blank';plink.rel='noopener';plink.textContent='Open workflow run ↗';plink.style.display='inline-block';plink.style.marginTop='8px';pages.appendChild(plink);
+    }else{pages.textContent='No workflow runs returned.';}
+    renderCommits(commits);
+    renderRepoTree(tree.tree||[]);
+    if(tree.truncated){
+      const note=document.createElement('div');note.className='live-source';note.style.marginTop='8px';
+      note.textContent='GitHub marked the recursive tree as truncated; the displayed tree is the returned subset.';
+      document.getElementById('githubTree').before(note);
+    }
+    if(status){status.className='live-status good';status.textContent='GitHub data loaded';}
+  }catch(error){
+    console.error(error);
+    if(status){status.className='live-status bad';status.textContent='GitHub data load failed';}
+  }
+  const docs=[
+    ['githubDiaryLive','research/DIARY.md'],
+    ['githubAgendaLive','research/AGENDA.md'],
+    ['githubFindingsLive','research/FINDINGS.md']
+  ];
+  await Promise.all(docs.map(async function(item){
+    try{setLiveText(item[0],await ghGetText(item[1]));}
+    catch(error){setLiveText(item[0],'Unable to load '+item[1]+': '+error.message);}
+  }));
+}
+document.getElementById('githubRefresh')?.addEventListener('click',loadGithubLive);
+loadGithubLive();
 
 // scroll-spy for sidebar nav
 const navLinks=[...document.querySelectorAll("#sideNav a")];
