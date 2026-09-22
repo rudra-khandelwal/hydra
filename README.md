@@ -1,5 +1,9 @@
 # Hydra — Public Research & Development Workspace
 
+> ## 🌐 [Open live research guide ↗](https://rudra-khandelwal.github.io/hydra/)
+>
+> **Live GitHub Pages site:** https://rudra-khandelwal.github.io/hydra/
+
 **Repository:** `rudra-khandelwal/hydra`  
 **Upstream:** `hydralauncher/hydra`  
 **Status:** Public research/development workspace  
@@ -120,9 +124,11 @@ See `upstream/UPSTREAM.md` for provenance and synchronization notes.
 
 ## GitHub Pages
 
-The repository contains a sanitized public `index.html` research guide and a GitHub Actions workflow intended to deploy it with GitHub Pages.
+The repository contains the public `index.html` research guide and a GitHub Actions workflow that deploys it with GitHub Pages.
 
-The first deployment attempt on 22 September 2026 reached the GitHub Actions runner but failed at the Pages configuration step because the repository's Pages site was not yet enabled/configured for GitHub Actions. See `research/CHECKPOINTS/2026-09-22-public-repository-and-pages.md` for the recorded evidence.
+The first deployment attempt on 22 September 2026 failed at the Pages configuration step because Pages was not yet enabled. After Pages was enabled, subsequent deployments succeeded. The current live guide is linked at the top of this README.
+
+The live guide reads repository/research data from GitHub, so GitHub is the source of truth for the published research record.
 
 ## Disclaimer
 
