@@ -160,7 +160,29 @@ textarea:focus{border-color:var(--accent-soft)}
 .research-panel pre code{font:13px Consolas,"Courier New",monospace;white-space:pre;color:#eadfd5}
 .research-panel .copy{position:absolute;right:10px;top:10px;background:#2a1d15;color:#fff;border:1px solid #5b4635;border-radius:7px;padding:6px 10px;cursor:pointer}
 .diary-day{position:relative;margin:22px 0 30px;padding-left:26px;border-left:2px solid #5b4635}.diary-date{margin-left:-39px;display:inline-block;padding:5px 10px;border-radius:999px;border:1px solid #5b4635;background:#1b130e;color:#f2b56b;font-size:12px;letter-spacing:.08em}.diary-entry{margin:15px 0;padding:14px 16px;border:1px solid #3a2c20;border-radius:10px;background:#17110d}.diary-entry b{display:block;font-size:11px;letter-spacing:.08em;margin-bottom:6px}.diary-entry.claude b{color:#d7a66a}.diary-entry.chatgpt b{color:#9dc5a1}
-.created-note{position:relative}.created-note .note-body{margin:14px 0;padding:16px;border:1px solid #3a2c20;border-radius:10px;background:#17110d;color:var(--text);white-space:normal}.created-note .sub{font:12px var(--mono);color:var(--dim)}
+.nav-subtopic-label{margin-top:12px;font-size:10.5px;color:#7f6e58;text-transform:uppercase;letter-spacing:.08em}
+.created-note{position:relative;scroll-margin-top:62px;animation:createdSectionIn .55s ease both}
+.created-note .note-body{margin:14px 0;padding:18px;border:1px solid #3a2c20;border-radius:10px;background:#17110d;color:var(--text);white-space:normal;line-height:1.75;overflow-wrap:anywhere}
+.created-note .note-body b,.created-note .note-body strong{color:var(--text);font-weight:700}
+.created-note .note-body u,.created-note .note-body ins{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.created-note .note-body a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.created-note .note-body a:hover{color:#ffd28a}
+.created-note .sub{font:12px var(--mono);color:var(--dim)}
+.created-note .created-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.note-editor-wrap{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#0c0a07}
+.note-toolbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:9px;border-bottom:1px solid var(--line);background:#15100c}
+.note-tool{min-width:34px;height:32px;padding:5px 9px;border:1px solid #3a2c20;border-radius:5px;background:#17110d;color:var(--muted);cursor:pointer;font:600 13px var(--sans)}
+.note-tool:hover,.note-tool.active{border-color:var(--accent-soft);color:var(--text);background:#21170f}
+.note-tool.wide{font-weight:500}
+.note-editor{min-height:230px;padding:15px;color:var(--text);outline:none;font:14px/1.75 var(--sans);overflow:auto}
+.note-editor:empty:before{content:attr(data-placeholder);color:#665a49;pointer-events:none}
+.note-editor a{color:var(--accent);text-decoration:underline}
+.note-title{width:100%;margin-bottom:10px;background:#0c0a07;color:var(--text);border:1px solid var(--line);border-radius:6px;padding:11px 13px;outline:none;font:13.5px var(--mono)}
+.note-title:focus{border-color:var(--accent-soft)}
+.created-nav-link{animation:navEntryIn .45s ease both}
+.created-nav-link .idx{color:var(--accent-soft)}
+@keyframes navEntryIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+@keyframes createdSectionIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
@@ -187,7 +209,12 @@ textarea:focus{border-color:var(--accent-soft)}
 <a href="#dev"><span class="idx">11</span>run-dev</a>
 <div class="nav-group-label">research</div>
 <a href="#security"><span class="idx">12</span>security-check</a>
-<a href="#research-checkpoint"><span class="idx">12A</span> checkpoint</a><a href="#one-go"><span class="idx">12B</span> one-go</a><a href="#research-status"><span class="idx">12C</span> status</a><a href="#research-diary"><span class="idx">12D</span> diary</a><a href="#firewall"><span class="idx">13</span>firewall</a>
+<div class="nav-group-label nav-subtopic-label">security research</div>
+<a href="#research-checkpoint"><span class="idx">•</span>checkpoint</a>
+<a href="#one-go"><span class="idx">•</span>one-go</a>
+<a href="#research-status"><span class="idx">•</span>status</a>
+<a href="#research-diary"><span class="idx">•</span>diary</a>
+<a href="#firewall"><span class="idx">13</span>firewall</a>
 <a href="#errors"><span class="idx">14</span>troubleshooting</a>
 <a href="#package"><span class="idx">15</span>package</a>
 <a href="#notes"><span class="idx">16</span>notes</a>
@@ -556,24 +583,21 @@ yarn install</code></pre>
 </section>
 <section id="notes">
 <h2>Research Notes <span class="tag">16</span></h2>
-<p class="sub">Use this as the writing area. Each time you save, the note becomes a new numbered section after 16: <code>17</code>, <code>18</code>, <code>19</code>… Created sections are saved in this browser and can be deleted individually.</p>
-<textarea id="researchNotes" placeholder="Write your research note here...
-
-Date / time:
-Build version:
-Command:
-Observation:
-Process:
-Domain / connection:
-File:
-Scanner result:
-Follow-up:
-
-Add your notes here..."></textarea>
+<p class="sub">Write a note, choose a section name, format selected text, add links, then save. Every save creates a new section after 16: <code>17</code>, <code>18</code>, <code>19</code>… Created sections are saved in this browser and can be deleted individually. Original guide sections cannot be deleted.</p>
+<input id="researchNoteTitle" class="note-title" type="text" maxlength="80" placeholder="Section name — e.g. Network observation, Build result, Follow-up">
+<div class="note-editor-wrap">
+  <div class="note-toolbar" role="toolbar" aria-label="Research note formatting">
+    <button type="button" class="note-tool" onclick="formatNote('bold')" title="Bold selected text"><strong>B</strong></button>
+    <button type="button" class="note-tool" onclick="formatNote('underline')" title="Underline selected text"><u>U</u></button>
+    <button type="button" class="note-tool wide" onclick="addDirectLink()" title="Make a URL directly clickable">Direct link</button>
+    <button type="button" class="note-tool wide" onclick="addNamedLink()" title="Turn a name into a clickable link">Named link</button>
+  </div>
+  <div id="researchNotes" class="note-editor" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="Write your research note here…"></div>
+</div>
 <div class="actions">
 <button class="action primary" onclick="saveNotes()">Save as new section</button>
 <button class="action" onclick="copyNotes()">Copy current note</button>
-<button class="action" onclick="downloadNotes()">Export current note</button>
+<button class="action" onclick="downloadNotes()">Export .html</button>
 <button class="action danger" onclick="clearNotes()">Clear editor</button>
 </div>
 <div class="status" id="noteStatus"></div>
@@ -595,133 +619,31 @@ Add your notes here..."></textarea>
 </main>
 </div>
 <script>
-function wireCopyButtons(){
-  document.querySelectorAll(".copy").forEach(btn=>{
-    btn.onclick=async()=>{
-      const code=btn.parentElement.querySelector("code");
-      if(!code)return;
-      const text=code.innerText;
-      try{ await navigator.clipboard.writeText(text); }
-      catch(e){
-        const t=document.createElement("textarea");
-        t.value=text;document.body.appendChild(t);t.select();
-        document.execCommand("copy");t.remove();
-      }
-      const old=btn.textContent;btn.textContent="copied";
-      setTimeout(()=>btn.textContent=old,1200);
-    };
-  });
-}
+function wireCopyButtons(){document.querySelectorAll(".copy").forEach(btn=>{btn.onclick=async()=>{const code=btn.parentElement.querySelector("code");if(!code)return;const text=code.innerText;try{await navigator.clipboard.writeText(text)}catch(e){const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}const old=btn.textContent;btn.textContent="copied";setTimeout(()=>btn.textContent=old,1200)}})}
 wireCopyButtons();
-
-const notesKey="hydraResearchNotes";
 const createdNotesKey="hydraResearchSections";
-function getCreatedNotes(){
-  try{return JSON.parse(localStorage.getItem(createdNotesKey)||"[]")}catch(e){return[]}
-}
-function setCreatedNotes(items){localStorage.setItem(createdNotesKey,JSON.stringify(items))}
-function escapeHtml(value){
-  return String(value).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));
-}
-function renderCreatedSections(){
-  const host=document.getElementById("createdSections");
-  if(!host)return;
-  const items=getCreatedNotes();
-  host.innerHTML=items.map(item=>`
-<section class="research-panel created-note" id="note-section-${item.id}">
-<h2>Research Note <span class="tag">${item.number}</span></h2>
-<div class="sub">Created ${escapeHtml(item.date)}</div>
-<div class="note-body">${escapeHtml(item.text).replace(/\n/g,"<br>")}</div>
-<div class="actions"><button class="action danger" onclick="deleteCreatedNote(${item.id})">Delete this section</button></div>
-</section>`).join("");
-  renderCreatedNav(items);
-}
-function renderCreatedNav(items){
-  const nav=document.getElementById("sideNav");
-  if(!nav)return;
-  let group=nav.querySelector(".created-notes-group");
-  if(!items.length){if(group)group.remove();return}
-  if(!group){
-    group=document.createElement("div");
-    group.className="created-notes-group";
-    group.innerHTML='<div class="nav-group-label">created notes</div>';
-    nav.appendChild(group);
-  }
-  group.querySelectorAll("a").forEach(a=>a.remove());
-  items.forEach(item=>{
-    const a=document.createElement("a");
-    a.href="#note-section-"+item.id;
-    a.innerHTML='<span class="idx">'+item.number+'</span>'+escapeHtml(item.title||"research-note");
-    group.appendChild(a);
-  });
-  wireScrollSpy();
-}
-function saveNotes(){
-  const editor=document.getElementById("researchNotes");
-  const text=editor.value.trim();
-  if(!text){document.getElementById("noteStatus").textContent="write something before saving";return}
-  const items=getCreatedNotes();
-  const nextNumber=items.reduce((max,item)=>Math.max(max,Number(item.number)||16),16)+1;
-  items.push({
-    id:Date.now(),
-    number:nextNumber,
-    title:"research-note",
-    text:text,
-    date:new Date().toLocaleString()
-  });
-  setCreatedNotes(items);
-  editor.value="";
-  document.getElementById("noteStatus").textContent="saved as section "+nextNumber;
-  renderCreatedSections();
-  setTimeout(()=>document.getElementById("note-section-"+items[items.length-1].id)?.scrollIntoView({behavior:"smooth",block:"start"}),50);
-}
-async function copyNotes(){
-  const notes=document.getElementById("researchNotes").value;
-  try{await navigator.clipboard.writeText(notes)}
-  catch(e){
-    const t=document.createElement("textarea");t.value=notes;document.body.appendChild(t);
-    t.select();document.execCommand("copy");t.remove();
-  }
-  document.getElementById("noteStatus").textContent="current research note copied";
-}
-function downloadNotes(){
-  const notes=document.getElementById("researchNotes").value;
-  const blob=new Blob([notes],{type:"text/plain;charset=utf-8"});
-  const url=URL.createObjectURL(blob),a=document.createElement("a");
-  a.href=url;a.download="Hydra-Research-Note.txt";a.click();URL.revokeObjectURL(url);
-  document.getElementById("noteStatus").textContent="current note exported";
-}
-function clearNotes(){
-  document.getElementById("researchNotes").value="";
-  document.getElementById("noteStatus").textContent="editor cleared";
-}
-function deleteCreatedNote(id){
-  const items=getCreatedNotes();
-  const item=items.find(x=>x.id===id);
-  if(!item)return;
-  if(!confirm("Delete research section "+item.number+"? This only deletes a section you created."))return;
-  setCreatedNotes(items.filter(x=>x.id!==id));
-  renderCreatedSections();
-}
-function wireScrollSpy(){
-  const navLinks=[...document.querySelectorAll("#sideNav a")];
-  const sections=navLinks.map(a=>document.querySelector(a.getAttribute("href"))).filter(Boolean);
-  if(window.__hydraSpy)window.__hydraSpy.disconnect();
-  window.__hydraSpy=new IntersectionObserver((entries)=>{
-    entries.forEach(entry=>{
-      const link=document.querySelector('#sideNav a[href="#'+entry.target.id+'"]');
-      if(!link)return;
-      if(entry.isIntersecting)link.classList.add("active");
-      else link.classList.remove("active");
-    });
-  },{rootMargin:"-20% 0px -70% 0px"});
-  sections.forEach(s=>window.__hydraSpy.observe(s));
-}
-(function loadNotes(){
-  renderCreatedSections();
-})();
-
-// scroll-spy for sidebar nav
+function setNoteStatus(message){const el=document.getElementById("noteStatus");if(el)el.textContent=message}
+function storageGet(){try{return JSON.parse(localStorage.getItem(createdNotesKey)||"[]")}catch(e){return[]}}
+function storageSet(items){try{localStorage.setItem(createdNotesKey,JSON.stringify(items));return true}catch(e){setNoteStatus("browser storage is unavailable — the note could not be saved");return false}}
+function escapeHtml(value){return String(value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/\x27/g,"&#39;")}
+function safeUrl(value){const url=String(value||"").trim();return /^https?:\/\//i.test(url)?url:null}
+function sanitizeNoteHtml(input){const template=document.createElement("template");template.innerHTML=String(input||"");const allowed=new Set(["B","STRONG","U","INS","A","BR","P","DIV","SPAN"]);const cleanNode=node=>{[...node.childNodes].forEach(child=>{if(child.nodeType===Node.COMMENT_NODE){child.remove();return}if(child.nodeType!==Node.ELEMENT_NODE)return;if(!allowed.has(child.tagName)){child.replaceWith(...[...child.childNodes]);return}[...child.attributes].forEach(attr=>{if(!(child.tagName==="A"&&["href","target","rel"].includes(attr.name)))child.removeAttribute(attr.name)});if(child.tagName==="A"){const href=safeUrl(child.getAttribute("href"));if(!href)child.replaceWith(...[...child.childNodes]);else{child.setAttribute("href",href);child.setAttribute("target","_blank");child.setAttribute("rel","noopener noreferrer")}}if(child.parentNode)cleanNode(child)})};cleanNode(template.content);return template.innerHTML}
+function getEditorHtml(){return sanitizeNoteHtml(document.getElementById("researchNotes").innerHTML||"")}
+function getEditorText(){return (document.getElementById("researchNotes").innerText||"").trim()}
+function formatNote(command){const editor=document.getElementById("researchNotes");editor.focus();document.execCommand(command,false,null)}
+function addDirectLink(){const editor=document.getElementById("researchNotes");editor.focus();const raw=prompt("Enter the full URL (https://…):");if(raw===null)return;const url=safeUrl(raw);if(!url){setNoteStatus("Only http:// or https:// links are allowed");return}const selection=window.getSelection();if(selection&&!selection.isCollapsed&&editor.contains(selection.anchorNode))document.execCommand("createLink",false,url);else document.execCommand("insertHTML",false,"<a href=\"" + escapeHtml(url) + "\">" + escapeHtml(url) + "</a>");setNoteStatus("direct clickable link added")}
+function addNamedLink(){const editor=document.getElementById("researchNotes");editor.focus();const name=prompt("Text to display for the link:");if(name===null)return;const raw=prompt("Enter the full URL (https://…):");if(raw===null)return;const url=safeUrl(raw);if(!url){setNoteStatus("Only http:// or https:// links are allowed");return}const selection=window.getSelection();if(selection&&!selection.isCollapsed&&editor.contains(selection.anchorNode))document.execCommand("createLink",false,url);else document.execCommand("insertHTML",false,"<a href=\"" + escapeHtml(url) + "\">" + escapeHtml(name) + "</a>");setNoteStatus("named clickable link added")}
+function nextSectionNumber(items){return items.reduce((max,item)=>Math.max(max,Number(item.number)||16),16)+1}
+function makeId(){return window.crypto&&crypto.randomUUID?crypto.randomUUID():String(Date.now())+"-"+Math.random().toString(36).slice(2)}
+function renderCreatedSections(scrollToId){const host=document.getElementById("createdSections");if(!host)return;const items=storageGet().sort((a,b)=>Number(a.number)-Number(b.number));host.innerHTML=items.map(item=>{const title=escapeHtml(item.title||("research-note-"+item.number));const safeHtml=sanitizeNoteHtml(item.html||"");return "<section class=\"research-panel created-note\" id=\"note-section-"+escapeHtml(item.id)+"\" data-created=\"true\"><h2>"+title+" <span class=\"tag\">"+escapeHtml(item.number)+"</span></h2><div class=\"sub\">Created "+escapeHtml(item.date||"")+"</div><div class=\"note-body\">"+safeHtml+"</div><div class=\"created-actions\"><span class=\"sub\">Created section • "+escapeHtml(item.number)+"</span><button class=\"action danger\" onclick=\"deleteCreatedNote(\'"+escapeHtml(item.id)+"\')\">Delete this section</button></div></section>"}).join("");renderCreatedNav(items);if(scrollToId)requestAnimationFrame(()=>{const target=document.getElementById("note-section-"+scrollToId);if(target)target.scrollIntoView({behavior:"smooth",block:"start"})})}
+function renderCreatedNav(items,newId){const nav=document.getElementById("sideNav");if(!nav)return;let group=nav.querySelector(".created-notes-group");if(!items.length){if(group)group.remove();return}if(!group){group=document.createElement("div");group.className="created-notes-group";group.innerHTML="<div class=\"nav-group-label\">created notes</div>";nav.appendChild(group)}group.querySelectorAll("a").forEach(a=>a.remove());items.forEach((item,index)=>{const a=document.createElement("a");a.href="#note-section-"+item.id;a.className="created-nav-link";a.style.animationDelay=(index*35)+"ms";a.innerHTML="<span class=\"idx\">"+escapeHtml(item.number)+"</span>"+escapeHtml(item.title||("research-note-"+item.number));group.appendChild(a)});wireScrollSpy();if(newId){const link=group.querySelector("a[href=\"#note-section-"+CSS.escape(String(newId))+"\"]");if(link)link.classList.add("active")}}
+function saveNotes(){const editor=document.getElementById("researchNotes");const text=getEditorText();const html=getEditorHtml();if(!text||!html){setNoteStatus("write something before saving");editor.focus();return}const items=storageGet();const number=nextSectionNumber(items);const title=(document.getElementById("researchNoteTitle").value||"").trim()||("research-note-"+number);const item={id:makeId(),number:number,title:title,html:html,date:new Date().toLocaleString()};items.push(item);if(!storageSet(items))return;editor.innerHTML="";document.getElementById("researchNoteTitle").value="";setNoteStatus("saved as section "+number);renderCreatedSections(item.id)}
+async function copyNotes(){const editor=document.getElementById("researchNotes");const html=getEditorHtml();const text=editor.innerText||"";try{if(navigator.clipboard&&navigator.clipboard.write){const data=new ClipboardItem({"text/html":new Blob([html],{type:"text/html"}),"text/plain":new Blob([text],{type:"text/plain"})});await navigator.clipboard.write([data])}else await navigator.clipboard.writeText(text)}catch(e){try{await navigator.clipboard.writeText(text)}catch(err){const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}}setNoteStatus("current research note copied")}
+function downloadNotes(){const html=getEditorHtml();const title=escapeHtml(document.getElementById("researchNoteTitle").value.trim()||"Hydra Research Note");const doc="<!doctype html><html><head><meta charset=\"utf-8\"><title>"+title+"</title></head><body><h1>"+title+"</h1>"+html+"</body></html>";const blob=new Blob([doc],{type:"text/html;charset=utf-8"});const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="Hydra-Research-Note.html";a.click();URL.revokeObjectURL(url);setNoteStatus("current note exported as HTML")}
+function clearNotes(){document.getElementById("researchNotes").innerHTML="";document.getElementById("researchNoteTitle").value="";setNoteStatus("editor cleared")}
+function deleteCreatedNote(id){const items=storageGet();const item=items.find(x=>String(x.id)===String(id));if(!item)return;if(!confirm("Delete research section "+item.number+"? This only deletes a section you created."))return;if(!storageSet(items.filter(x=>String(x.id)!==String(id))))return;renderCreatedSections();setNoteStatus("section "+item.number+" deleted")}
+function wireScrollSpy(){const navLinks=[...document.querySelectorAll("#sideNav a")];const sections=navLinks.map(a=>document.querySelector(a.getAttribute("href"))).filter(Boolean);if(window.__hydraSpy)window.__hydraSpy.disconnect();window.__hydraSpy=new IntersectionObserver(entries=>{entries.forEach(entry=>{const link=document.querySelector("#sideNav a[href=\"#"+CSS.escape(entry.target.id)+"\"]");if(!link)return;if(entry.isIntersecting)link.classList.add("active");else link.classList.remove("active")})},{rootMargin:"-20% 0px -70% 0px"});sections.forEach(s=>window.__hydraSpy.observe(s))}
+(function loadNotes(){renderCreatedSections()})();
 wireScrollSpy();
 </script>
 </body>
