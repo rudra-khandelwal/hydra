@@ -10,19 +10,23 @@
 - Establish research diary methodology.
 
 ### 2026-09-22
-- Establish dedicated private GitHub repository.
+- Establish dedicated GitHub research repository.
 - Preserve research history.
 - Formalize repository structure and methodology.
-- Connect local Hydra development workspace to private repository.
+- Publish the repository and sanitized research guide.
+- Add GitHub Pages deployment workflow.
+- Record and diagnose the first Pages deployment failure.
 - Continue controlled runtime testing.
 
 ## Next phases
 
-1. Verify local Git remote and repository history.
-2. Synchronize the validated local Hydra source into the private repository.
-3. Add reproducible evidence templates.
-4. Perform controlled download/install observations.
-5. Analyze the resulting files and process/network behavior.
-6. Correlate observations with source code.
-7. Produce dated findings.
-8. Review repository for secrets before any future public release.
+1. Enable/configure GitHub Pages for the public repository.
+2. Rerun the Pages workflow and verify the published site.
+3. Verify local Git remote and repository history.
+4. Synchronize the validated local Hydra source into the repository without unnecessary generated artifacts.
+5. Add reproducible evidence templates and dated checkpoints.
+6. Perform controlled download/install observations.
+7. Analyze the resulting files and process/network behavior.
+8. Correlate observations with source code.
+9. Produce dated findings.
+10. Review every future commit for credentials, personal data, raw sensitive logs, and other material that should not be public.
