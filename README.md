@@ -1,13 +1,13 @@
-# Hydra — Private Research & Development Workspace
+# Hydra — Public Research & Development Workspace
 
 **Repository:** `rudra-khandelwal/hydra`  
 **Upstream:** `hydralauncher/hydra`  
-**Status:** Private research/development workspace  
+**Status:** Public research/development workspace  
 **Established:** 22 September 2026
 
 ## Why this repository exists
 
-This repository is Rudra Khandelwal's private workspace for building, understanding, documenting, and security-testing a local copy of the open-source Hydra Launcher project.
+This repository is Rudra Khandelwal's public workspace for building, understanding, documenting, and security-testing a local copy of the open-source Hydra Launcher project.
 
 The work is intentionally separated from the upstream project so that local experiments, research notes, test evidence, build configuration, and security findings can be developed without presenting them as official Hydra project statements.
 
@@ -85,7 +85,9 @@ scripts/           Reproducible analysis helpers
 upstream/          Upstream relationship and provenance notes
 ```
 
-## Safety and privacy
+## Public repository safety
+
+Because this repository is public, every committed file and its Git history should be treated as public.
 
 Do not commit:
 
@@ -106,7 +108,7 @@ Use `.env.example` for configuration templates and keep real `.env` files local.
 
 The research began with Windows build troubleshooting and evolved into a structured security research workflow. Existing research records from September 2026 are being preserved as a chronological project history rather than rewritten as if they happened later.
 
-See `research/DIARY.md` and `research/AGENDA.md`.
+See `research/DIARY.md`, `research/AGENDA.md`, and the dated checkpoint records.
 
 ## Upstream relationship
 
@@ -115,6 +117,12 @@ This workspace is based on the public upstream project:
 `hydralauncher/hydra`
 
 See `upstream/UPSTREAM.md` for provenance and synchronization notes.
+
+## GitHub Pages
+
+The repository contains a sanitized public `index.html` research guide and a GitHub Actions workflow intended to deploy it with GitHub Pages.
+
+The first deployment attempt on 22 September 2026 reached the GitHub Actions runner but failed at the Pages configuration step because the repository's Pages site was not yet enabled/configured for GitHub Actions. See `research/CHECKPOINTS/2026-09-22-public-repository-and-pages.md` for the recorded evidence.
 
 ## Disclaimer
 
