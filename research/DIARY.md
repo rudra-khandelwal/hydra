@@ -71,3 +71,9 @@ Removed the prominent live-guide banner from the main repository README as reque
 
 ### [CHATGPT] GitHub Pages favicon
 Added a public `favicon.svg` with a white H mark so the browser tab uses an H icon instead of the generic globe icon.
+
+### [CHATGPT] Claude design + current data restoration
+Restored the earlier Claude visual design language for the public guide: dark brown/orange title bar, sticky left navigation, monospace section labels, compact research panels, and the original build-guide structure. The current verified Node 24.19.0 / VS2022 environment, research checkpoint, one-paste setup, daily status, attributed diary and troubleshooting data were retained. Private credentials/vault material remain excluded.
+
+### [CHATGPT] Single live README link
+The main README now contains one direct live-guide link, rather than a large banner or multiple repeated live-guide links.
