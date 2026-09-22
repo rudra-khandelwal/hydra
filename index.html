@@ -623,7 +623,7 @@ function wireCopyButtons(){document.querySelectorAll(".copy").forEach(btn=>{btn.
 wireCopyButtons();
 const createdNotesKey="hydraResearchSections";
 function setNoteStatus(message){const el=document.getElementById("noteStatus");if(el)el.textContent=message}
-function storageGet(){try{const raw=JSON.parse(localStorage.getItem(createdNotesKey)||"[]");return Array.isArray(raw)?raw.map(item=>{if(item&&item.html==null&&item.text!=null){const text=String(item.text);item.html=escapeHtml(text).replace(/\\n/g,"<br>")}return item}).filter(Boolean):[]}catch(e){return[]}}
+function storageGet(){try{const raw=JSON.parse(localStorage.getItem(createdNotesKey)||"[]");return Array.isArray(raw)?raw.map(item=>{if(item&&item.html==null&&item.text!=null){const text=String(item.text);item.html=escapeHtml(text).replace(/\n/g,"<br>")}return item}).filter(Boolean):[]}catch(e){return[]}}
 function storageSet(items){try{localStorage.setItem(createdNotesKey,JSON.stringify(items));return true}catch(e){setNoteStatus("browser storage is unavailable — the note could not be saved");return false}}
 function escapeHtml(value){return String(value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/\x27/g,"&#39;")}
 function safeUrl(value){const url=String(value||"").trim();return /^https?:\/\//i.test(url)?url:null}
