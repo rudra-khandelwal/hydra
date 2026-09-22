@@ -62,3 +62,12 @@ The main GitHub repository README now exposes the public research guide directly
 
 ### [CHATGPT] README publication update
 The repository README was updated to prominently link the live GitHub Pages guide and document that GitHub is the source of truth for the live research record.
+
+### [CHATGPT] Public guide restoration and favicon
+The public GitHub Pages guide was rebuilt from the earlier v4 research guide content, restoring the documented research checkpoint, daily research routine, verified Windows toolchain details, troubleshooting history, final clean command sequence, and a single copy-paste setup block. Private vault controls and encrypted credential material were not carried into the public site.
+
+### [RUDRA] Main README cleanup
+Removed the prominent live-guide banner from the main repository README as requested. The live guide remains the GitHub Pages site, while the HTML itself provides direct repository/research navigation.
+
+### [CHATGPT] GitHub Pages favicon
+Added a public `favicon.svg` with a white H mark so the browser tab uses an H icon instead of the generic globe icon.
