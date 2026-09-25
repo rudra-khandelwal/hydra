@@ -54,7 +54,6 @@ body{
 .nav a .idx{color:var(--dim)}
 .nav a:hover{background:var(--panel-soft);color:var(--text)}
 .nav a.active{background:var(--panel-soft);color:var(--accent);border-left-color:var(--accent)}
-.nav{background:var(--bg2)}
 
 .content{flex:1;min-width:0;padding:0 26px 90px}
 
@@ -942,17 +941,16 @@ yarn install</code></pre>
 <a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/research/VALIDATION.md" target="_blank" rel="noopener noreferrer">Open validation</a>
 </div>
 <div class="publisher-panel" id="publisher">
-<h3>Maintainer repository upload</h3>
-<p class="mini">Owner-only publishing boundary for this public repository. Choose a folder and a text/code file, review it, then publish it to <code>research/uploads/&lt;folder&gt;/</code>. The GitHub token is held only in this page's memory and is never written to localStorage.</p>
+<h3>Maintainer GitHub upload</h3>
+<p class="mini">This public guide does not collect repository write tokens. Select the file and destination folder to validate the target, then open GitHub's authenticated upload page. GitHub itself remains the owner-only write boundary.</p>
 <div class="publisher-grid">
-<div class="publisher-field"><label for="publisherToken">Fine-grained GitHub token — Contents: write</label><input id="publisherToken" type="password" autocomplete="off" spellcheck="false" placeholder="Paste token only when publishing"></div>
 <div class="publisher-field"><label for="publisherFolder">Folder name</label><input id="publisherFolder" type="text" maxlength="48" autocomplete="off" placeholder="e.g. runtime-notes"></div>
-<div class="publisher-field full"><label for="publisherFile">HTML / TXT / MD / code file</label><input id="publisherFile" type="file" accept=".html,.htm,.txt,.md,.js,.ts,.jsx,.tsx,.css,.scss,.json,.yaml,.yml,.xml,.py,.java,.cpp,.c,.h,.hpp,.rs,.go,.php,.sh,.ps1,.bat,.sql,.toml,.ini,.cfg,.log"></div>
+<div class="publisher-field"><label for="publisherFile">HTML / TXT / MD / code file</label><input id="publisherFile" type="file" accept=".html,.htm,.txt,.md,.js,.ts,.jsx,.tsx,.css,.scss,.json,.yaml,.yml,.xml,.py,.java,.cpp,.c,.h,.hpp,.rs,.go,.php,.sh,.ps1,.bat,.sql,.toml,.ini,.cfg,.log"></div>
 <div class="publisher-field full"><label for="publisherMessage">Commit message</label><input id="publisherMessage" type="text" maxlength="120" value="docs: add maintainer research upload" autocomplete="off"></div>
 </div>
-<div class="publisher-help">There is no fake client-side password gate. GitHub repository permission is the actual write boundary. Use a fine-grained token restricted to this repository with Contents: write. The token is never saved by this page. Obvious credential/private-key patterns are blocked before upload.</div>
-<div class="publisher-actions"><button class="action" type="button" onclick="publishSelectedFile()">Publish selected file</button><button class="action" type="button" onclick="clearPublisher()">Lock / clear token</button></div>
-<div class="publisher-status" id="publisherStatus"></div>
+<div class="publisher-help">The page only prepares the destination. Clicking the upload action opens GitHub for your authenticated session; the file is then selected in GitHub. No GitHub token is read, stored, or transmitted by this site.</div>
+<div class="publisher-actions"><button class="action" type="button" onclick="preparePublisherHandoff()">Open GitHub upload</button><button class="action" type="button" onclick="clearPublisher()">Clear</button></div>
+<div class="publisher-status" id="publisherStatus" aria-live="polite"></div>
 </div>
 <div class="callout warn"><strong>Verification rule:</strong> “Implemented” means the source contains the intended behavior. “Deployed” means GitHub Pages published the relevant commit. “Live-verified” means the published page was actually exercised. Do not treat these as interchangeable.</div>
 <div class="callout"><strong>Next research goal:</strong> use a legitimate free/open-source artifact for a controlled download experiment, then compare pre/post process, network, filesystem, hash, and Defender observations before any appropriate execution.</div>
@@ -986,19 +984,20 @@ const items=storageGet().sort((a,b)=>Number(a.number)-Number(b.number));
 host.innerHTML=items.map(item=>{
 const title=escapeHtml(item.title||("research-note-"+item.number));const safeHtml=sanitizeNoteHtml(item.html||"");const history=historyFor(item);const updated=item.updatedAt?'<span class="updated">Updated '+escapeHtml(item.updatedAt)+'</span>':'';
 const historyItems=history.slice().reverse().map((entry,index)=>'<div class="note-history-item"><div class="history-head">Version '+escapeHtml(entry.version||index+1)+' • '+escapeHtml(entry.date||"")+'</div><div><strong>Previously written:</strong> '+escapeHtml(entry.title||item.title||"")+'</div><div class="history-body">'+sanitizeNoteHtml(entry.html||"")+'</div></div>').join("");
-return '<section class="research-panel created-note" id="note-section-'+escapeHtml(item.id)+'" data-created="true"><h2>'+title+' <span class="tag">'+escapeHtml(item.number)+'</span></h2><div class="sub">Created '+escapeHtml(item.date||"")+' '+updated+'</div><div class="note-body">'+safeHtml+'</div><div class="created-actions"><div class="actions"><button class="action" type="button" onclick="editCreatedNote(\''+escapeHtml(item.id)+'\')">Edit</button><button class="action" type="button" onclick="toggleNoteHistory(\''+escapeHtml(item.id)+'\')">Previous / history</button><button class="action danger" type="button" onclick="deleteCreatedNote(\''+escapeHtml(item.id)+'\')">Delete this section</button></div></div><div class="note-history" id="note-history-'+escapeHtml(item.id)+'"><div class="note-history-title">Previous versions</div>'+ (history.length?historyItems:'<div class="note-history-empty">No previous version yet. Editing this note will create the first history entry.</div>') +'</div></section>';
+const safeId=encodeURIComponent(String(item.id));
+return '<section class="research-panel created-note" id="note-section-'+safeId+'" data-created="true"><h2>'+title+' <span class="tag">'+escapeHtml(item.number)+'</span></h2><div class="sub">Created '+escapeHtml(item.date||"")+' '+updated+'</div><div class="note-body">'+safeHtml+'</div><div class="created-actions"><div class="actions"><button class="action" type="button" data-note-action="edit" data-note-id="'+safeId+'">Edit</button><button class="action" type="button" data-note-action="history" data-note-id="'+safeId+'">Previous / History</button><button class="action danger" type="button" data-note-action="delete" data-note-id="'+safeId+'">Delete This Section</button></div></div><div class="note-history" id="note-history-'+safeId+'"><div class="note-history-title">Previous Versions</div>'+ (history.length?historyItems:'<div class="note-history-empty">No previous version yet. Editing this note will create the first history entry.</div>') +'</div></section>';
 }).join("");
 renderCreatedNav(items);
-if(scrollToId)requestAnimationFrame(()=>{const target=document.getElementById("note-section-"+scrollToId);if(target)target.scrollIntoView({behavior:"smooth",block:"start"})})
+if(scrollToId)requestAnimationFrame(()=>{const target=document.getElementById("note-section-"+encodeURIComponent(String(scrollToId)));if(target)target.scrollIntoView({behavior:"smooth",block:"start"})})
 }
 function renderCreatedNav(items,newId){
 const nav=document.getElementById("sideNav");if(!nav)return;let group=nav.querySelector(".created-notes-group");
 if(!items.length){if(group)group.remove();return}
 if(!group){group=document.createElement("div");group.className="created-notes-group";group.innerHTML="<div class=\"nav-group-label\" id=\"navGroupCreatedNotes\">Created Notes</div>";nav.appendChild(group)}
 group.querySelectorAll("a").forEach(a=>a.remove());
-items.forEach((item,index)=>{const a=document.createElement("a");a.href="#note-section-"+item.id;a.className="created-nav-link";a.style.animationDelay=(index*35)+"ms";a.innerHTML="<span class=\"idx\">"+escapeHtml(item.number)+"</span>"+escapeHtml(item.title||("research-note-"+item.number));group.appendChild(a)});
+items.forEach((item,index)=>{const safeId=encodeURIComponent(String(item.id));const a=document.createElement("a");a.href="#note-section-"+safeId;a.className="created-nav-link";a.style.animationDelay=(index*35)+"ms";a.innerHTML="<span class=\"idx\">"+escapeHtml(item.number)+"</span>"+escapeHtml(item.title||("research-note-"+item.number));group.appendChild(a)});
 wireScrollSpy();
-if(newId){const link=group.querySelector("a[href=\"#note-section-"+CSS.escape(String(newId))+"\"]");if(link)link.classList.add("active")}
+if(newId){const link=group.querySelector("a[href=\"#note-section-"+CSS.escape(encodeURIComponent(String(newId)))+"\"]");if(link)link.classList.add("active")}
 }
 function toggleNoteHistory(id){const el=document.getElementById("note-history-"+CSS.escape(String(id)));if(el)el.classList.toggle("open")}
 function editCreatedNote(id){
@@ -1029,31 +1028,35 @@ async function copyNotes(){const editor=document.getElementById("researchNotes")
 function downloadNotes(){const html=getEditorHtml();const title=escapeHtml(document.getElementById("researchNoteTitle").value.trim()||"Hydra Research Note");const doc="<!doctype html><html><head><meta charset=\"utf-8\"><title>"+title+"</title></head><body><h1>"+title+"</h1>"+html+"<scr"+"ipt>\n</scr"+"ipt>\n</body></html>";const blob=new Blob([doc],{type:"text/html;charset=utf-8"});const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="Hydra-Research-Note.html";a.click();URL.revokeObjectURL(url);setNoteStatus("current note exported as HTML")}
 
 const publisherAllowedExtensions=new Set(["html","htm","txt","md","js","ts","jsx","tsx","css","scss","json","yaml","yml","xml","py","java","cpp","c","h","hpp","rs","go","php","sh","ps1","bat","sql","toml","ini","cfg","log"]);
-const publisherMaxBytes=1024*1024;
 function publisherStatus(message,kind){const el=document.getElementById("publisherStatus");if(!el)return;el.textContent=message;el.className="publisher-status"+(kind?" "+kind:"")}
-function clearPublisher(){const token=document.getElementById("publisherToken");if(token)token.value="";publisherStatus("publisher locked — no repository credential is retained","good")}
+function clearPublisher(){const folder=document.getElementById("publisherFolder"),file=document.getElementById("publisherFile");if(folder)folder.value="";if(file)file.value="";publisherStatus("upload form cleared","good")}
 function publisherSafePart(value,label){const v=String(value||"").trim();if(!v||v==="."||v===".."||/[\\/]/.test(v)||!/^[A-Za-z0-9._-]+$/.test(v))throw new Error(label+" may contain only letters, numbers, dots, dashes and underscores")}
-function publisherCredentialWarning(text){const patterns=[/-----BEGIN [A-Z ]*PRIVATE KEY-----/i,/github_pat_[A-Za-z0-9_]+/i,/ghp_[A-Za-z0-9]+/i,/AKIA[0-9A-Z]{16}/,/password\s*[:=]/i,/secret\s*[:=]/i,/api[_-]?key\s*[:=]/i,/token\s*[:=]\s*[A-Za-z0-9_-]{12,}/i];return patterns.some(rx=>rx.test(text))}
-function toBase64Utf8(text){const bytes=new TextEncoder().encode(text);let binary="";const chunk=0x8000;for(let i=0;i<bytes.length;i+=chunk)binary+=String.fromCharCode(...bytes.subarray(i,i+chunk));return btoa(binary)}
-async function publishSelectedFile(){
-const token=(document.getElementById("publisherToken").value||"").trim();const folder=(document.getElementById("publisherFolder").value||"").trim();const input=document.getElementById("publisherFile");const file=input&&input.files?input.files[0]:null;const message=(document.getElementById("publisherMessage").value||"").trim()||"docs: add maintainer research upload";
+function preparePublisherHandoff(){
+const folder=(document.getElementById("publisherFolder").value||"").trim();const input=document.getElementById("publisherFile");const file=input&&input.files?input.files[0]:null;
 try{
-if(!token)throw new Error("paste your fine-grained GitHub token first");publisherSafePart(folder,"Folder name");if(!file)throw new Error("choose a file first");if(file.size>publisherMaxBytes)throw new Error("file is larger than the 1 MB maintainer-upload limit");
-const match=(file.name.match(/\.([^.]+)$/)||[])[1];const ext=(match||"").toLowerCase();if(!publisherAllowedExtensions.has(ext))throw new Error("this file type is not allowed");publisherSafePart(file.name,"File name");
-const text=await file.text();if(publisherCredentialWarning(text)){if(!confirm("Credential-like or private-key content was detected. Do not publish secrets. Continue only if this is a deliberate non-secret test fixture."))throw new Error("upload cancelled after credential warning")}
-publisherStatus("checking GitHub write access…");
-const headers={"Accept":"application/vnd.github+json","Authorization":"Bearer "+token,"X-GitHub-Api-Version":"2026-03-10","Content-Type":"application/json"};
-const repoRes=await fetch("https://api.github.com/repos/rudra-khandelwal/hydra",{headers});if(!repoRes.ok)throw new Error("GitHub rejected the credential or repository access");
-const path="research/uploads/"+folder+"/"+file.name;const existingRes=await fetch("https://api.github.com/repos/rudra-khandelwal/hydra/contents/"+path.split("/").map(encodeURIComponent).join("/")+"?ref=main",{headers});let sha=null;
-if(existingRes.ok){const existing=await existingRes.json();sha=existing.sha}else if(existingRes.status!==404)throw new Error("could not check the target path");
-publisherStatus("publishing "+path+"…");const body={message,content:toBase64Utf8(text),branch:"main"};if(sha)body.sha=sha;
-const put=await fetch("https://api.github.com/repos/rudra-khandelwal/hydra/contents/"+path.split("/").map(encodeURIComponent).join("/"),{method:"PUT",headers,body:JSON.stringify(body)});
-if(!put.ok){let detail="GitHub upload failed";try{const data=await put.json();if(data&&data.message)detail+=": "+data.message}catch(e){}throw new Error(detail)}
-const result=await put.json();publisherStatus("published to "+path+" • commit "+String(result.commit&&result.commit.sha||"").slice(0,7),"good");input.value="";clearPublisher()
-}catch(e){publisherStatus(e&&e.message?e.message:"upload failed","danger")}
+publisherSafePart(folder,"Folder name");if(!file)throw new Error("choose a file first");
+const match=(file.name.match(/\.([^.]+)$/)||[])[1];const ext=(match||"").toLowerCase();if(!publisherAllowedExtensions.has(ext))throw new Error("this file type is not allowed");
+publisherSafePart(file.name,"File name");
+const path="research/uploads/"+folder+"/"+file.name;
+const url="https://github.com/rudra-khandelwal/hydra/upload/main/"+path.split("/").map(encodeURIComponent).join("/");
+publisherStatus("opening authenticated GitHub upload for "+path+"…","good");
+window.open(url,"_blank","noopener,noreferrer");
+}catch(e){publisherStatus(e&&e.message?e.message:"could not prepare upload","danger")}
 }
-function clearNotes(){document.getElementById("researchNotes").innerHTML="";document.getElementById("researchNoteTitle").value="";setNoteStatus("editor cleared")}
-function deleteCreatedNote(id){const items=storageGet();const item=items.find(x=>String(x.id)===String(id));if(!item)return;if(!confirm("Delete research section "+item.number+"? This only deletes a section you created."))return;if(!storageSet(items.filter(x=>String(x.id)!==String(id))))return;renderCreatedSections();setNoteStatus("section "+item.number+" deleted")}
+
+function clearNotes(){
+  if(editingNoteId)cancelNoteEdit();
+  document.getElementById("researchNotes").innerHTML="";
+  document.getElementById("researchNoteTitle").value="";
+  setNoteStatus("editor cleared")
+}
+function deleteCreatedNote(id){
+  const items=storageGet();const item=items.find(x=>String(x.id)===String(id));if(!item)return;
+  if(!confirm("Delete research section "+item.number+"? This only deletes a section you created."))return;
+  if(editingNoteId===String(id))cancelNoteEdit();
+  if(!storageSet(items.filter(x=>String(x.id)!==String(id))))return;
+  renderCreatedSections();setNoteStatus("section "+item.number+" deleted")
+}
 function projectMapButtonForTarget(targetId){
   const buttons=[...document.querySelectorAll(".project-map-button")];
   if(targetId&&targetId.startsWith("note-section-")){
@@ -1143,7 +1146,22 @@ function focusSideNav(button){
   syncProjectMap(targetId);
 }
 
-(function loadNotes(){renderCreatedSections()})();
+function wireCreatedNoteActions(){
+  const host=document.getElementById("createdSections");if(!host)return;
+  if(window.__hydraNoteActions)host.removeEventListener("click",window.__hydraNoteActions);
+  window.__hydraNoteActions=function(event){
+    const button=event.target.closest("[data-note-action]");if(!button||!host.contains(button))return;
+    const rawId=button.getAttribute("data-note-id");if(!rawId)return;
+    let id;try{id=decodeURIComponent(rawId)}catch(e){return}
+    const action=button.getAttribute("data-note-action");
+    if(action==="edit")editCreatedNote(id);
+    else if(action==="history")toggleNoteHistory(id);
+    else if(action==="delete")deleteCreatedNote(id);
+  };
+  host.addEventListener("click",window.__hydraNoteActions);
+}
+
+(function loadNotes(){wireCreatedNoteActions();renderCreatedSections()})();
 wireScrollSpy();
 (function(){
   const menu=document.getElementById('navMenu');
