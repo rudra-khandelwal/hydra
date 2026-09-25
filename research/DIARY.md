@@ -101,3 +101,27 @@ Today's guide/editor work is considered complete for the day. Historical diary e
 
 ### Next checkpoint
 Verify the latest GitHub Pages deployment in a browser, test creating/formatting/deleting a research note on the live guide, then continue the controlled Hydra security research cycle and record the next substantive runtime test.
+
+
+## 25 September 2026
+
+### [CHATGPT] Fresh-session security checkpoint
+A new research day was started with a fresh Hydra runtime observation cycle. Existing historical diary entries were preserved rather than rewritten.
+
+### [CHATGPT] Download-source API correlation
+Hydra requests to the game download-source endpoint were observed with source IDs `BVnaGLvo` and `w4nVajB6`. The API returned a concrete download-source record associated with `w4nVajB6` and the source name `FitGirl`, including URI/torrent metadata. The full magnet/tracker data was not copied into the public diary because it is unnecessary to the security finding.
+
+### [CHATGPT] Source-code correlation
+Repository source inspection showed that Hydra maintains a local `downloadSources` store and synchronizes source definitions with the Hydra API. The client also exposes API-backed source creation and synchronization logic. This strengthens the architectural model in which the Hydra API is a trust boundary between the client and configured download-source metadata.
+
+### [CHATGPT] Trust-boundary conclusion
+The current evidence demonstrates metadata flow from Hydra API responses into the Hydra client and local source storage. It does not establish peer/tracker communication or behavior of a downloaded executable. Those require a separate controlled download and analysis experiment.
+
+### [CHATGPT] Antivirus control result
+Windows antivirus/AMSI blocked the EICAR test string at the PowerShell command stage. Because the assignment was blocked before a valid test file was established, the result is recorded as an AV interception control rather than a completed EICAR-file quarantine test. No Defender threat-history record was displayed by the queried cmdlets in the captured output.
+
+### [RUDRA] Public-evidence handling
+The public research record will retain conclusions and reproducible methodology while avoiding publication of credentials, authentication data, raw sensitive logs, or unnecessary redistribution metadata.
+
+### Next checkpoint
+Perform a controlled download test with a legitimate free/open-source artifact, then compare process, network, filesystem, hash, and Defender observations before considering execution.
