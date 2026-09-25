@@ -21,7 +21,7 @@ This file separates source implementation from deployment and live behavior.
 | Only one GitHub repo button beside Hydra Launcher | Implemented | Pending latest control-pass deploy | Pending |
 | GitHub button focuses originating GitHub tab when available | Implemented | Pending latest control-pass deploy | Pending |
 | Direct-open GitHub button fallback opens repository separately | Implemented | Pending latest control-pass deploy | Pending |
-| Created research notes start at section 18 | Pending implementation update | Pending | Pending |
+| Created research notes start at section 18 | Implemented | Pending latest control-pass deploy | Pending live test |
 
 ## Repository integrity
 
@@ -30,8 +30,8 @@ This file separates source implementation from deployment and live behavior.
 | Repository is public | Verified |
 | No secrets intentionally committed | Ongoing public-release review |
 | Research findings state uncertainty | Verified by current FINDINGS.md |
-| Canonical checkpoint directory is lowercase | Pending structure cleanup |
-| README repository map is current | Pending structure cleanup |
+| Canonical checkpoint directory is lowercase | Verified |
+| README/repository map is current | Implemented; final tree review still required |
 
 ## Security research
 
