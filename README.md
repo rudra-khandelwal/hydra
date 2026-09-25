@@ -3,7 +3,8 @@
 **Repository:** `rudra-khandelwal/hydra`  
 **Upstream:** `hydralauncher/hydra`  
 **Status:** Public research/development workspace  
-**Established:** 22 September 2026
+**Established:** 22 September 2026  
+**Live research guide:** [Open the live guide](https://rudra-khandelwal.github.io/hydra/)
 
 ## Why this repository exists
 
@@ -126,7 +127,7 @@ The repository contains the public `index.html` research guide and a GitHub Acti
 
 The first deployment attempt on 22 September 2026 failed at the Pages configuration step because Pages was not yet enabled. After Pages was enabled, subsequent deployments succeeded.
 
-**Live research guide:** [Open the live guide](https://rudra-khandelwal.github.io/hydra/)
+The live guide link is kept at the top of this README for quick access.
 
 The guide preserves the earlier Claude visual design while incorporating the current verified build environment, research checkpoint, diary attribution, security workflow, and one-paste setup path. Private credentials and vault material are intentionally excluded from the public page.
 
