@@ -176,7 +176,9 @@ Before changing anything:
 
 The last confirmed successful GitHub Pages run before the project-control restructuring was workflow run #41 for commit `8e273eaa506f6df4be11d305e58d3e56f284cf84`.
 
-The project-control restructuring and subsequent workflow-maintenance commits triggered newer runs, several of which were superseded/cancelled by the workflow concurrency policy. The **newest run for the current HEAD must be checked** before calling the current live site fully deployed or live-verified.
+The control-pass HEAD `d9b83fee2ad9a8bf4a1875693a88c765bbc455cb` was then deployed successfully as workflow run **#66**. Its `deploy` check completed with **success** and **0 annotations**.
+
+The published browser behavior is still separate from deployment status: source/deployment success does not by itself count as live browser verification.
 
 ## Current control-pass checkpoints
 
@@ -185,7 +187,9 @@ The project-control restructuring and subsequent workflow-maintenance commits tr
 - User-created note numbering moved to section 18+: implemented.
 - Public/private documentation consistency audit: implemented.
 - Checkpoint directory case cleanup: implemented.
-- Workflow runtime maintenance: implemented in `.github/workflows/pages.yml`; deployment result for the newest post-maintenance commit must be checked.
+- Workflow runtime maintenance: implemented in `.github/workflows/pages.yml`.
+- Control-pass Pages deployment: run #66 succeeded with 0 annotations.
+- Live browser behavior: still requires direct exercise after deployment.
 
 ## Handoff instruction
 

@@ -13,14 +13,14 @@ This file separates source implementation from deployment and live behavior.
 
 | Check | Source | Deployment | Live verification |
 |---|---|---|---|
-| README live-guide link opens separately | Implemented | Pending latest control-pass deploy | Pending |
-| GitHub opener refreshes once | Implemented | Pending latest control-pass deploy | Pending |
-| Desktop/tablet sidebar stays fixed during document scroll | Implemented | Pending latest control-pass deploy | Pending |
-| Mobile navigation remains slide-out | Implemented | Pending latest control-pass deploy | Pending |
-| Overview targets hero | Implemented | Pending latest control-pass deploy | Pending |
-| Only one GitHub repo button beside Hydra Launcher | Implemented | Pending latest control-pass deploy | Pending |
-| GitHub button focuses originating GitHub tab when available | Implemented | Pending latest control-pass deploy | Pending |
-| Direct-open GitHub button fallback opens repository separately | Implemented | Pending latest control-pass deploy | Pending |
+| README live-guide link opens separately | Implemented | Deployed in control-pass run #66 | Pending live test |
+| GitHub opener refreshes once | Implemented | Deployed in control-pass run #66 | Pending live test |
+| Desktop/tablet sidebar stays fixed during document scroll | Implemented | Deployed in control-pass run #66 | Pending live test |
+| Mobile navigation remains slide-out | Implemented | Deployed in control-pass run #66 | Pending live test |
+| Overview targets hero | Implemented | Deployed in control-pass run #66 | Pending live test |
+| Only one GitHub repo button beside Hydra Launcher | Implemented | Deployed in control-pass run #66 | Pending live test |
+| GitHub button focuses originating GitHub tab when available | Implemented | Deployed in control-pass run #66 | Pending live test |
+| Direct-open GitHub button fallback opens repository separately | Implemented | Deployed in control-pass run #66 | Pending live test |
 | Created research notes start at section 18 | Implemented | Pending latest control-pass deploy | Pending live test |
 
 ## Repository integrity
