@@ -30,3 +30,15 @@
 8. Correlate observations with source code.
 9. Produce dated findings.
 10. Review every future commit for credentials, personal data, raw sensitive logs, and other material that should not be public.
+
+
+### 2026-09-25
+- ~~Correlate configured source IDs with Hydra API download-source requests.~~ Completed.
+- ~~Confirm API-returned source metadata and source-name association.~~ Completed.
+- ~~Correlate API source handling with the Hydra client source-synchronization code.~~ Completed.
+- ~~Record the antivirus control result without overstating it as a completed EICAR file quarantine test.~~ Completed.
+- Perform a controlled download test using a legitimate free/open-source artifact.
+- Record pre/post process, network, and filesystem state.
+- Hash and statically inspect the downloaded artifact before any execution.
+- Correlate observed downloader behavior with Hydra source code.
+- Add a dated finding only when the evidence supports one.
