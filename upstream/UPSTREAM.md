@@ -4,11 +4,11 @@
 
 **Repository:** `hydralauncher/hydra`
 
-This private repository is an independent research/development workspace based on the upstream Hydra project.
+This **public** repository is an independent research/development workspace based on the upstream Hydra project.
 
 ## Provenance
 
-Changes made here should be distinguishable from upstream code.
+Changes made here should remain distinguishable from upstream code.
 
 When importing or synchronizing upstream changes:
 
@@ -19,11 +19,15 @@ When importing or synchronizing upstream changes:
 
 ## Intended Git relationship
 
-The local repository should eventually use:
+The local development repository may use:
 
 ```text
-origin  → https://github.com/rudra-khandelwal/hydra.git
+origin   → https://github.com/rudra-khandelwal/hydra.git
 upstream → https://github.com/hydralauncher/hydra.git
 ```
 
-This allows local work to be pushed to the private repository while upstream changes can be fetched separately.
+The public research repository is the destination for this workspace's documentation, evidence summaries, guide, and controlled research records.
+
+## Research boundary
+
+Do not present independent observations in this repository as official Hydra maintainer statements.
