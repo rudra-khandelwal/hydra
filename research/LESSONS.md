@@ -123,3 +123,10 @@ Add a new lesson whenever a recurring mistake, ambiguity, or tooling failure tea
 **Observed mistake:** An older mobile sidebar media rule remained alongside the newer responsive foundation. Later rules overrode some properties but not all, creating a hidden conflict and making the effective mobile behavior harder to reason about.
 
 **Prevention:** Keep one authoritative responsive rule set per breakpoint. Remove superseded media blocks instead of relying on cascade order to override them.
+
+
+## L-019 — Current-state docs must follow the current HEAD
+
+**Observed mistake:** Deployment notes in the project-memory and validation records still pointed at older Pages runs after newer repository commits had already superseded them.
+
+**Prevention:** When a deployment or audit changes repository state, refresh all current-state references to the newest confirmed HEAD/run. Keep older run numbers only where they are explicitly historical.
