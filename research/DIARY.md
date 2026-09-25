@@ -144,3 +144,12 @@ The responsive changes follow the current web platform approach of flexible layo
 
 ### [CHATGPT] GitHub Actions runtime warning cleanup
 The GitHub Pages workflow was updated after a successful deployment still reported a Node.js 20 deprecation annotation. First-party actions were moved to Node 24-compatible current major versions: `checkout@v7`, `configure-pages@v6`, `upload-pages-artifact@v5`, and `deploy-pages@v5`. The runner was pinned to `ubuntu-24.04` so the repository is not silently moved by the upcoming `ubuntu-latest` → Ubuntu 26.04 migration. The warning was treated as maintenance debt rather than a deployment failure.
+
+### [CHATGPT] Project control structure established
+A canonical project-memory and repository-control layer was added so future work can continue from repository state rather than hidden conversation context. The new control set includes project memory, goal, repository map, change control, lessons/mistake prevention, and a validation matrix. The live guide now exposes these through section 17, Project Control Center; user-created notes are reserved for section 18 onward.
+
+### [CHATGPT] Public-state consistency audit
+Repository documentation was audited after the earlier public-visibility transition. Stale descriptions of the workspace as private were corrected in the project, security, contribution, upstream, and publication-safety documents. The duplicate case-variant checkpoint directories were consolidated to the canonical lowercase `research/checkpoints/` path because Windows filesystems commonly treat case variants as the same path.
+
+### [CHATGPT] Persistent change-control rule
+The project now explicitly distinguishes **Implemented**, **Deployed**, and **Live-verified** states. A green GitHub Actions run is not treated as clean without checking annotations and runtime warnings.
