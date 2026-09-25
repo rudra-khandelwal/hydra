@@ -203,12 +203,16 @@ textarea:focus{border-color:var(--accent-soft)}
   background:var(--bg2);box-shadow:none;backdrop-filter:none
 }
 .project-map-title{
-  margin:0 0 6px 8px;color:var(--dim);
-  font:11.5px var(--mono);letter-spacing:.02em;text-transform:lowercase
+  margin:0 8px 8px;padding:0 0 7px;
+  border-bottom:1px solid var(--line);
+  color:var(--dim);
+  font:11.5px var(--mono);letter-spacing:.02em;
+  text-transform:none
 }
 .project-map-subtitle{
   margin:0 0 8px 8px;color:var(--dim);
-  font:10px var(--mono);letter-spacing:.02em;text-transform:lowercase
+  font:10px var(--mono);letter-spacing:.02em;
+  text-transform:none
 }
 .project-map-button{
   display:flex;gap:8px;align-items:baseline;width:100%;
@@ -284,7 +288,10 @@ textarea:focus{border-color:var(--accent-soft)}
   --touch:44px;
   --map-width:155px;
   --nav-width:250px;
-  --sidebar-gap:0px;
+  --map-nav-gap:14px;
+  --nav-content-gap:48px;
+  --rail-shift:120px;
+  --rail-gutter:24px;
 }
 html{
   scroll-padding-top:60px;
@@ -362,9 +369,13 @@ button,.action,.note-tool{min-height:var(--touch)}
   }
 }
 @media (min-width:1280px){
-  .project-map{display:block}
+  .project-map{display:block;
+    left:max(var(--rail-gutter),calc((100vw - var(--page-max))/2 - var(--rail-shift)))}
   .nav{
-    left:max(0px,calc((100vw - var(--page-max))/2 + var(--map-width) + var(--sidebar-gap)));
+    left:max(
+      calc(var(--rail-gutter) + var(--map-width) + var(--map-nav-gap)),
+      calc((100vw - var(--page-max))/2 - var(--rail-shift) + var(--map-width) + var(--map-nav-gap))
+    );
     width:var(--nav-width);
     top:52px;
     height:calc(100dvh - 52px);
@@ -375,8 +386,8 @@ button,.action,.note-tool{min-height:var(--touch)}
     box-shadow:none
   }
   .content{
-    width:calc(100% - var(--map-width) - var(--nav-width) - var(--sidebar-gap));
-    margin-left:calc(var(--map-width) + var(--nav-width) + var(--sidebar-gap));
+    width:calc(100% - var(--map-width) - var(--map-nav-gap) - var(--nav-width) - var(--nav-content-gap) + var(--rail-shift));
+    margin-left:calc(var(--map-width) + var(--map-nav-gap) + var(--nav-width) + var(--nav-content-gap) - var(--rail-shift));
   }
 }
 @media (min-width:881px) and (max-width:1279px){
@@ -472,46 +483,46 @@ button,.action,.note-tool{min-height:var(--touch)}
 </div>
 <div class="shell">
 <nav class="nav" id="sideNav">
-<div class="nav-group-label" id="navGroupHydra">hydra launcher</div>
-<a href="#guide-top"><span class="idx">00</span>overview</a>
-<div class="nav-group-label" id="navGroupSetup">setup</div>
-<a href="#requirements"><span class="idx">01</span>requirements</a>
-<a href="#git"><span class="idx">02</span>git</a>
-<a href="#node"><span class="idx">03</span>node-24.19</a>
-<a href="#yarn"><span class="idx">04</span>yarn</a>
-<a href="#rust"><span class="idx">05</span>rust</a>
-<a href="#vs"><span class="idx">06</span>vs-build-tools</a>
-<div class="nav-group-label" id="navGroupBuild">build</div>
-<a href="#clone"><span class="idx">07</span>clone</a>
-<a href="#terminal"><span class="idx">08</span>terminal</a>
-<a href="#install"><span class="idx">09</span>install</a>
-<a href="#env"><span class="idx">10</span>env</a>
-<a href="#dev"><span class="idx">11</span>run-dev</a>
-<div class="nav-group-label" id="navGroupSecurityResearch">security research</div>
-<a href="#security"><span class="idx">12</span>security-check</a>
-<div class="nav-group-label nav-subtopic-label">investigation log</div>
-<a href="#research-checkpoint"><span class="idx">•</span>checkpoint</a>
-<a href="#one-go"><span class="idx">•</span>one-go</a>
-<a href="#research-status"><span class="idx">•</span>status</a>
-<a href="#research-diary"><span class="idx">•</span>diary</a>
-<a href="#firewall"><span class="idx">13</span>firewall</a>
-<a href="#errors"><span class="idx">14</span>troubleshooting</a>
-<a href="#package"><span class="idx">15</span>package</a>
-<div class="nav-group-label" id="navGroupResearch">research</div>
-<a href="#notes"><span class="idx">16</span>notes</a>
-<div class="nav-group-label" id="navGroupProjectControl">project control</div>
-<a href="#control-center"><span class="idx">17</span>control-center</a>
+<div class="nav-group-label" id="navGroupHydra">Hydra Launcher</div>
+<a href="#guide-top"><span class="idx">00</span>Overview</a>
+<div class="nav-group-label" id="navGroupSetup">Setup</div>
+<a href="#requirements"><span class="idx">01</span>Requirements</a>
+<a href="#git"><span class="idx">02</span>Git</a>
+<a href="#node"><span class="idx">03</span>Node-24.19</a>
+<a href="#yarn"><span class="idx">04</span>Yarn</a>
+<a href="#rust"><span class="idx">05</span>Rust</a>
+<a href="#vs"><span class="idx">06</span>VS-Build-Tools</a>
+<div class="nav-group-label" id="navGroupBuild">Build</div>
+<a href="#clone"><span class="idx">07</span>Clone</a>
+<a href="#terminal"><span class="idx">08</span>Terminal</a>
+<a href="#install"><span class="idx">09</span>Install</a>
+<a href="#env"><span class="idx">10</span>Env</a>
+<a href="#dev"><span class="idx">11</span>Run-Dev</a>
+<div class="nav-group-label" id="navGroupSecurityResearch">Security Research</div>
+<a href="#security"><span class="idx">12</span>Security-Check</a>
+<div class="nav-group-label nav-subtopic-label">Investigation Log</div>
+<a href="#research-checkpoint"><span class="idx">•</span>Checkpoint</a>
+<a href="#one-go"><span class="idx">•</span>One-Go</a>
+<a href="#research-status"><span class="idx">•</span>Status</a>
+<a href="#research-diary"><span class="idx">•</span>Diary</a>
+<a href="#firewall"><span class="idx">13</span>Firewall</a>
+<a href="#errors"><span class="idx">14</span>Troubleshooting</a>
+<a href="#package"><span class="idx">15</span>Package</a>
+<div class="nav-group-label" id="navGroupResearch">Research</div>
+<a href="#notes"><span class="idx">16</span>Notes</a>
+<div class="nav-group-label" id="navGroupProjectControl">Project Control</div>
+<a href="#control-center"><span class="idx">17</span>Control-Center</a>
 </nav>
-<aside class="project-map" id="projectMap" aria-label="Project map">
-  <div class="project-map-title">project map</div>
-  <div class="project-map-subtitle">primary navigator</div>
-  <button class="project-map-button" type="button" data-nav-target="navGroupHydra" data-content-target="#overview" onclick="focusSideNav(this)">hydra launcher</button>
-  <button class="project-map-button" type="button" data-nav-target="navGroupSetup" data-content-target="#requirements" onclick="focusSideNav(this)">setup</button>
-  <button class="project-map-button" type="button" data-nav-target="navGroupBuild" data-content-target="#clone" onclick="focusSideNav(this)">build</button>
-  <button class="project-map-button" type="button" data-nav-target="navGroupSecurityResearch" data-content-target="#security" onclick="focusSideNav(this)">security research</button>
-  <button class="project-map-button" type="button" data-nav-target="navGroupResearch" data-content-target="#notes" onclick="focusSideNav(this)">research</button>
-  <button class="project-map-button" type="button" data-nav-target="navGroupProjectControl" data-content-target="#control-center" onclick="focusSideNav(this)">project control</button>
-  <button class="project-map-button" type="button" data-nav-target="navGroupCreatedNotes" data-content-target="#notes" onclick="focusSideNav(this)">created notes</button>
+<aside class="project-map" id="projectMap" aria-label="Project Map">
+  <div class="project-map-title">Project Map</div>
+  <div class="project-map-subtitle">Primary Navigator</div>
+  <button class="project-map-button" type="button" data-nav-target="navGroupHydra" data-content-target="#guide-top" onclick="focusSideNav(this)">Hydra Launcher</button>
+  <button class="project-map-button" type="button" data-nav-target="navGroupSetup" data-content-target="#requirements" onclick="focusSideNav(this)">Setup</button>
+  <button class="project-map-button" type="button" data-nav-target="navGroupBuild" data-content-target="#clone" onclick="focusSideNav(this)">Build</button>
+  <button class="project-map-button" type="button" data-nav-target="navGroupSecurityResearch" data-content-target="#security" onclick="focusSideNav(this)">Security Research</button>
+  <button class="project-map-button" type="button" data-nav-target="navGroupResearch" data-content-target="#notes" onclick="focusSideNav(this)">Research</button>
+  <button class="project-map-button" type="button" data-nav-target="navGroupProjectControl" data-content-target="#control-center" onclick="focusSideNav(this)">Project Control</button>
+  <button class="project-map-button" type="button" data-nav-target="navGroupCreatedNotes" data-content-target="#notes" onclick="focusSideNav(this)">Created Notes</button>
 </aside>
 <main class="content">
 <div class="banner" id="guide-top">
@@ -981,7 +992,7 @@ if(scrollToId)requestAnimationFrame(()=>{const target=document.getElementById("n
 function renderCreatedNav(items,newId){
 const nav=document.getElementById("sideNav");if(!nav)return;let group=nav.querySelector(".created-notes-group");
 if(!items.length){if(group)group.remove();return}
-if(!group){group=document.createElement("div");group.className="created-notes-group";group.innerHTML="<div class=\"nav-group-label\" id=\"navGroupCreatedNotes\">created notes</div>";nav.appendChild(group)}
+if(!group){group=document.createElement("div");group.className="created-notes-group";group.innerHTML="<div class=\"nav-group-label\" id=\"navGroupCreatedNotes\">Created Notes</div>";nav.appendChild(group)}
 group.querySelectorAll("a").forEach(a=>a.remove());
 items.forEach((item,index)=>{const a=document.createElement("a");a.href="#note-section-"+item.id;a.className="created-nav-link";a.style.animationDelay=(index*35)+"ms";a.innerHTML="<span class=\"idx\">"+escapeHtml(item.number)+"</span>"+escapeHtml(item.title||("research-note-"+item.number));group.appendChild(a)});
 wireScrollSpy();
@@ -1054,15 +1065,19 @@ function focusSideNav(button){
     const top=nav.scrollTop+(targetRect.top-navRect.top)-8;
     nav.scrollTo({top:Math.max(0,top),behavior:"smooth"});
   }
-  let contentTarget=null;
-  if(targetId==="navGroupCreatedNotes"){
-    contentTarget=document.querySelector(".created-note")||document.querySelector("#notes");
-  }else if(contentSelector){
-    contentTarget=document.querySelector(contentSelector);
-  }
-  if(contentTarget){
-    const y=window.scrollY+contentTarget.getBoundingClientRect().top-72;
-    window.scrollTo({top:Math.max(0,y),behavior:"smooth"});
+  if(targetId==="navGroupHydra"){
+    window.scrollTo({top:0,behavior:"smooth"});
+  }else{
+    let contentTarget=null;
+    if(targetId==="navGroupCreatedNotes"){
+      contentTarget=document.querySelector(".created-note")||document.querySelector("#notes");
+    }else if(contentSelector){
+      contentTarget=document.querySelector(contentSelector);
+    }
+    if(contentTarget){
+      const y=window.scrollY+contentTarget.getBoundingClientRect().top-72;
+      window.scrollTo({top:Math.max(0,y),behavior:"smooth"});
+    }
   }
   document.querySelectorAll(".project-map-button").forEach(el=>el.classList.remove("active"));
   button.classList.add("active");
