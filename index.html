@@ -206,7 +206,7 @@ textarea:focus{border-color:var(--accent-soft)}
   margin:0;padding:6px 10px;min-height:40px;
   border:0;border-left:2px solid transparent;border-radius:5px;
   background:transparent;color:var(--muted);text-align:left;cursor:pointer;
-  font:13px var(--mono);font-weight:400;text-transform:lowercase;
+  font:13px var(--mono);font-weight:400;text-transform:none;
   transition:background .18s ease,color .18s ease,border-color .18s ease
 }
 .project-map-button:hover,
@@ -219,7 +219,6 @@ textarea:focus{border-color:var(--accent-soft)}
 }
 .project-map-button:hover{transform:none}
 @media(max-width:1279px){.project-map{display:none}}
-@media(max-width:880px){.project-map{display:none}}
 
 .created-note .created-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .created-note .note-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--dim);font:11px var(--mono);margin-top:10px}
