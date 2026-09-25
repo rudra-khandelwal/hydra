@@ -149,19 +149,7 @@ textarea:focus{border-color:var(--accent-soft)}
 
 .navtoggle{display:none}
 
-@media(max-width:880px){
-  .nav{
-    position:sticky;top:41px;width:100%;max-height:none;overflow:visible;
-    display:flex;overflow-x:auto;gap:2px;border-right:none;border-bottom:1px solid var(--line);
-    padding:10px 14px;background:var(--bg2);white-space:nowrap
-  }
-  .nav-group-label{display:none}
-  .nav a{flex:none}
-  .shell{flex-direction:column}
-  .content{padding:0 18px 70px}
-  .banner{padding:30px 4px 22px}
-  .banner h1{font-size:32px}
-}
+/* Legacy mobile override removed: the responsive foundation below is authoritative. */
 
 /* Public research-data layer added while preserving the original Claude design. */
 .research-panel{margin:28px 0;padding:24px;border:1px solid #3a2c20;border-radius:14px;background:linear-gradient(180deg,rgba(30,22,17,.92),rgba(20,16,13,.96));box-shadow:0 10px 30px rgba(0,0,0,.18)}
