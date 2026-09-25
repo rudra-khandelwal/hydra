@@ -3,7 +3,9 @@
 <html lang="en">
 <head><link href="favicon.svg" rel="icon" type="image/svg+xml"/>
 <meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="#0c0a07" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
 <title>Hydra Launcher — Windows Build &amp; Security Research Guide</title>
 <style>
 :root{
@@ -183,12 +185,153 @@ textarea:focus{border-color:var(--accent-soft)}
 .created-nav-link .idx{color:var(--accent-soft)}
 @keyframes navEntryIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
 @keyframes createdSectionIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+/* ---------- responsive foundation: phone / tablet / desktop ---------- */
+:root{
+  --page-max:1180px;
+  --content-max:900px;
+  --gutter:clamp(14px,3vw,30px);
+  --touch:44px;
+}
+html{
+  min-width:320px;
+  overflow-x:hidden;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+body{
+  min-height:100dvh;
+  overflow-x:hidden;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+.titlebar{
+  min-height:52px;
+  padding-top:max(10px,env(safe-area-inset-top));
+  padding-left:max(14px,env(safe-area-inset-left));
+  padding-right:max(14px,env(safe-area-inset-right));
+}
+.nav-menu{
+  display:none;
+  margin-left:auto;
+  min-width:var(--touch);
+  min-height:var(--touch);
+  border:1px solid var(--line);
+  border-radius:7px;
+  background:#15100c;
+  color:var(--text);
+  font:600 13px var(--sans);
+  cursor:pointer;
+}
+.nav-menu:hover,.nav-menu:focus-visible{border-color:var(--accent-soft);color:var(--accent)}
+.shell{width:min(100%,var(--page-max))}
+.content{padding-left:var(--gutter);padding-right:var(--gutter)}
+.banner{max-width:var(--content-max)}
+.banner h1{font-size:clamp(30px,4vw,42px)}
+.banner p{max-width:70ch}
+.research-panel{max-width:100%;overflow:hidden}
+table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+pre{max-width:100%;-webkit-overflow-scrolling:touch}
+pre code{word-break:normal}
+img,video,iframe,svg,canvas{max-width:100%;height:auto}
+button,.action,.note-tool,.nav a{touch-action:manipulation}
+button,.action,.note-tool{min-height:var(--touch)}
+.nav a{min-height:var(--touch);align-items:center}
+.note-toolbar{position:sticky;top:0;z-index:3}
+.note-editor{min-height:clamp(180px,30vh,280px)}
+.grid6{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.step{grid-template-columns:minmax(42px,52px) minmax(0,1fr)}
+.callout,.banner-note,.created-note .note-body{overflow-wrap:anywhere}
+@media (max-width:1100px){
+  .shell{max-width:100%}
+  .nav{width:220px}
+  .content{padding-right:22px}
+}
+@media (max-width:880px){
+  .titlebar{position:sticky}
+  .nav-menu{display:block}
+  .nav{
+    position:fixed;
+    z-index:50;
+    top:52px;
+    left:0;
+    bottom:0;
+    width:min(82vw,320px);
+    max-height:none;
+    display:block;
+    overflow-y:auto;
+    padding:16px 12px calc(30px + env(safe-area-inset-bottom));
+    background:rgba(15,12,9,.98);
+    border-right:1px solid var(--line);
+    box-shadow:16px 0 40px rgba(0,0,0,.35);
+    transform:translateX(-105%);
+    transition:transform .22s ease;
+  }
+  .nav.open{transform:translateX(0)}
+  .nav-group-label{margin-top:18px}
+  .nav a{padding:8px 10px}
+  .shell{display:block}
+  .content{padding:0 var(--gutter) 70px}
+  .banner{padding-top:32px}
+  body.nav-open{overflow:hidden}
+}
+@media (max-width:600px){
+  .titlebar .path{font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .nav-menu span{display:none}
+  .banner{padding-left:0;padding-right:0}
+  .banner h1{font-size:clamp(28px,9vw,36px)}
+  .banner p{font-size:15px}
+  section{padding:24px 0}
+  .research-panel{margin:20px 0;padding:18px;border-radius:12px}
+  h2{font-size:19px;flex-wrap:wrap}
+  h3{font-size:15px}
+  p,li{overflow-wrap:anywhere}
+  .envrow{display:grid;grid-template-columns:1fr;gap:7px}
+  .grid6{grid-template-columns:1fr}
+  .step{grid-template-columns:1fr;gap:4px}
+  .step-tag{padding-top:0}
+  .actions{display:grid;grid-template-columns:1fr}
+  .actions .action{width:100%}
+  .note-toolbar{gap:5px}
+  .note-tool{flex:1 1 auto}
+  .note-tool.wide{flex:1 1 45%}
+  .created-note .created-actions{align-items:stretch}
+  .created-note .created-actions .action{width:100%}
+  .foot{padding-left:0;padding-right:0}
+}
+@media (max-width:380px){
+  .content{padding-left:13px;padding-right:13px}
+  .research-panel{padding:15px}
+  .titlebar{gap:7px}
+  .dots{gap:4px}
+  .dots span{width:8px;height:8px}
+  .note-tool{font-size:12px;padding-left:7px;padding-right:7px}
+}
+@media (min-width:881px) and (max-width:1100px){
+  .nav{width:210px}
+}
+@media (hover:none){
+  .nav a:hover,.action:hover,.note-tool:hover{background:inherit}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
+@media (forced-colors:active){
+  .nav-menu,.action,.note-tool,.note-title,.note-editor,.research-panel,.callout,.banner-note{
+    border:1px solid CanvasText;
+  }
+  a{color:LinkText}
+}
 </style>
 </head>
 <body>
 <div class="titlebar">
-<div class="dots"><span></span><span></span><span></span></div>
+<div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
 <div class="path"><b>hydra-launcher /</b> build-guide.md</div>
+<button class="nav-menu" id="navMenu" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="sideNav">☰ <span>Menu</span></button>
 </div>
 <div class="shell">
 <nav class="nav" id="sideNav">
@@ -638,7 +781,36 @@ function renderCreatedSections(scrollToId){const host=document.getElementById("c
 function renderCreatedNav(items,newId){const nav=document.getElementById("sideNav");if(!nav)return;let group=nav.querySelector(".created-notes-group");if(!items.length){if(group)group.remove();return}if(!group){group=document.createElement("div");group.className="created-notes-group";group.innerHTML="<div class=\"nav-group-label\">created notes</div>";nav.appendChild(group)}group.querySelectorAll("a").forEach(a=>a.remove());items.forEach((item,index)=>{const a=document.createElement("a");a.href="#note-section-"+item.id;a.className="created-nav-link";a.style.animationDelay=(index*35)+"ms";a.innerHTML="<span class=\"idx\">"+escapeHtml(item.number)+"</span>"+escapeHtml(item.title||("research-note-"+item.number));group.appendChild(a)});wireScrollSpy();if(newId){const link=group.querySelector("a[href=\"#note-section-"+CSS.escape(String(newId))+"\"]");if(link)link.classList.add("active")}}
 function saveNotes(){const editor=document.getElementById("researchNotes");const text=getEditorText();const html=getEditorHtml();if(!text||!html){setNoteStatus("write something before saving");editor.focus();return}const items=storageGet();const number=nextSectionNumber(items);const title=(document.getElementById("researchNoteTitle").value||"").trim()||("research-note-"+number);const item={id:makeId(),number:number,title:title,html:html,date:new Date().toLocaleString()};items.push(item);if(!storageSet(items))return;editor.innerHTML="";document.getElementById("researchNoteTitle").value="";setNoteStatus("saved as section "+number);renderCreatedSections(item.id)}
 async function copyNotes(){const editor=document.getElementById("researchNotes");const html=getEditorHtml();const text=editor.innerText||"";try{if(navigator.clipboard&&navigator.clipboard.write){const data=new ClipboardItem({"text/html":new Blob([html],{type:"text/html"}),"text/plain":new Blob([text],{type:"text/plain"})});await navigator.clipboard.write([data])}else await navigator.clipboard.writeText(text)}catch(e){try{await navigator.clipboard.writeText(text)}catch(err){const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}}setNoteStatus("current research note copied")}
-function downloadNotes(){const html=getEditorHtml();const title=escapeHtml(document.getElementById("researchNoteTitle").value.trim()||"Hydra Research Note");const doc="<!doctype html><html><head><meta charset=\"utf-8\"><title>"+title+"</title></head><body><h1>"+title+"</h1>"+html+"</body></html>";const blob=new Blob([doc],{type:"text/html;charset=utf-8"});const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="Hydra-Research-Note.html";a.click();URL.revokeObjectURL(url);setNoteStatus("current note exported as HTML")}
+function downloadNotes(){const html=getEditorHtml();const title=escapeHtml(document.getElementById("researchNoteTitle").value.trim()||"Hydra Research Note");const doc="<!doctype html><html><head><meta charset=\"utf-8\"><title>"+title+"</title></head><body><h1>"+title+"</h1>"+html+"<script>
+(function(){
+  const menu=document.getElementById('navMenu');
+  const nav=document.getElementById('sideNav');
+  if(!menu||!nav)return;
+  const close=()=>{
+    nav.classList.remove('open');
+    document.body.classList.remove('nav-open');
+    menu.setAttribute('aria-expanded','false');
+    menu.setAttribute('aria-label','Open navigation');
+  };
+  const open=()=>{
+    nav.classList.add('open');
+    document.body.classList.add('nav-open');
+    menu.setAttribute('aria-expanded','true');
+    menu.setAttribute('aria-label','Close navigation');
+  };
+  menu.addEventListener('click',()=>nav.classList.contains('open')?close():open());
+  nav.addEventListener('click',e=>{
+    if(e.target.closest('a') && window.matchMedia('(max-width: 880px)').matches) close();
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape') close();
+  });
+  window.addEventListener('resize',()=>{
+    if(!window.matchMedia('(max-width: 880px)').matches) close();
+  });
+})();
+</script>
+</body></html>";const blob=new Blob([doc],{type:"text/html;charset=utf-8"});const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="Hydra-Research-Note.html";a.click();URL.revokeObjectURL(url);setNoteStatus("current note exported as HTML")}
 function clearNotes(){document.getElementById("researchNotes").innerHTML="";document.getElementById("researchNoteTitle").value="";setNoteStatus("editor cleared")}
 function deleteCreatedNote(id){const items=storageGet();const item=items.find(x=>String(x.id)===String(id));if(!item)return;if(!confirm("Delete research section "+item.number+"? This only deletes a section you created."))return;if(!storageSet(items.filter(x=>String(x.id)!==String(id))))return;renderCreatedSections();setNoteStatus("section "+item.number+" deleted")}
 function wireScrollSpy(){const navLinks=[...document.querySelectorAll("#sideNav a")];const sections=navLinks.map(a=>document.querySelector(a.getAttribute("href"))).filter(Boolean);if(window.__hydraSpy)window.__hydraSpy.disconnect();window.__hydraSpy=new IntersectionObserver(entries=>{entries.forEach(entry=>{const link=document.querySelector("#sideNav a[href=\"#"+CSS.escape(entry.target.id)+"\"]");if(!link)return;if(entry.isIntersecting)link.classList.add("active");else link.classList.remove("active")})},{rootMargin:"-20% 0px -70% 0px"});sections.forEach(s=>window.__hydraSpy.observe(s))}
