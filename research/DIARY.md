@@ -78,6 +78,9 @@ Restored the earlier Claude visual design language for the public guide: dark br
 ### [CHATGPT] Single live README link
 The main README now contains one direct live-guide link, rather than a large banner or multiple repeated live-guide links.
 
+### [CHATGPT] Live-guide navigation correction
+The public guide navigation was corrected so desktop/tablet side navigation stays fixed while the content scrolls. The Overview link now targets the guide hero ("windows · source build · security-minded workflow" / "Hydra Launcher") instead of the Overview section heading. The top-bar repository link was replaced with a single GitHub repo button beside the Hydra Launcher title. When the guide was opened from GitHub, the button can reuse the originating GitHub tab without closing the guide; direct opens fall back to a new repository tab. The README live-guide link was changed to open the guide in a new tab.
+
 ### [CHATGPT] Research notes editor redesign
 The public guide's Research Notes section was upgraded from a plain text note workflow to a rich editor. A saved note now creates a new numbered section after the original guide sections (17, 18, 19, …), with a user-defined section title and a corresponding sidebar entry.
 
