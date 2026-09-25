@@ -42,7 +42,7 @@ The final A-to-Z audit guide/source state was deployed successfully in **Pages r
 
 ## Layout audit — 25 September 2026
 
-A static geometry audit found that the Project Map was previously enabled too early: at 1280px there was not enough outer margin for the 155px rail plus its 14px gap before the 250px detailed sidebar. The Project Map breakpoint was moved to **1536px** so the two rails do not overlap. Browser-level live verification remains pending.
+A static geometry audit found that the Project Map was previously enabled too early: at 1280px there was not enough outer margin for the 155px rail plus its 14px gap before the 250px detailed sidebar. The Project Map breakpoint was moved to **1536px** so the two rails do not overlap. Pages run #118 successfully deployed this source state; browser-level live verification remains pending.
 
 ## Security hardening audit — 25 September 2026
 

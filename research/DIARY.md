@@ -171,3 +171,7 @@ The Project Map is now displayed only at viewport widths of 1536px and above. Th
 
 ### Next checkpoint
 Inspect the newest Pages run for the geometry correction, then directly exercise the live guide at representative widths (phone, tablet, 1280px desktop, and 1536px+ wide desktop).
+
+
+### [CHATGPT] Geometry correction deployed
+GitHub Pages workflow run #118 completed successfully for commit `c2e441b7e31170b6151510513278a0650fcdacc2`. The deployment log retained the Node.js DEP0040/punycode warning already observed in earlier runs. Browser-level live verification remains pending because the published page still needs direct exercise.
