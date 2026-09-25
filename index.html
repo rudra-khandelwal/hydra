@@ -432,33 +432,32 @@ echo MAIN_VITE_LAUNCHER_SUBDOMAIN=
 </ul>
 </section>
 <section class="research-panel" id="research-checkpoint">
-<h2>Research Checkpoint <span class="tag">21 SEP 2026</span></h2>
-<p class="sub">This is the documented point reached in the Hydra security investigation. No third-party game download or execution has been performed yet.</p>
+<h2>Research Checkpoint <span class="tag">25 SEP 2026</span></h2>
+<p class="sub">Fresh-session checkpoint. Source/API metadata flow has been correlated with the client code. No third-party game download or execution has been performed.</p>
 <div class="grid6">
-<div class="cell"><b>phase</b><span>Static analysis + runtime baseline</span></div>
-<div class="cell"><b>source</b><span>Official Hydra repository</span></div>
-<div class="cell"><b>runtime</b><span>Electron development build confirmed</span></div>
-<div class="cell"><b>next target</b><span><code>torrent-service.ts</code> + <code>executeDownload()</code></span></div>
+<div class="cell"><b>phase</b><span>Runtime baseline + source/API correlation</span></div>
+<div class="cell"><b>source IDs</b><span><code>BVnaGLvo</code> + <code>w4nVajB6</code></span></div>
+<div class="cell"><b>API result</b><span>Concrete download-source metadata observed</span></div>
+<div class="cell"><b>next target</b><span>Controlled legitimate download observation</span></div>
 </div>
 <h3>Confirmed evidence</h3>
 <ul>
-<li><strong>Baseline:</strong> process, network and filesystem snapshots were created under <code>security-research</code> before any game-download test.</li>
-<li><strong>Hydra runtime:</strong> Electron HTTPS connections were observed during runtime and the owning processes were recorded.</li>
-<li><strong>Download-source flow:</strong> adding a source sends its URL to Hydra's <code>/download-sources</code> API; the main process stores the returned source object locally.</li>
-<li><strong>Source model:</strong> <code>DownloadSource.url</code> is the registry/source URL, while <code>DownloadSourceDownload.uris</code> contains actual download URIs.</li>
-<li><strong>URI selection:</strong> Hydra recognizes specific host prefixes plus <code>magnet:</code>; it does not treat every arbitrary HTTPS URI as a downloader.</li>
-<li><strong>Downloader split:</strong> HTTP uses <code>JsHttpDownloader</code>; torrent payloads go through the native libtorrent path.</li>
-<li><strong>Hydra branch:</strong> the internal <code>Downloader.Hydra</code> path throws <code>NotCachedOnHydra</code> rather than directly executing an arbitrary URI.</li>
-<li><strong>Community source:</strong> <code>hydralinks.cloud/sources/fitgirl.json</code> is treated as an unverified third-party/community source. A direct request returned HTTP 403 during testing; that is an anti-bot response, not proof of malware.</li>
+<li><strong>Fresh baseline:</strong> Hydra process, network, and filesystem observations were recorded on 25 September 2026.</li>
+<li><strong>API source request:</strong> Hydra requested <code>/games/steam/1817070/download-sources</code> with <code>BVnaGLvo</code> and <code>w4nVajB6</code>.</li>
+<li><strong>API response:</strong> a returned record contained <code>downloadSourceId: 'w4nVajB6'</code>, <code>downloadSourceName: 'FitGirl'</code>, and URI/torrent metadata.</li>
+<li><strong>Client correlation:</strong> source inspection shows a local <code>downloadSources</code> store plus API-backed source creation and synchronization.</li>
+<li><strong>Trust boundary:</strong> the evidence establishes metadata flow through the Hydra API, but does not establish tracker/peer communication or behavior of a downloaded executable.</li>
+<li><strong>AV control:</strong> Windows antivirus/AMSI blocked the EICAR test string at the PowerShell command stage. A valid EICAR file and quarantine event were not established.</li>
+<li><strong>Public evidence handling:</strong> full magnet/tracker metadata and raw sensitive logs are intentionally not reproduced in the public guide.</li>
 </ul>
-<div class="banner-note"><strong>Next action:</strong> trace <code>TorrentService</code> and <code>executeDownload()</code> one layer deeper, then inspect extraction and launch handling before any controlled third-party download test.</div>
+<div class="banner-note"><strong>Next action:</strong> use a small legitimate free/open-source artifact for a controlled download test. Capture pre/post process, network, filesystem, hash, and Defender observations before considering execution.</div>
 </section><section class="research-panel" id="research-status">
-<h2>Today's Research Status <span class="tag">22 SEP 2026</span></h2>
+<h2>Today's Research Status <span class="tag">25 SEP 2026</span></h2>
 <div class="grid6">
-<div class="cell"><b>completed</b><span>Baseline collection + downloader static tracing</span></div>
-<div class="cell"><b>not yet tested</b><span>Third-party game download / execution</span></div>
-<div class="cell"><b>next file</b><span><code>src/main/services/torrent-service.ts</code></span></div>
-<div class="cell"><b>then</b><span><code>executeDownload()</code> → extraction → launch</span></div>
+<div class="cell"><b>completed</b><span>Fresh baseline + API/source correlation + AV control</span></div>
+<div class="cell"><b>not yet tested</b><span>Legitimate controlled download / execution</span></div>
+<div class="cell"><b>source layer</b><span>Hydra API + local download-source store correlated</span></div>
+<div class="cell"><b>next</b><span>Controlled free/open-source artifact</span></div>
 </div>
 <h3>Daily Start Checklist</h3>
 <ul><li>Read the latest checkpoint.</li><li>Confirm the next investigation target.</li><li>Capture fresh baseline data before a behavior-changing test.</li><li>Redact secrets before saving or sharing notes.</li><li>Record evidence, not assumptions.</li><li>End with the next exact command/task.</li></ul>
