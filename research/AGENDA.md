@@ -56,3 +56,13 @@
 
 
 - ~~Update the GitHub Pages workflow to current Node 24-compatible first-party action majors and pin the runner to a stable Ubuntu image.~~ Completed 25 September 2026.
+
+### 2026-09-25 — Project control and repository consistency
+- ~~Create canonical project memory for future AI/maintainer handoff.~~ Completed.
+- ~~Create project goal and success-criteria document.~~ Completed.
+- ~~Create repository map and change-control document.~~ Completed.
+- ~~Create lessons/mistake-prevention log and validation matrix.~~ Completed.
+- ~~Expose the control documents through live guide section 17.~~ Completed.
+- ~~Correct stale public/private documentation.~~ Completed.
+- ~~Consolidate checkpoint directory case variants into `research/checkpoints/`.~~ Completed.
+- Live-verify the new Project Control Center and current sidebar/README opener behavior after the newest Pages deployment.
