@@ -4,7 +4,7 @@
 **Upstream:** `hydralauncher/hydra`  
 **Status:** Public research/development workspace  
 **Established:** 22 September 2026  
-**Live research guide:** [Open the live guide](https://rudra-khandelwal.github.io/hydra/)
+**Live research guide:** <a href="https://rudra-khandelwal.github.io/hydra/" target="_blank" rel="opener">Open the live guide</a>
 
 ## Why this repository exists
 
