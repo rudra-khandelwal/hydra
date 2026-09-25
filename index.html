@@ -43,7 +43,7 @@ body{
 .shell{display:flex;max-width:1180px;margin:0 auto;align-items:flex-start}
 .nav{
   width:250px;flex:none;position:static;
-  padding:22px 10px 40px 18px;border-right:1px solid var(--line);
+  padding:22px 10px 72px 18px;border-right:1px solid var(--line);
 }
 .nav-group-label{font:11.5px var(--mono);color:var(--dim);margin:18px 0 6px 10px}
 .nav-group-label:first-child{margin-top:0}
@@ -290,7 +290,6 @@ textarea:focus{border-color:var(--accent-soft)}
   --nav-width:250px;
   --map-nav-gap:14px;
   --nav-content-gap:48px;
-  --rail-shift:120px;
   --rail-gutter:24px;
 }
 html{
@@ -369,13 +368,15 @@ button,.action,.note-tool{min-height:var(--touch)}
   }
 }
 @media (min-width:1280px){
-  .project-map{display:block;
-    left:max(var(--rail-gutter),calc((100vw - var(--page-max))/2 - var(--rail-shift)))}
-  .nav{
+  .project-map{
+    display:block;
     left:max(
-      calc(var(--rail-gutter) + var(--map-width) + var(--map-nav-gap)),
-      calc((100vw - var(--page-max))/2 - var(--rail-shift) + var(--map-width) + var(--map-nav-gap))
-    );
+      8px,
+      calc((100vw - var(--page-max))/2 - var(--map-width) - var(--map-nav-gap))
+    )
+  }
+  .nav{
+    left:max(0px,calc((100vw - var(--page-max))/2));
     width:var(--nav-width);
     top:52px;
     height:calc(100dvh - 52px);
@@ -383,11 +384,12 @@ button,.action,.note-tool{min-height:var(--touch)}
     border-right:1px solid var(--line);
     background:var(--bg2);
     backdrop-filter:none;
-    box-shadow:none
+    box-shadow:none;
+    z-index:37
   }
   .content{
-    width:calc(100% - var(--map-width) - var(--map-nav-gap) - var(--nav-width) - var(--nav-content-gap) + var(--rail-shift));
-    margin-left:calc(var(--map-width) + var(--map-nav-gap) + var(--nav-width) + var(--nav-content-gap) - var(--rail-shift));
+    width:calc(100% - var(--nav-width) - var(--nav-content-gap));
+    margin-left:calc(var(--nav-width) + var(--nav-content-gap));
   }
 }
 @media (min-width:881px) and (max-width:1279px){
@@ -527,7 +529,7 @@ button,.action,.note-tool{min-height:var(--touch)}
 <main class="content">
 <div class="banner" id="guide-top">
 <p class="kicker">windows · source build · security-minded workflow</p>
-<div class="hero-title-row"><h1>Hydra Launcher</h1><a class="repo-button" href="https://github.com/rudra-khandelwal/hydra" target="_blank" rel="opener" onclick="openHydraRepo(event)" aria-label="Open the Hydra GitHub repository">GitHub repo ↗</a></div>
+<div class="hero-title-row"><h1>Hydra Launcher</h1><a class="repo-button" href="https://github.com/rudra-khandelwal/hydra" target="_blank" rel="noopener noreferrer" aria-label="Open the Hydra GitHub repository">GitHub repo ↗</a></div>
 <p>A clean, beginner-friendly path from source code to a working development build — and a plan for checking what the build actually does before you trust it.</p>
 <div class="envrow"><span><b>os:</b> windows 11</span><span><b>node:</b> 24.19.0</span><span><b>toolchain:</b> vs2022 build tools</span><span><b>rust:</b> 1.98.1 msvc</span><span><b>yarn:</b> 1.22.22</span></div>
 <div class="banner-note">
@@ -1052,21 +1054,78 @@ const result=await put.json();publisherStatus("published to "+path+" • commit 
 }
 function clearNotes(){document.getElementById("researchNotes").innerHTML="";document.getElementById("researchNoteTitle").value="";setNoteStatus("editor cleared")}
 function deleteCreatedNote(id){const items=storageGet();const item=items.find(x=>String(x.id)===String(id));if(!item)return;if(!confirm("Delete research section "+item.number+"? This only deletes a section you created."))return;if(!storageSet(items.filter(x=>String(x.id)!==String(id))))return;renderCreatedSections();setNoteStatus("section "+item.number+" deleted")}
-function wireScrollSpy(){const navLinks=[...document.querySelectorAll("#sideNav a")];const sections=navLinks.map(a=>document.querySelector(a.getAttribute("href"))).filter(Boolean);if(window.__hydraSpy)window.__hydraSpy.disconnect();window.__hydraSpy=new IntersectionObserver(entries=>{entries.forEach(entry=>{const link=document.querySelector("#sideNav a[href=\"#"+CSS.escape(entry.target.id)+"\"]");if(!link)return;if(entry.isIntersecting)link.classList.add("active");else link.classList.remove("active")})},{rootMargin:"-20% 0px -70% 0px"});sections.forEach(s=>window.__hydraSpy.observe(s))}
+function projectMapButtonForTarget(targetId){
+  const buttons=[...document.querySelectorAll(".project-map-button")];
+  if(targetId&&targetId.startsWith("note-section-")){
+    return buttons.find(button=>button.dataset.navTarget==="navGroupCreatedNotes")||null;
+  }
+  const map={
+    "guide-top":"navGroupHydra","overview":"navGroupHydra",
+    "requirements":"navGroupSetup","git":"navGroupSetup","node":"navGroupSetup","yarn":"navGroupSetup","rust":"navGroupSetup","vs":"navGroupSetup",
+    "clone":"navGroupBuild","terminal":"navGroupBuild","install":"navGroupBuild","env":"navGroupBuild","dev":"navGroupBuild",
+    "security":"navGroupSecurityResearch","research-checkpoint":"navGroupSecurityResearch","one-go":"navGroupSecurityResearch","research-status":"navGroupSecurityResearch","research-diary":"navGroupSecurityResearch","firewall":"navGroupSecurityResearch","errors":"navGroupSecurityResearch","package":"navGroupSecurityResearch",
+    "notes":"navGroupResearch","control-center":"navGroupProjectControl"
+  };
+  const group=map[targetId];
+  return group?buttons.find(button=>button.dataset.navTarget===group)||null:null;
+}
+function syncProjectMap(targetId){
+  const active=projectMapButtonForTarget(targetId);
+  document.querySelectorAll(".project-map-button").forEach(button=>button.classList.remove("active"));
+  if(active){
+    active.classList.add("active");
+    active.scrollIntoView({block:"nearest",behavior:"smooth"});
+  }
+}
+function syncSidebarLink(targetId){
+  const link=document.querySelector("#sideNav a[href=\"#"+CSS.escape(targetId)+"\"]");
+  if(!link)return;
+  document.querySelectorAll("#sideNav a").forEach(item=>item.classList.remove("active"));
+  link.classList.add("active");
+}
+function wireScrollSpy(){
+  const navLinks=[...document.querySelectorAll("#sideNav a")];
+  const sections=navLinks.map(a=>document.querySelector(a.getAttribute("href"))).filter(Boolean);
+  if(window.__hydraSpy)window.__hydraSpy.disconnect();
+  if(window.__hydraNavClicks)window.__hydraNavClicks();
+  const nav=document.getElementById("sideNav");
+  const clickHandler=event=>{
+    const link=event.target.closest("a");
+    if(!link||!nav.contains(link))return;
+    const href=link.getAttribute("href")||"";
+    if(!href.startsWith("#"))return;
+    const targetId=href.slice(1);
+    syncSidebarLink(targetId);
+    syncProjectMap(targetId);
+  };
+  nav.addEventListener("click",clickHandler);
+  window.__hydraNavClicks=()=>nav.removeEventListener("click",clickHandler);
+
+  window.__hydraSpy=new IntersectionObserver(entries=>{
+    const visible=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+    if(!visible)return;
+    syncSidebarLink(visible.target.id);
+    syncProjectMap(visible.target.id);
+  },{rootMargin:"-18% 0px -62% 0px",threshold:[0,0.25,0.5,0.75,1]});
+  sections.forEach(section=>window.__hydraSpy.observe(section));
+}
 function focusSideNav(button){
   if(!button)return;
   const nav=document.getElementById("sideNav");
   const targetId=button.getAttribute("data-nav-target");
   const contentSelector=button.getAttribute("data-content-target");
   const target=targetId?document.getElementById(targetId):null;
+
   if(nav&&target){
     const navRect=nav.getBoundingClientRect();
     const targetRect=target.getBoundingClientRect();
     const top=nav.scrollTop+(targetRect.top-navRect.top)-8;
     nav.scrollTo({top:Math.max(0,top),behavior:"smooth"});
   }
+
   if(targetId==="navGroupHydra"){
     window.scrollTo({top:0,behavior:"smooth"});
+    syncSidebarLink("guide-top");
   }else{
     let contentTarget=null;
     if(targetId==="navGroupCreatedNotes"){
@@ -1077,10 +1136,11 @@ function focusSideNav(button){
     if(contentTarget){
       const y=window.scrollY+contentTarget.getBoundingClientRect().top-72;
       window.scrollTo({top:Math.max(0,y),behavior:"smooth"});
+      syncSidebarLink(contentTarget.id);
     }
   }
-  document.querySelectorAll(".project-map-button").forEach(el=>el.classList.remove("active"));
-  button.classList.add("active");
+
+  syncProjectMap(targetId);
 }
 
 (function loadNotes(){renderCreatedSections()})();
@@ -1122,19 +1182,7 @@ wireScrollSpy();
   }catch(e){}
 })();
 
-function openHydraRepo(event){
-  const ref=document.referrer||'';
-  const fromGithub=/^https:\/\/github\.com\//i.test(ref);
-  const opener=window.opener;
-  if(fromGithub && opener && !opener.closed){
-    try{
-      event.preventDefault();
-      opener.focus();
-    }catch(e){}
-    return;
-  }
-  // Direct-open or opener unavailable: let the normal target=_blank link open the repository.
-}
+
 </script>
 </body>
 </html>
