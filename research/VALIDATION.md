@@ -13,32 +13,32 @@ This file separates source implementation from deployment and live behavior.
 
 | Check | Source | Deployment | Live verification |
 |---|---|---|---|
-| README live-guide link opens separately | Implemented | Deployed in run #108 | Pending live test |
-| GitHub opener refreshes once | Implemented | Deployed in run #108 | Pending live test |
-| Desktop/tablet sidebar stays fixed during document scroll | Implemented | Deployed in run #108 | Pending live test |
-| Mobile navigation remains slide-out | Implemented | Deployed in run #108 | Pending live test |
-| Overview targets hero | Implemented | Deployed in run #108 | Pending live test |
-| Only one GitHub repo button beside Hydra Launcher | Implemented | Deployed in run #108 | Pending live test |
-| GitHub button opens the repository directly in a new tab without opener redirect | Implemented | Deployed in run #108 | Pending live test |
+| README live-guide link opens separately | Implemented | Pending final audit deployment (after run #108) | Pending live test |
+| GitHub opener refreshes once | Implemented | Pending final audit deployment (after run #108) | Pending live test |
+| Desktop/tablet sidebar stays fixed during document scroll | Implemented | Pending final audit deployment (after run #108) | Pending live test |
+| Mobile navigation remains slide-out | Implemented | Pending final audit deployment (after run #108) | Pending live test |
+| Overview targets hero | Implemented | Pending final audit deployment (after run #108) | Pending live test |
+| Only one GitHub repo button beside Hydra Launcher | Implemented | Pending final audit deployment (after run #108) | Pending live test |
+| GitHub button opens the repository directly in a new tab without opener redirect | Implemented | Pending final audit deployment (after run #108) | Pending live test |
 | Created research notes start at section 18 | Implemented | Pending latest control-pass deploy | Pending live test |
 
 ## Current UI interaction validation — 25 September 2026
 
 | Check | Source | Deployment | Live verification |
 |---|---|---|---|
-| Project Map primary sequence is Hydra Launcher → Setup → Build → Security Research → Research → Project Control → Created Notes | Implemented | Deployed in run #108 | Pending live test |
-| Project Map clicks update follower sidebar and main document | Implemented | Deployed in run #108 | Pending live test |
-| Detailed-sidebar navigation updates Project Map active category | Implemented | Deployed in run #108 | Pending live test |
-| Project Map Hydra Launcher targets #guide-top | Implemented | Deployed in run #108 | Pending live test |
-| Final detailed-sidebar item remains reachable | Implemented | Deployed in run #108 | Pending live test |
-| Project Control buttons transparent by default | Implemented | Deployed in run #108 | Pending live test |
-| Capitalized navigation labels | Implemented | Deployed in run #108 | Pending live test |
-| Canonical original visual theme preserved for both rails | Implemented | Deployed in run #108 | Pending live test |
-| Hero GitHub repo button is direct new-tab repository link | Implemented | Deployed in run #108 | Pending live test |
+| Project Map primary sequence is Hydra Launcher → Setup → Build → Security Research → Research → Project Control → Created Notes | Implemented | Pending final audit deployment (after run #108) | Pending live test |
+| Project Map clicks update follower sidebar and main document | Implemented | Pending final audit deployment (after run #108) | Pending live test |
+| Detailed-sidebar navigation updates Project Map active category | Implemented | Pending final audit deployment (after run #108) | Pending live test |
+| Project Map Hydra Launcher targets #guide-top | Implemented | Pending final audit deployment (after run #108) | Pending live test |
+| Final detailed-sidebar item remains reachable | Implemented | Pending final audit deployment (after run #108) | Pending live test |
+| Project Control buttons transparent by default | Implemented | Pending final audit deployment (after run #108) | Pending live test |
+| Capitalized navigation labels | Implemented | Pending final audit deployment (after run #108) | Pending live test |
+| Canonical original visual theme preserved for both rails | Implemented | Pending final audit deployment (after run #108) | Pending live test |
+| Hero GitHub repo button is direct new-tab repository link | Implemented | Pending final audit deployment (after run #108) | Pending live test |
 
 ## Latest deployment audit — 25 September 2026
 
-The newest GitHub Pages workflow run is **#108**, for main commit `3a2444089df3fa6943d52e7ba41da0a513f6b924`. The workflow and deploy job completed successfully. The deploy job log contains a Node.js `DEP0040` deprecation warning about the built-in `punycode` module during `actions/deploy-pages@v5`; this is recorded as maintenance debt, not a deployment failure. Browser-level live verification remains pending.
+The last confirmed successful GitHub Pages workflow is **#108**, for commit `3a2444089df3fa6943d52e7ba41da0a513f6b924`. The later A-to-Z audit fixes are on `main` after that deployment and are awaiting confirmation from the newest Pages run. The #108 deploy job contained the Node.js `DEP0040` punycode deprecation warning during `actions/deploy-pages@v5`. Browser-level live verification remains pending.
 
 ## Security hardening audit — 25 September 2026
 
