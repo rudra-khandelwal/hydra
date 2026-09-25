@@ -1,34 +1,39 @@
-# Public Release Checklist
+# Public Repository Safety Checklist
 
-This repository is private by design while research is ongoing.
+This repository is already public.
 
-Before making the repository public:
+This checklist is therefore an **ongoing publication-safety control**, not a pre-publication gate.
 
-## Repository review
+## Every commit
 
-- [ ] Confirm intended license and upstream attribution.
-- [ ] Review commit history for accidentally committed secrets.
-- [ ] Search current files for passwords, tokens, cookies, API keys and private keys.
-- [ ] Remove personal data and unnecessary machine-specific paths.
-- [ ] Remove raw sensitive logs.
-- [ ] Remove proprietary/copyrighted downloaded software.
-- [ ] Review generated artifacts and build output.
-- [ ] Review GitHub Actions and workflow permissions.
-- [ ] Review third-party source references.
+- [ ] No passwords, access tokens, API keys, cookies, private keys, or recovery codes.
+- [ ] No raw credential-bearing or privacy-sensitive logs.
+- [ ] No unnecessary personal or machine-specific data.
+- [ ] No proprietary/copyrighted downloaded software artifacts.
+- [ ] No credentials copied from local `.env` files.
+- [ ] Public claims are supported by the recorded evidence.
+- [ ] Research hypotheses are clearly labelled as hypotheses.
+- [ ] Third-party download infrastructure is kept separate from Hydra findings.
+- [ ] Build/test output added to Git is intentional and documented.
 
-## Research review
+## Documentation consistency
 
-- [ ] Separate facts from hypotheses.
-- [ ] Preserve dates and attribution.
-- [ ] Link findings to evidence.
-- [ ] State uncertainty and alternative explanations.
-- [ ] Avoid unsupported security verdicts.
-- [ ] Clearly distinguish independent research from official Hydra statements.
+- [ ] Repository visibility is described as public.
+- [ ] Live guide URL is current.
+- [ ] Project Memory reflects current operating rules.
+- [ ] Repository Map matches the actual tree.
+- [ ] Diary/Agenda are updated for substantive changes.
+- [ ] Validation status distinguishes implemented, deployed, and live-verified behavior.
 
-## Final verification
+## GitHub Pages / Actions
 
-- [ ] Fresh clone succeeds.
-- [ ] Documentation matches the actual repository.
-- [ ] Build instructions work from a clean environment.
-- [ ] No secret material is present.
-- [ ] Upstream provenance is clear.
+- [ ] Workflow completes successfully.
+- [ ] Workflow warnings/annotations are reviewed.
+- [ ] Current action/runtime versions are not silently relying on deprecated runtimes.
+- [ ] The newest run is used as the deployment status; cancelled superseded runs are treated as historical.
+
+## Research safety
+
+- [ ] Keep Hydra, API/auth, community source, third-party download infrastructure, and downloaded artifact as separate trust boundaries.
+- [ ] Do not perform unauthorized access or DRM bypass.
+- [ ] Use legitimate free/open-source artifacts for controlled download tests.
