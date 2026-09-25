@@ -194,22 +194,30 @@ textarea:focus{border-color:var(--accent-soft)}
 .created-nav-link .idx{color:var(--accent-soft)}
 @keyframes navEntryIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
 /* ---------- project map rail ---------- */
-.project-rail{
-  position:fixed;z-index:30;top:78px;
-  left:max(8px,calc((100vw - var(--page-max))/2 - 176px));
-  width:158px;max-height:calc(100dvh - 96px);overflow-y:auto;
-  padding:12px 10px;border:1px solid var(--line-soft);border-radius:9px;
-  background:rgba(21,17,12,.88);backdrop-filter:blur(10px);
-  box-shadow:0 10px 28px rgba(0,0,0,.16)
+.project-map{
+  position:fixed;z-index:34;top:78px;
+  left:max(8px,calc((100vw - var(--page-max))/2 - 132px));
+  width:116px;max-height:calc(100dvh - 96px);overflow-y:auto;
+  padding:10px 8px;border:1px solid rgba(138,101,38,.34);border-radius:9px;
+  background:rgba(21,17,12,.58);backdrop-filter:blur(10px);
+  box-shadow:0 8px 24px rgba(0,0,0,.14)
 }
-.project-rail-title{margin:0 6px 8px;color:var(--accent);font:10px var(--mono);letter-spacing:.08em;text-transform:uppercase}
-.project-rail-group{margin:10px 0 0}
-.project-rail-group b{display:block;margin:0 6px 3px;color:var(--dim);font:9.5px var(--mono);text-transform:uppercase;letter-spacing:.06em}
-.project-rail a{display:block;padding:4px 6px;border-radius:4px;color:var(--muted);text-decoration:none;font:10.5px/1.45 var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.project-rail a:hover,.project-rail a:focus-visible{background:rgba(232,163,61,.10);color:var(--accent);outline:none}
-.project-rail .rail-note{color:var(--accent-soft)}
-@media(max-width:1380px){.project-rail{display:none}}
-@media(max-width:880px){.project-rail{display:none}}
+.project-map-title{margin:0 5px 8px;color:var(--dim);font:9.5px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.project-map-button{
+  display:block;width:100%;margin:2px 0;padding:7px 7px;min-height:34px;
+  border:1px solid transparent;border-radius:5px;background:transparent;
+  color:var(--muted);text-align:left;cursor:pointer;
+  font:10px/1.35 var(--mono);text-transform:lowercase;
+  transition:background .18s ease,border-color .18s ease,color .18s ease,transform .18s ease
+}
+.project-map-button:hover,.project-map-button:focus-visible,
+.project-map-button.active{
+  background:rgba(232,163,61,.08);border-color:rgba(138,101,38,.52);
+  color:var(--accent);outline:none
+}
+.project-map-button:hover{transform:translateX(2px)}
+@media(max-width:1419px){.project-map{display:none}}
+@media(max-width:880px){.project-map{display:none}}
 
 .created-note .created-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .created-note .note-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--dim);font:11px var(--mono);margin-top:10px}
@@ -240,22 +248,20 @@ textarea:focus{border-color:var(--accent-soft)}
 @media(max-width:600px){.publisher-grid{grid-template-columns:1fr}.publisher-field.full{grid-column:auto}}
 
 .control-actions .action,
-.control-actions .action:visited{background:transparent;border-color:var(--line);color:var(--muted)}
+.control-actions .action:link,
+.control-actions .action:visited,
+.control-actions .action.primary{
+  background:transparent !important;
+  border-color:var(--line-soft);
+  color:var(--muted)
+}
 .control-actions .action:not(.danger):hover,
 .control-actions .action:not(.danger):focus-visible,
 .control-actions .action:not(.danger):active{
-  background:rgba(232,163,61,.10);
-  border-color:var(--accent-soft);
-  color:var(--text);
+  background:rgba(232,163,61,.08) !important;
+  border-color:rgba(138,101,38,.62);
+  color:var(--accent);
   outline:none
-}
-.control-actions .action.primary,
-.control-actions .action.primary:hover,
-.control-actions .action.primary:focus-visible,
-.control-actions .action.primary:active{
-  background:transparent;
-  border-color:var(--line);
-  color:var(--muted)
 }
 
 @keyframes createdSectionIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
@@ -431,24 +437,24 @@ button,.action,.note-tool{min-height:var(--touch)}
 </div>
 <div class="shell">
 <nav class="nav" id="sideNav">
-<div class="nav-group-label">hydra launcher</div>
+<div class="nav-group-label" id="navGroupHydra">hydra launcher</div>
 <a href="#guide-top"><span class="idx">00</span>overview</a>
-<div class="nav-group-label">setup</div>
+<div class="nav-group-label" id="navGroupSetup">setup</div>
 <a href="#requirements"><span class="idx">01</span>requirements</a>
 <a href="#git"><span class="idx">02</span>git</a>
 <a href="#node"><span class="idx">03</span>node-24.19</a>
 <a href="#yarn"><span class="idx">04</span>yarn</a>
 <a href="#rust"><span class="idx">05</span>rust</a>
 <a href="#vs"><span class="idx">06</span>vs-build-tools</a>
-<div class="nav-group-label">build</div>
+<div class="nav-group-label" id="navGroupBuild">build</div>
 <a href="#clone"><span class="idx">07</span>clone</a>
 <a href="#terminal"><span class="idx">08</span>terminal</a>
 <a href="#install"><span class="idx">09</span>install</a>
 <a href="#env"><span class="idx">10</span>env</a>
 <a href="#dev"><span class="idx">11</span>run-dev</a>
-<div class="nav-group-label">research</div>
+<div class="nav-group-label" id="navGroupResearch">research</div>
 <a href="#security"><span class="idx">12</span>security-check</a>
-<div class="nav-group-label nav-subtopic-label">security research</div>
+<div class="nav-group-label nav-subtopic-label" id="navGroupSecurityResearch">security research</div>
 <a href="#research-checkpoint"><span class="idx">•</span>checkpoint</a>
 <a href="#one-go"><span class="idx">•</span>one-go</a>
 <a href="#research-status"><span class="idx">•</span>status</a>
@@ -457,16 +463,18 @@ button,.action,.note-tool{min-height:var(--touch)}
 <a href="#errors"><span class="idx">14</span>troubleshooting</a>
 <a href="#package"><span class="idx">15</span>package</a>
 <a href="#notes"><span class="idx">16</span>notes</a>
-<div class="nav-group-label">project control</div>
+<div class="nav-group-label" id="navGroupProjectControl">project control</div>
 <a href="#control-center"><span class="idx">17</span>control-center</a>
-<aside class="project-rail" id="projectRail" aria-label="Project map">
-  <div class="project-rail-title">project map</div>
-  <div class="project-rail-group"><b>hydra launcher</b><a href="#guide-top">overview</a></div>
-  <div class="project-rail-group"><b>setup</b><a href="#requirements">requirements</a><a href="#git">git</a><a href="#node">node</a><a href="#yarn">yarn</a><a href="#rust">rust</a><a href="#vs">vs tools</a></div>
-  <div class="project-rail-group"><b>build</b><a href="#clone">clone</a><a href="#terminal">terminal</a><a href="#install">install</a><a href="#env">environment</a><a href="#dev">run dev</a></div>
-  <div class="project-rail-group"><b>security research</b><a href="#security">security check</a><a href="#research-checkpoint">checkpoint</a><a href="#one-go">one-go</a><a href="#research-status">status</a><a href="#research-diary">diary</a><a href="#firewall">firewall</a><a href="#errors">troubleshooting</a><a href="#package">package</a></div>
-  <div class="project-rail-group"><b>research</b><a href="#notes">research notes</a><div id="projectRailNotes"></div></div>
-  <div class="project-rail-group"><b>project control</b><a href="#control-center">control center</a><a href="#publisher">maintainer upload</a></div>
+</nav>
+<aside class="project-map" id="projectMap" aria-label="Project map">
+  <div class="project-map-title">project map</div>
+  <button class="project-map-button" type="button" onclick="focusSideNav('navGroupHydra',this)">hydra launcher</button>
+  <button class="project-map-button" type="button" onclick="focusSideNav('navGroupSetup',this)">setup</button>
+  <button class="project-map-button" type="button" onclick="focusSideNav('navGroupBuild',this)">build</button>
+  <button class="project-map-button" type="button" onclick="focusSideNav('navGroupCreatedNotes',this)">created notes</button>
+  <button class="project-map-button" type="button" onclick="focusSideNav('navGroupProjectControl',this)">project control</button>
+  <button class="project-map-button" type="button" onclick="focusSideNav('navGroupSecurityResearch',this)">security research</button>
+  <button class="project-map-button" type="button" onclick="focusSideNav('navGroupResearch',this)">research</button>
 </aside>
 <main class="content">
 <div class="banner" id="guide-top">
@@ -935,14 +943,13 @@ if(scrollToId)requestAnimationFrame(()=>{const target=document.getElementById("n
 }
 function renderCreatedNav(items,newId){
 const nav=document.getElementById("sideNav");if(!nav)return;let group=nav.querySelector(".created-notes-group");
-if(!items.length){if(group)group.remove();renderProjectRailNotes(items);return}
-if(!group){group=document.createElement("div");group.className="created-notes-group";group.innerHTML="<div class=\"nav-group-label\">created notes</div>";nav.appendChild(group)}
+if(!items.length){if(group)group.remove();return}
+if(!group){group=document.createElement("div");group.className="created-notes-group";group.innerHTML="<div class=\"nav-group-label\" id=\"navGroupCreatedNotes\">created notes</div>";nav.appendChild(group)}
 group.querySelectorAll("a").forEach(a=>a.remove());
 items.forEach((item,index)=>{const a=document.createElement("a");a.href="#note-section-"+item.id;a.className="created-nav-link";a.style.animationDelay=(index*35)+"ms";a.innerHTML="<span class=\"idx\">"+escapeHtml(item.number)+"</span>"+escapeHtml(item.title||("research-note-"+item.number));group.appendChild(a)});
-renderProjectRailNotes(items);wireScrollSpy();
+wireScrollSpy();
 if(newId){const link=group.querySelector("a[href=\"#note-section-"+CSS.escape(String(newId))+"\"]");if(link)link.classList.add("active")}
 }
-function renderProjectRailNotes(items){const host=document.getElementById("projectRailNotes");if(!host)return;host.innerHTML=items.map(item=>'<a class="rail-note" href="#note-section-'+escapeHtml(item.id)+'">'+escapeHtml(item.number)+' '+escapeHtml(item.title||("research-note-"+item.number))+'</a>').join("")}
 function toggleNoteHistory(id){const el=document.getElementById("note-history-"+CSS.escape(String(id)));if(el)el.classList.toggle("open")}
 function editCreatedNote(id){
 const item=storageGet().find(x=>String(x.id)===String(id));if(!item)return;editingNoteId=String(id);
@@ -968,7 +975,6 @@ setNoteStatus("section "+updatedNumber+" updated — previous version saved to h
 const number=nextSectionNumber(items);const title=(document.getElementById("researchNoteTitle").value||"").trim()||("research-note-"+number);const item={id:makeId(),number:number,title:title,html:html,date:new Date().toLocaleString(),history:[]};
 items.push(item);if(!storageSet(items))return;editor.innerHTML="";document.getElementById("researchNoteTitle").value="";setNoteStatus("saved as section "+number);renderCreatedSections(item.id)
 }
-function saveNotes(){const editor=document.getElementById("researchNotes");const text=getEditorText();const html=getEditorHtml();if(!text||!html){setNoteStatus("write something before saving");editor.focus();return}const items=storageGet();const number=nextSectionNumber(items);const title=(document.getElementById("researchNoteTitle").value||"").trim()||("research-note-"+number);const item={id:makeId(),number:number,title:title,html:html,date:new Date().toLocaleString()};items.push(item);if(!storageSet(items))return;editor.innerHTML="";document.getElementById("researchNoteTitle").value="";setNoteStatus("saved as section "+number);renderCreatedSections(item.id)}
 async function copyNotes(){const editor=document.getElementById("researchNotes");const html=getEditorHtml();const text=editor.innerText||"";try{if(navigator.clipboard&&navigator.clipboard.write){const data=new ClipboardItem({"text/html":new Blob([html],{type:"text/html"}),"text/plain":new Blob([text],{type:"text/plain"})});await navigator.clipboard.write([data])}else await navigator.clipboard.writeText(text)}catch(e){try{await navigator.clipboard.writeText(text)}catch(err){const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}}setNoteStatus("current research note copied")}
 function downloadNotes(){const html=getEditorHtml();const title=escapeHtml(document.getElementById("researchNoteTitle").value.trim()||"Hydra Research Note");const doc="<!doctype html><html><head><meta charset=\"utf-8\"><title>"+title+"</title></head><body><h1>"+title+"</h1>"+html+"<scr"+"ipt>\n</scr"+"ipt>\n</body></html>";const blob=new Blob([doc],{type:"text/html;charset=utf-8"});const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="Hydra-Research-Note.html";a.click();URL.revokeObjectURL(url);setNoteStatus("current note exported as HTML")}
 
@@ -999,6 +1005,16 @@ const result=await put.json();publisherStatus("published to "+path+" • commit 
 function clearNotes(){document.getElementById("researchNotes").innerHTML="";document.getElementById("researchNoteTitle").value="";setNoteStatus("editor cleared")}
 function deleteCreatedNote(id){const items=storageGet();const item=items.find(x=>String(x.id)===String(id));if(!item)return;if(!confirm("Delete research section "+item.number+"? This only deletes a section you created."))return;if(!storageSet(items.filter(x=>String(x.id)!==String(id))))return;renderCreatedSections();setNoteStatus("section "+item.number+" deleted")}
 function wireScrollSpy(){const navLinks=[...document.querySelectorAll("#sideNav a")];const sections=navLinks.map(a=>document.querySelector(a.getAttribute("href"))).filter(Boolean);if(window.__hydraSpy)window.__hydraSpy.disconnect();window.__hydraSpy=new IntersectionObserver(entries=>{entries.forEach(entry=>{const link=document.querySelector("#sideNav a[href=\"#"+CSS.escape(entry.target.id)+"\"]");if(!link)return;if(entry.isIntersecting)link.classList.add("active");else link.classList.remove("active")})},{rootMargin:"-20% 0px -70% 0px"});sections.forEach(s=>window.__hydraSpy.observe(s))}
+function focusSideNav(targetId,button){
+  const nav=document.getElementById("sideNav"),target=document.getElementById(targetId);
+  if(!nav||!target)return;
+  let top=0,node=target;
+  while(node&&node!==nav){top+=node.offsetTop;node=node.offsetParent}
+  nav.scrollTo({top:Math.max(0,top-14),behavior:"smooth"});
+  document.querySelectorAll(".project-map-button").forEach(el=>el.classList.remove("active"));
+  if(button)button.classList.add("active");
+}
+
 (function loadNotes(){renderCreatedSections()})();
 wireScrollSpy();
 (function(){
