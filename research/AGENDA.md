@@ -66,3 +66,13 @@
 - ~~Correct stale public/private documentation.~~ Completed.
 - ~~Consolidate checkpoint directory case variants into `research/checkpoints/`.~~ Completed.
 - Live-verify the new Project Control Center and current sidebar/README opener behavior after the newest Pages deployment.
+
+
+### 2026-09-25 — UI context preservation
+- ~~Persist the original dark brown/orange guide theme and tokens.~~ Completed.
+- ~~Persist the Project Map as primary navigation and the detailed sidebar as follower.~~ Completed.
+- ~~Persist bidirectional Project Map / sidebar synchronization.~~ Completed.
+- ~~Persist Hydra Launcher → guide hero/top-state behavior.~~ Completed.
+- ~~Persist direct new-tab GitHub repository-link behavior.~~ Completed.
+- ~~Persist final-sidebar reachability safeguard.~~ Completed.
+- Live-verify the complete navigation interaction set from the public Pages URL.
