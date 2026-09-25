@@ -28,6 +28,8 @@ We are studying the application through:
 
 The research goal is **measurement and documentation**, not a predetermined conclusion about whether the software is safe or unsafe.
 
+The 25 September 2026 checkpoint records API-mediated download-source metadata, client-side source synchronization, and the antivirus/AMSI control result. No malware verdict has been established, and no third-party game/software executable has been downloaded or executed as part of this checkpoint.
+
 ## Important trust boundaries
 
 The research treats these as separate components:
@@ -133,4 +135,4 @@ The guide preserves the earlier Claude visual design while incorporating the cur
 This repository is an independent research/development workspace. It is not an official Hydra repository and does not speak for the Hydra maintainers.
 
 ---
-Last maintained: 22 September 2026
+Last maintained: 25 September 2026
