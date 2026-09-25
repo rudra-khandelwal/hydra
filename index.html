@@ -193,6 +193,57 @@ textarea:focus{border-color:var(--accent-soft)}
 .created-nav-link{animation:navEntryIn .45s ease both}
 .created-nav-link .idx{color:var(--accent-soft)}
 @keyframes navEntryIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+/* ---------- project map rail ---------- */
+.project-rail{
+  position:fixed;z-index:30;top:78px;
+  left:max(8px,calc((100vw - var(--page-max))/2 - 176px));
+  width:158px;max-height:calc(100dvh - 96px);overflow-y:auto;
+  padding:12px 10px;border:1px solid var(--line-soft);border-radius:9px;
+  background:rgba(21,17,12,.88);backdrop-filter:blur(10px);
+  box-shadow:0 10px 28px rgba(0,0,0,.16)
+}
+.project-rail-title{margin:0 6px 8px;color:var(--accent);font:10px var(--mono);letter-spacing:.08em;text-transform:uppercase}
+.project-rail-group{margin:10px 0 0}
+.project-rail-group b{display:block;margin:0 6px 3px;color:var(--dim);font:9.5px var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.project-rail a{display:block;padding:4px 6px;border-radius:4px;color:var(--muted);text-decoration:none;font:10.5px/1.45 var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.project-rail a:hover,.project-rail a:focus-visible{background:rgba(232,163,61,.10);color:var(--accent);outline:none}
+.project-rail .rail-note{color:var(--accent-soft)}
+@media(max-width:1380px){.project-rail{display:none}}
+@media(max-width:880px){.project-rail{display:none}}
+
+.created-note .created-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.created-note .note-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--dim);font:11px var(--mono);margin-top:10px}
+.created-note .note-meta .updated{color:var(--muted)}
+.note-history{display:none;margin-top:12px;padding:12px 14px;border:1px solid var(--line-soft);border-radius:7px;background:#120f0b}
+.note-history.open{display:block}
+.note-history-title{color:var(--accent);font:11px var(--mono);margin-bottom:8px}
+.note-history-item{margin:8px 0;padding:9px 10px;border-left:2px solid var(--accent-soft);background:#17110d;color:var(--muted);font-size:12.5px}
+.note-history-item .history-head{color:var(--text);font:11px var(--mono);margin-bottom:6px}
+.note-history-item .history-body{margin-top:6px;max-height:180px;overflow:auto}
+.note-history-empty{color:var(--dim);font:11px var(--mono)}
+.note-editor.editing{border-color:var(--accent-soft)}
+.note-edit-banner{display:none;margin:8px 0 0;padding:7px 10px;border-left:2px solid var(--accent);background:rgba(232,163,61,.07);color:var(--muted);font:11px var(--mono)}
+.note-edit-banner.open{display:block}
+
+.publisher-panel{margin-top:20px;padding:16px;border:1px solid var(--line-soft);border-radius:8px;background:#17110d}
+.publisher-panel h3{margin-top:0}
+.publisher-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.publisher-field{display:flex;flex-direction:column;gap:5px}
+.publisher-field.full{grid-column:1/-1}
+.publisher-field label{color:var(--dim);font:11px var(--mono)}
+.publisher-field input{width:100%;background:#0c0a07;color:var(--text);border:1px solid var(--line);border-radius:5px;padding:9px 10px;outline:none;font:12.5px var(--mono)}
+.publisher-field input:focus{border-color:var(--accent-soft)}
+.publisher-help{color:var(--dim);font-size:12px}
+.publisher-status{min-height:18px;margin-top:10px;color:var(--muted);font:11px var(--mono)}
+.publisher-status.good{color:var(--good)}.publisher-status.warn{color:var(--warn)}.publisher-status.danger{color:var(--danger)}
+.publisher-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+@media(max-width:600px){.publisher-grid{grid-template-columns:1fr}.publisher-field.full{grid-column:auto}}
+
+.control-actions .action{background:transparent}
+.control-actions .action:not(.danger):hover,.control-actions .action:not(.danger):focus-visible{background:rgba(232,163,61,.10);border-color:var(--accent-soft);color:var(--text);outline:none}
+.control-actions .action.primary{background:transparent;border-color:var(--line);color:var(--muted)}
+.control-actions .action.primary:hover,.control-actions .action.primary:focus-visible{background:rgba(232,163,61,.10);border-color:var(--accent-soft);color:var(--text)}
+
 @keyframes createdSectionIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 /* ---------- responsive foundation: phone / tablet / desktop ---------- */
 :root{
@@ -394,7 +445,15 @@ button,.action,.note-tool{min-height:var(--touch)}
 <a href="#notes"><span class="idx">16</span>notes</a>
 <div class="nav-group-label">project control</div>
 <a href="#control-center"><span class="idx">17</span>control-center</a>
-</nav>
+<aside class="project-rail" id="projectRail" aria-label="Project map">
+  <div class="project-rail-title">project map</div>
+  <div class="project-rail-group"><b>hydra launcher</b><a href="#guide-top">overview</a></div>
+  <div class="project-rail-group"><b>setup</b><a href="#requirements">requirements</a><a href="#git">git</a><a href="#node">node</a><a href="#yarn">yarn</a><a href="#rust">rust</a><a href="#vs">vs tools</a></div>
+  <div class="project-rail-group"><b>build</b><a href="#clone">clone</a><a href="#terminal">terminal</a><a href="#install">install</a><a href="#env">environment</a><a href="#dev">run dev</a></div>
+  <div class="project-rail-group"><b>security research</b><a href="#security">security check</a><a href="#research-checkpoint">checkpoint</a><a href="#one-go">one-go</a><a href="#research-status">status</a><a href="#research-diary">diary</a><a href="#firewall">firewall</a><a href="#errors">troubleshooting</a><a href="#package">package</a></div>
+  <div class="project-rail-group"><b>research</b><a href="#notes">research notes</a><div id="projectRailNotes"></div></div>
+  <div class="project-rail-group"><b>project control</b><a href="#control-center">control center</a><a href="#publisher">maintainer upload</a></div>
+</aside>
 <main class="content">
 <div class="banner" id="guide-top">
 <p class="kicker">windows · source build · security-minded workflow</p>
@@ -769,8 +828,10 @@ yarn install</code></pre>
   </div>
   <div id="researchNotes" class="note-editor" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="Write your research note here…"></div>
 </div>
+<div id="noteEditBanner" class="note-edit-banner">Editing a saved section. Saving will update that section and preserve the previous version in its history.</div>
 <div class="actions">
-<button class="action primary" onclick="saveNotes()">Save as new section</button>
+<button id="saveNoteButton" class="action primary" onclick="saveNotes()">Save as new section</button>
+<button id="cancelNoteEdit" class="action" type="button" onclick="cancelNoteEdit()" style="display:none">Cancel edit</button>
 <button class="action" onclick="copyNotes()">Copy current note</button>
 <button class="action" onclick="downloadNotes()">Export .html</button>
 <button class="action danger" onclick="clearNotes()">Clear editor</button>
@@ -800,13 +861,26 @@ yarn install</code></pre>
 <div class="cell"><b>lessons</b><span>Recorded mistakes, corrections, and prevention rules so the same failure mode is not repeated.</span></div>
 <div class="cell"><b>validation</b><span>Implementation versus deployment versus live-verification matrix for the guide and research workflow.</span></div>
 </div>
-<div class="actions">
-<a class="action primary" href="https://github.com/rudra-khandelwal/hydra/blob/main/docs/PROJECT-MEMORY.md" target="_blank" rel="noopener noreferrer">Open project memory</a>
+<div class="actions control-actions">
+<a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/docs/PROJECT-MEMORY.md" target="_blank" rel="noopener noreferrer">Open project memory</a>
 <a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/docs/PROJECT-GOAL.md" target="_blank" rel="noopener noreferrer">Open project goal</a>
 <a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/docs/REPOSITORY-MAP.md" target="_blank" rel="noopener noreferrer">Open repository map</a>
 <a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/docs/CHANGE-CONTROL.md" target="_blank" rel="noopener noreferrer">Open change control</a>
 <a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/research/LESSONS.md" target="_blank" rel="noopener noreferrer">Open lessons</a>
 <a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/research/VALIDATION.md" target="_blank" rel="noopener noreferrer">Open validation</a>
+</div>
+<div class="publisher-panel" id="publisher">
+<h3>Maintainer repository upload</h3>
+<p class="mini">Owner-only publishing boundary for this public repository. Choose a folder and a text/code file, review it, then publish it to <code>research/uploads/&lt;folder&gt;/</code>. The GitHub token is held only in this page's memory and is never written to localStorage.</p>
+<div class="publisher-grid">
+<div class="publisher-field"><label for="publisherToken">Fine-grained GitHub token — Contents: write</label><input id="publisherToken" type="password" autocomplete="off" spellcheck="false" placeholder="Paste token only when publishing"></div>
+<div class="publisher-field"><label for="publisherFolder">Folder name</label><input id="publisherFolder" type="text" maxlength="48" autocomplete="off" placeholder="e.g. runtime-notes"></div>
+<div class="publisher-field full"><label for="publisherFile">HTML / TXT / MD / code file</label><input id="publisherFile" type="file" accept=".html,.htm,.txt,.md,.js,.ts,.jsx,.tsx,.css,.scss,.json,.yaml,.yml,.xml,.py,.java,.cpp,.c,.h,.hpp,.rs,.go,.php,.sh,.ps1,.bat,.sql,.toml,.ini,.cfg,.log"></div>
+<div class="publisher-field full"><label for="publisherMessage">Commit message</label><input id="publisherMessage" type="text" maxlength="120" value="docs: add maintainer research upload" autocomplete="off"></div>
+</div>
+<div class="publisher-help">There is no fake client-side password gate. GitHub repository permission is the actual write boundary. Use a fine-grained token restricted to this repository with Contents: write. The token is never saved by this page. Obvious credential/private-key patterns are blocked before upload.</div>
+<div class="publisher-actions"><button class="action" type="button" onclick="publishSelectedFile()">Publish selected file</button><button class="action" type="button" onclick="clearPublisher()">Lock / clear token</button></div>
+<div class="publisher-status" id="publisherStatus"></div>
 </div>
 <div class="callout warn"><strong>Verification rule:</strong> “Implemented” means the source contains the intended behavior. “Deployed” means GitHub Pages published the relevant commit. “Live-verified” means the published page was actually exercised. Do not treat these as interchangeable.</div>
 <div class="callout"><strong>Next research goal:</strong> use a legitimate free/open-source artifact for a controlled download experiment, then compare pre/post process, network, filesystem, hash, and Defender observations before any appropriate execution.</div>
@@ -832,11 +906,82 @@ function addDirectLink(){const editor=document.getElementById("researchNotes");e
 function addNamedLink(){const editor=document.getElementById("researchNotes");editor.focus();const name=prompt("Text to display for the link:");if(name===null)return;const raw=prompt("Enter the full URL (https://…):");if(raw===null)return;const url=safeUrl(raw);if(!url){setNoteStatus("Only http:// or https:// links are allowed");return}const selection=window.getSelection();if(selection&&!selection.isCollapsed&&editor.contains(selection.anchorNode))document.execCommand("createLink",false,url);else document.execCommand("insertHTML",false,"<a href=\"" + escapeHtml(url) + "\">" + escapeHtml(name) + "</a>");setNoteStatus("named clickable link added")}
 function nextSectionNumber(items){return items.reduce((max,item)=>Math.max(max,Number(item.number)||17),17)+1}
 function makeId(){return window.crypto&&crypto.randomUUID?crypto.randomUUID():String(Date.now())+"-"+Math.random().toString(36).slice(2)}
-function renderCreatedSections(scrollToId){const host=document.getElementById("createdSections");if(!host)return;const items=storageGet().sort((a,b)=>Number(a.number)-Number(b.number));host.innerHTML=items.map(item=>{const title=escapeHtml(item.title||("research-note-"+item.number));const safeHtml=sanitizeNoteHtml(item.html||"");return "<section class=\"research-panel created-note\" id=\"note-section-"+escapeHtml(item.id)+"\" data-created=\"true\"><h2>"+title+" <span class=\"tag\">"+escapeHtml(item.number)+"</span></h2><div class=\"sub\">Created "+escapeHtml(item.date||"")+"</div><div class=\"note-body\">"+safeHtml+"</div><div class=\"created-actions\"><span class=\"sub\">Created section • "+escapeHtml(item.number)+"</span><button class=\"action danger\" onclick=\"deleteCreatedNote(\'"+escapeHtml(item.id)+"\')\">Delete this section</button></div></section>"}).join("");renderCreatedNav(items);if(scrollToId)requestAnimationFrame(()=>{const target=document.getElementById("note-section-"+scrollToId);if(target)target.scrollIntoView({behavior:"smooth",block:"start"})})}
-function renderCreatedNav(items,newId){const nav=document.getElementById("sideNav");if(!nav)return;let group=nav.querySelector(".created-notes-group");if(!items.length){if(group)group.remove();return}if(!group){group=document.createElement("div");group.className="created-notes-group";group.innerHTML="<div class=\"nav-group-label\">created notes</div>";nav.appendChild(group)}group.querySelectorAll("a").forEach(a=>a.remove());items.forEach((item,index)=>{const a=document.createElement("a");a.href="#note-section-"+item.id;a.className="created-nav-link";a.style.animationDelay=(index*35)+"ms";a.innerHTML="<span class=\"idx\">"+escapeHtml(item.number)+"</span>"+escapeHtml(item.title||("research-note-"+item.number));group.appendChild(a)});wireScrollSpy();if(newId){const link=group.querySelector("a[href=\"#note-section-"+CSS.escape(String(newId))+"\"]");if(link)link.classList.add("active")}}
+let editingNoteId=null;
+function historyFor(item){return Array.isArray(item.history)?item.history:[]}
+function renderCreatedSections(scrollToId){
+const host=document.getElementById("createdSections");if(!host)return;
+const items=storageGet().sort((a,b)=>Number(a.number)-Number(b.number));
+host.innerHTML=items.map(item=>{
+const title=escapeHtml(item.title||("research-note-"+item.number));const safeHtml=sanitizeNoteHtml(item.html||"");const history=historyFor(item);const updated=item.updatedAt?'<span class="updated">Updated '+escapeHtml(item.updatedAt)+'</span>':'';
+const historyItems=history.slice().reverse().map((entry,index)=>'<div class="note-history-item"><div class="history-head">Version '+escapeHtml(entry.version||index+1)+' • '+escapeHtml(entry.date||"")+'</div><div><strong>Previously written:</strong> '+escapeHtml(entry.title||item.title||"")+'</div><div class="history-body">'+sanitizeNoteHtml(entry.html||"")+'</div></div>').join("");
+return '<section class="research-panel created-note" id="note-section-'+escapeHtml(item.id)+'" data-created="true"><h2>'+title+' <span class="tag">'+escapeHtml(item.number)+'</span></h2><div class="sub">Created '+escapeHtml(item.date||"")+' '+updated+'</div><div class="note-body">'+safeHtml+'</div><div class="created-actions"><div class="actions"><button class="action" type="button" onclick="editCreatedNote(\''+escapeHtml(item.id)+'\')">Edit</button><button class="action" type="button" onclick="toggleNoteHistory(\''+escapeHtml(item.id)+'\')">Previous / history</button><button class="action danger" type="button" onclick="deleteCreatedNote(\''+escapeHtml(item.id)+'\')">Delete this section</button></div></div><div class="note-history" id="note-history-'+escapeHtml(item.id)+'"><div class="note-history-title">Previous versions</div>'+ (history.length?historyItems:'<div class="note-history-empty">No previous version yet. Editing this note will create the first history entry.</div>') +'</div></section>';
+}).join("");
+renderCreatedNav(items);
+if(scrollToId)requestAnimationFrame(()=>{const target=document.getElementById("note-section-"+scrollToId);if(target)target.scrollIntoView({behavior:"smooth",block:"start"})})
+}
+function renderCreatedNav(items,newId){
+const nav=document.getElementById("sideNav");if(!nav)return;let group=nav.querySelector(".created-notes-group");
+if(!items.length){if(group)group.remove();renderProjectRailNotes(items);return}
+if(!group){group=document.createElement("div");group.className="created-notes-group";group.innerHTML="<div class=\"nav-group-label\">created notes</div>";nav.appendChild(group)}
+group.querySelectorAll("a").forEach(a=>a.remove());
+items.forEach((item,index)=>{const a=document.createElement("a");a.href="#note-section-"+item.id;a.className="created-nav-link";a.style.animationDelay=(index*35)+"ms";a.innerHTML="<span class=\"idx\">"+escapeHtml(item.number)+"</span>"+escapeHtml(item.title||("research-note-"+item.number));group.appendChild(a)});
+renderProjectRailNotes(items);wireScrollSpy();
+if(newId){const link=group.querySelector("a[href=\"#note-section-"+CSS.escape(String(newId))+"\"]");if(link)link.classList.add("active")}
+}
+function renderProjectRailNotes(items){const host=document.getElementById("projectRailNotes");if(!host)return;host.innerHTML=items.map(item=>'<a class="rail-note" href="#note-section-'+escapeHtml(item.id)+'">'+escapeHtml(item.number)+' '+escapeHtml(item.title||("research-note-"+item.number))+'</a>').join("")}
+function toggleNoteHistory(id){const el=document.getElementById("note-history-"+CSS.escape(String(id)));if(el)el.classList.toggle("open")}
+function editCreatedNote(id){
+const item=storageGet().find(x=>String(x.id)===String(id));if(!item)return;editingNoteId=String(id);
+document.getElementById("researchNoteTitle").value=item.title||"";const editor=document.getElementById("researchNotes");editor.innerHTML=sanitizeNoteHtml(item.html||"");editor.classList.add("editing");
+document.getElementById("noteEditBanner").classList.add("open");document.getElementById("saveNoteButton").textContent="Update note";document.getElementById("cancelNoteEdit").style.display="inline-flex";
+setNoteStatus("editing section "+item.number+" — update will preserve the previous version in history");document.getElementById("notes").scrollIntoView({behavior:"smooth",block:"start"});editor.focus()
+}
+function cancelNoteEdit(){
+editingNoteId=null;document.getElementById("researchNotes").innerHTML="";document.getElementById("researchNotes").classList.remove("editing");document.getElementById("researchNoteTitle").value="";
+document.getElementById("noteEditBanner").classList.remove("open");document.getElementById("saveNoteButton").textContent="Save as new section";document.getElementById("cancelNoteEdit").style.display="none";setNoteStatus("edit cancelled")
+}
+function saveNotes(){
+const editor=document.getElementById("researchNotes");const text=getEditorText();const html=getEditorHtml();if(!text||!html){setNoteStatus("write something before saving");editor.focus();return}
+const items=storageGet();
+if(editingNoteId){
+const item=items.find(x=>String(x.id)===String(editingNoteId));if(!item){cancelNoteEdit();return}
+const history=historyFor(item);history.push({version:history.length+1,date:new Date().toLocaleString(),title:item.title||("research-note-"+item.number),html:item.html||""});item.history=history;
+item.title=(document.getElementById("researchNoteTitle").value||"").trim()||item.title||("research-note-"+item.number);item.html=html;item.updatedAt=new Date().toLocaleString();
+if(!storageSet(items))return;const updatedNumber=item.number;editingNoteId=null;editor.innerHTML="";editor.classList.remove("editing");document.getElementById("researchNoteTitle").value="";
+document.getElementById("noteEditBanner").classList.remove("open");document.getElementById("saveNoteButton").textContent="Save as new section";document.getElementById("cancelNoteEdit").style.display="none";
+setNoteStatus("section "+updatedNumber+" updated — previous version saved to history");renderCreatedSections(item.id);return;
+}
+const number=nextSectionNumber(items);const title=(document.getElementById("researchNoteTitle").value||"").trim()||("research-note-"+number);const item={id:makeId(),number:number,title:title,html:html,date:new Date().toLocaleString(),history:[]};
+items.push(item);if(!storageSet(items))return;editor.innerHTML="";document.getElementById("researchNoteTitle").value="";setNoteStatus("saved as section "+number);renderCreatedSections(item.id)
+}
 function saveNotes(){const editor=document.getElementById("researchNotes");const text=getEditorText();const html=getEditorHtml();if(!text||!html){setNoteStatus("write something before saving");editor.focus();return}const items=storageGet();const number=nextSectionNumber(items);const title=(document.getElementById("researchNoteTitle").value||"").trim()||("research-note-"+number);const item={id:makeId(),number:number,title:title,html:html,date:new Date().toLocaleString()};items.push(item);if(!storageSet(items))return;editor.innerHTML="";document.getElementById("researchNoteTitle").value="";setNoteStatus("saved as section "+number);renderCreatedSections(item.id)}
 async function copyNotes(){const editor=document.getElementById("researchNotes");const html=getEditorHtml();const text=editor.innerText||"";try{if(navigator.clipboard&&navigator.clipboard.write){const data=new ClipboardItem({"text/html":new Blob([html],{type:"text/html"}),"text/plain":new Blob([text],{type:"text/plain"})});await navigator.clipboard.write([data])}else await navigator.clipboard.writeText(text)}catch(e){try{await navigator.clipboard.writeText(text)}catch(err){const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}}setNoteStatus("current research note copied")}
 function downloadNotes(){const html=getEditorHtml();const title=escapeHtml(document.getElementById("researchNoteTitle").value.trim()||"Hydra Research Note");const doc="<!doctype html><html><head><meta charset=\"utf-8\"><title>"+title+"</title></head><body><h1>"+title+"</h1>"+html+"<scr"+"ipt>\n</scr"+"ipt>\n</body></html>";const blob=new Blob([doc],{type:"text/html;charset=utf-8"});const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="Hydra-Research-Note.html";a.click();URL.revokeObjectURL(url);setNoteStatus("current note exported as HTML")}
+
+const publisherAllowedExtensions=new Set(["html","htm","txt","md","js","ts","jsx","tsx","css","scss","json","yaml","yml","xml","py","java","cpp","c","h","hpp","rs","go","php","sh","ps1","bat","sql","toml","ini","cfg","log"]);
+const publisherMaxBytes=1024*1024;
+function publisherStatus(message,kind){const el=document.getElementById("publisherStatus");if(!el)return;el.textContent=message;el.className="publisher-status"+(kind?" "+kind:"")}
+function clearPublisher(){const token=document.getElementById("publisherToken");if(token)token.value="";publisherStatus("publisher locked — no repository credential is retained","good")}
+function publisherSafePart(value,label){const v=String(value||"").trim();if(!v||v==="."||v===".."||/[\\/]/.test(v)||!/^[A-Za-z0-9._-]+$/.test(v))throw new Error(label+" may contain only letters, numbers, dots, dashes and underscores")}
+function publisherCredentialWarning(text){const patterns=[/-----BEGIN [A-Z ]*PRIVATE KEY-----/i,/github_pat_[A-Za-z0-9_]+/i,/ghp_[A-Za-z0-9]+/i,/AKIA[0-9A-Z]{16}/,/password\s*[:=]/i,/secret\s*[:=]/i,/api[_-]?key\s*[:=]/i,/token\s*[:=]\s*[A-Za-z0-9_-]{12,}/i];return patterns.some(rx=>rx.test(text))}
+function toBase64Utf8(text){const bytes=new TextEncoder().encode(text);let binary="";const chunk=0x8000;for(let i=0;i<bytes.length;i+=chunk)binary+=String.fromCharCode(...bytes.subarray(i,i+chunk));return btoa(binary)}
+async function publishSelectedFile(){
+const token=(document.getElementById("publisherToken").value||"").trim();const folder=(document.getElementById("publisherFolder").value||"").trim();const input=document.getElementById("publisherFile");const file=input&&input.files?input.files[0]:null;const message=(document.getElementById("publisherMessage").value||"").trim()||"docs: add maintainer research upload";
+try{
+if(!token)throw new Error("paste your fine-grained GitHub token first");publisherSafePart(folder,"Folder name");if(!file)throw new Error("choose a file first");if(file.size>publisherMaxBytes)throw new Error("file is larger than the 1 MB maintainer-upload limit");
+const match=(file.name.match(/\.([^.]+)$/)||[])[1];const ext=(match||"").toLowerCase();if(!publisherAllowedExtensions.has(ext))throw new Error("this file type is not allowed");publisherSafePart(file.name,"File name");
+const text=await file.text();if(publisherCredentialWarning(text)){if(!confirm("Credential-like or private-key content was detected. Do not publish secrets. Continue only if this is a deliberate non-secret test fixture."))throw new Error("upload cancelled after credential warning")}
+publisherStatus("checking GitHub write access…");
+const headers={"Accept":"application/vnd.github+json","Authorization":"Bearer "+token,"X-GitHub-Api-Version":"2026-03-10","Content-Type":"application/json"};
+const repoRes=await fetch("https://api.github.com/repos/rudra-khandelwal/hydra",{headers});if(!repoRes.ok)throw new Error("GitHub rejected the credential or repository access");
+const path="research/uploads/"+folder+"/"+file.name;const existingRes=await fetch("https://api.github.com/repos/rudra-khandelwal/hydra/contents/"+path.split("/").map(encodeURIComponent).join("/")+"?ref=main",{headers});let sha=null;
+if(existingRes.ok){const existing=await existingRes.json();sha=existing.sha}else if(existingRes.status!==404)throw new Error("could not check the target path");
+publisherStatus("publishing "+path+"…");const body={message,content:toBase64Utf8(text),branch:"main"};if(sha)body.sha=sha;
+const put=await fetch("https://api.github.com/repos/rudra-khandelwal/hydra/contents/"+path.split("/").map(encodeURIComponent).join("/"),{method:"PUT",headers,body:JSON.stringify(body)});
+if(!put.ok){let detail="GitHub upload failed";try{const data=await put.json();if(data&&data.message)detail+=": "+data.message}catch(e){}throw new Error(detail)}
+const result=await put.json();publisherStatus("published to "+path+" • commit "+String(result.commit&&result.commit.sha||"").slice(0,7),"good");input.value="";clearPublisher()
+}catch(e){publisherStatus(e&&e.message?e.message:"upload failed","danger")}
+}
 function clearNotes(){document.getElementById("researchNotes").innerHTML="";document.getElementById("researchNoteTitle").value="";setNoteStatus("editor cleared")}
 function deleteCreatedNote(id){const items=storageGet();const item=items.find(x=>String(x.id)===String(id));if(!item)return;if(!confirm("Delete research section "+item.number+"? This only deletes a section you created."))return;if(!storageSet(items.filter(x=>String(x.id)!==String(id))))return;renderCreatedSections();setNoteStatus("section "+item.number+" deleted")}
 function wireScrollSpy(){const navLinks=[...document.querySelectorAll("#sideNav a")];const sections=navLinks.map(a=>document.querySelector(a.getAttribute("href"))).filter(Boolean);if(window.__hydraSpy)window.__hydraSpy.disconnect();window.__hydraSpy=new IntersectionObserver(entries=>{entries.forEach(entry=>{const link=document.querySelector("#sideNav a[href=\"#"+CSS.escape(entry.target.id)+"\"]");if(!link)return;if(entry.isIntersecting)link.classList.add("active");else link.classList.remove("active")})},{rootMargin:"-20% 0px -70% 0px"});sections.forEach(s=>window.__hydraSpy.observe(s))}
