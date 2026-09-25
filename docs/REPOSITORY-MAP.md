@@ -48,14 +48,12 @@ This is the canonical map of the public research workspace.
 
 ## security-research/
 
-Organized areas for sanitized evidence:
+Current tracked files:
 
-- `baseline/`
-- `network/`
-- `processes/`
-- `filesystem/`
-- `hashes/`
-- `reports/`
+- `README.md` — evidence-area rules and sensitive-data handling
+- `evidence-template.md` — compact template for recording sanitized evidence
+
+The evidence-area subdirectories `baseline/`, `network/`, `processes/`, `filesystem/`, `hashes/`, and `reports/` are reserved for future material; they are not currently present in the repository tree. Create them when the corresponding sanitized evidence is actually added.
 
 Raw credential-bearing or sensitive material stays outside Git or in ignored local paths.
 
