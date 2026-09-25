@@ -49,4 +49,7 @@
 - ~~Add touch-friendly mobile navigation and safe-area handling.~~ Completed.
 - ~~Make grids, tables, code blocks, note controls, and research panels adapt to narrow screens.~~ Completed.
 - Validate the live guide on representative desktop, tablet, and phone viewport sizes after the next GitHub Pages deployment.
+- Confirm the desktop sidebar remains fixed during anchor navigation and document scroll.
+- Confirm GitHub README → live guide opens separately and refreshes the originating GitHub tab once.
+- Confirm the single hero GitHub button keeps the guide open while returning focus to the originating GitHub tab, with direct-open fallback.
 - Continue adding research content without creating device-specific duplicate pages.
