@@ -60,7 +60,7 @@ These rules are persistent:
 - Keep the live guide responsive without creating separate device-specific pages.
 - The maintainer normally opens the current public GitHub Pages live link after each repository update; treat this as the expected browser-check path, while still distinguishing deployed state from live verification. The two navigation rails are bidirectionally synchronized: Project Map clicks update the main sidebar and document, while main-sidebar navigation updates the Project Map active category. The final sidebar item must remain reachable. The hero GitHub repo button must directly open the repository URL in a new tab; it must not redirect/focus the GitHub referrer tab.
 - The live guide uses a dark brown/orange research-console theme. Project Control links are transparent by default with only a subtle translucent accent on hover/focus.
-- On wide desktop screens, a compact Project Map rail sits to the left of the main fixed sidebar. Its category buttons scroll the main sidebar to Hydra Launcher, Setup, Build, Created Notes, Project Control, Security Research, or Research.
+- On wide desktop screens, a compact Project Map rail sits to the left of the main fixed sidebar. Its category buttons follow the document order: Hydra Launcher, Setup, Build, Security Research, Research, Project Control, and Created Notes.
 - The Project Map rail is hidden on narrower screens to protect the existing responsive layout.
 - Detailed UI decisions are recorded in docs/HTML-GUIDE-DESIGN.md.
 - When changing the live guide, update the GitHub repository first; GitHub Pages is deployment output.
@@ -186,9 +186,9 @@ Before changing anything:
 
 ## Last known deployment checkpoint
 
-The last confirmed successful GitHub Pages run before the project-control restructuring was workflow run #41 for commit `8e273eaa506f6df4be11d305e58d3e56f284cf84`.
+The latest confirmed GitHub Pages deployment is workflow run **#108** for main commit `3a2444089df3fa6943d52e7ba41da0a513f6b924`. The workflow and `deploy` job completed with **success**.
 
-The control-pass HEAD `d9b83fee2ad9a8bf4a1875693a88c765bbc455cb` was then deployed successfully as workflow run **#66**. Its `deploy` check completed with **success** and **0 annotations**.
+The deploy job log contains a Node.js `DEP0040` deprecation warning about the built-in `punycode` module during `actions/deploy-pages@v5`. This is recorded as maintenance debt rather than a deployment failure.
 
 The published browser behavior is still separate from deployment status: source/deployment success does not by itself count as live browser verification.
 
@@ -199,8 +199,9 @@ The published browser behavior is still separate from deployment status: source/
 - User-created note numbering moved to section 18+: implemented.
 - Public/private documentation consistency audit: implemented.
 - Checkpoint directory case cleanup: implemented.
+- Repository-map tree audit: corrected to match the current tracked tree.
 - Workflow runtime maintenance: implemented in `.github/workflows/pages.yml`.
-- Control-pass Pages deployment: run #66 succeeded with 0 annotations.
+- Latest Pages deployment: run #108 succeeded for main commit `3a2444089df3fa6943d52e7ba41da0a513f6b924`.
 - Live browser behavior: still requires direct exercise after deployment.
 
 ## Handoff instruction
@@ -264,9 +265,10 @@ The hero GitHub repo control opens https://github.com/rudra-khandelwal/hydra in 
 
 ### Current implementation checkpoints
 - Latest navigation/source hardening pass: 3da566756014861a0a82774607d8f13ae6e90309
-- Latest Pages deployment checked: run #105, successful, head 56b95d50113030d85bca92a7818a8597de1b35
-- Current audit/source hardening commit: 56b95d50113030dcb85bca92a7818a8597de1b35
-- Latest Pages deployment checked: run #105, successful, head 56b95d50113030dcb85bca92a7818a8597de1b35.
+- Latest functional UI/source hardening commit: 56b95d50113030dcb85bca92a7818a8597de1b35
+- Current main HEAD: 3a2444089df3fa6943d52e7ba41da0a513f6b924
+- Latest Pages deployment checked: run #108, successful, head 3a2444089df3fa6943d52e7ba41da0a513f6b924
+- The latest deploy job emitted the Node.js DEP0040/punycode deprecation warning noted above.
 - Latest deployment success is not equivalent to live-browser verification.
 - The maintainer normally checks the public live link after updates.
 
