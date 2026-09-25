@@ -263,13 +263,21 @@ The Open project memory action and all other Project Control Center document lin
 The hero GitHub repo control opens https://github.com/rudra-khandelwal/hydra in a new tab with no opener/focus redirect. GitHub may naturally show the repository README below the repository root; the guide must not manipulate that location.
 
 ### Current implementation checkpoints
-- Latest navigation code fix: 91d420803bd759b792f3c3a1e0410b4f30e5eec4
+- Latest navigation/source hardening pass: 3da566756014861a0a82774607d8f13ae6e90309
 - Latest Pages deployment checked: run #86, successful, head a6e28425e560cb53dcb038987b0f7225b9f699af
 - Latest deployment success is not equivalent to live-browser verification.
 - The maintainer normally checks the public live link after updates.
 
 ### Current note-editor state
 The Research Notes editor supports rich formatting, clickable HTTP/HTTPS links, user-defined titles, edit/update in place, previous-version history, copy, HTML export, clear, dynamic sidebar entries, and deletion of user-created sections only. Fixed guide section 17 is reserved for Project Control Center; user-created notes start at 18.
+
+### Static guide security architecture
+
+The public GitHub Pages guide is client-side only. JavaScript is used for UI behavior, navigation synchronization, research-note editing, and the maintainer upload handoff.
+
+The guide must not handle durable GitHub repository write credentials. The maintainer upload flow now opens GitHub's authenticated web upload interface instead of accepting a token or calling the GitHub Contents write API directly.
+
+Research Notes are browser-local storage only at present. Cross-device persistence or secure owner-only publishing requires a real authenticated backend/GitHub App/OAuth architecture; do not simulate this with a token field in public HTML.
 
 ### Public-repository rule
 All committed project material is public. Never store passwords, tokens, API keys, cookies, private keys, recovery codes, proprietary downloaded software, or raw credential-bearing logs in the repository. Future maintainer publishing must preserve an owner-write / public-read boundary without durable write credentials embedded in static client code.
