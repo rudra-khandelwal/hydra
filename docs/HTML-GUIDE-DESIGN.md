@@ -36,7 +36,7 @@ Created research notes continue at section 18+.
 
 ## Project Map rail
 
-The Project Map is now the **primary navigation rail** on sufficiently wide desktop screens. The detailed section sidebar is its **follower** and sits immediately to the right of it.
+The Project Map is the **primary navigation rail** on sufficiently wide desktop screens. The detailed section sidebar is its **follower** and sits immediately to the right.
 
 Primary Project Map sequence follows the guide's document order:
 
@@ -48,14 +48,17 @@ Primary Project Map sequence follows the guide's document order:
 6. Project Control
 7. Created Notes
 
-Each Project Map button performs two coordinated actions:
+The Project Map intentionally uses the **same original sidebar visual language** as the guide: dark page surface, thin muted border, monospace labels, transparent items, panel-soft hover, and orange accent only for active state. It is not a glassmorphism/card-style sidebar.
 
-- scrolls the follower sidebar so the matching category heading is positioned at the top of the sidebar's visible scroll area; any remaining empty space below is left alone;
-- scrolls the main document to the corresponding content section, with the section heading aligned below the fixed title bar.
+The follower sidebar retains its original styling from the guide. Its fixed position and independent scrolling are preserved; Project Map interactions only coordinate its scroll position and the main document position.
 
-The Project Map uses the stronger themed panel treatment. The follower sidebar uses a quieter translucent treatment and is explicitly labeled as following the Project Map.
+Each Project Map button:
 
-The Project Map is hidden below the wide-desktop breakpoint so it cannot crowd the main sidebar or content on smaller screens.
+- scrolls the follower sidebar so the matching category heading is positioned near the top of its visible scroll area;
+- scrolls the main document to the corresponding content section below the fixed title bar;
+- leaves unused space below the sidebar alone.
+
+The Project Map is hidden below the wide-desktop breakpoint so it cannot crowd the existing responsive layout.
 
 ## Control Center action styling
 
