@@ -58,7 +58,7 @@ These rules are persistent:
 - Do not upgrade a hypothesis into a finding without evidence.
 - Keep historical diary entries; do not rewrite history as if later work happened earlier.
 - Keep the live guide responsive without creating separate device-specific pages.
-- The maintainer normally opens the current public GitHub Pages live link after each repository update; treat this as the expected browser-check path, while still distinguishing deployed state from live verification.
+- The maintainer normally opens the current public GitHub Pages live link after each repository update; treat this as the expected browser-check path, while still distinguishing deployed state from live verification. The two navigation rails are bidirectionally synchronized: Project Map clicks update the main sidebar and document, while main-sidebar navigation updates the Project Map active category. The final sidebar item must remain reachable. The hero GitHub repo button must directly open the repository URL in a new tab; it must not redirect/focus the GitHub referrer tab.
 - The live guide uses a dark brown/orange research-console theme. Project Control links are transparent by default with only a subtle translucent accent on hover/focus.
 - On wide desktop screens, a compact Project Map rail sits to the left of the main fixed sidebar. Its category buttons scroll the main sidebar to Hydra Launcher, Setup, Build, Created Notes, Project Control, Security Research, or Research.
 - The Project Map rail is hidden on narrower screens to protect the existing responsive layout.
