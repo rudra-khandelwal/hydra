@@ -42,3 +42,11 @@
 - Hash and statically inspect the downloaded artifact before any execution.
 - Correlate observed downloader behavior with Hydra source code.
 - Add a dated finding only when the evidence supports one.
+
+
+### 2026-09-25 — Responsive guide
+- ~~Create a single responsive foundation for desktop/laptop/tablet/phone layouts.~~ Completed.
+- ~~Add touch-friendly mobile navigation and safe-area handling.~~ Completed.
+- ~~Make grids, tables, code blocks, note controls, and research panels adapt to narrow screens.~~ Completed.
+- Validate the live guide on representative desktop, tablet, and phone viewport sizes after the next GitHub Pages deployment.
+- Continue adding research content without creating device-specific duplicate pages.
