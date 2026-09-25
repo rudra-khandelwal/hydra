@@ -116,3 +116,10 @@ Add a new lesson whenever a recurring mistake, ambiguity, or tooling failure tea
 **Observed gap:** Research Notes are stored in browser localStorage, so they persist only in the current browser profile.
 
 **Prevention:** Describe them as browser-local unless a real backend/GitHub synchronization layer is implemented. Do not call them cross-device or server-persistent data.
+
+
+## L-018 — Remove legacy responsive overrides
+
+**Observed mistake:** An older mobile sidebar media rule remained alongside the newer responsive foundation. Later rules overrode some properties but not all, creating a hidden conflict and making the effective mobile behavior harder to reason about.
+
+**Prevention:** Keep one authoritative responsive rule set per breakpoint. Remove superseded media blocks instead of relying on cascade order to override them.
