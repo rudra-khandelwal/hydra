@@ -36,6 +36,18 @@ This file separates source implementation from deployment and live behavior.
 | Canonical original visual theme preserved for both rails | Implemented | Deployed in run #86 | Pending live test |
 | Hero GitHub repo button is direct new-tab repository link | Implemented | Deployed in run #86 | Pending live test |
 
+## Security hardening audit — 25 September 2026
+
+| Check | Status |
+|---|---|
+| Public maintainer page contains no repository write token field | Implemented in latest source |
+| Public maintainer page performs no GitHub Contents write API calls | Implemented in latest source |
+| Maintainer upload uses GitHub authenticated web flow | Implemented in latest source |
+| Research-note action buttons avoid inline ID-bearing handlers | Implemented in latest source |
+| Clearing an edited note exits edit mode | Implemented in latest source |
+| Deleting an edited note clears edit state | Implemented in latest source |
+| Cross-device/server persistence for Research Notes | Not implemented; browser-local only |
+
 ## Repository integrity
 
 | Check | Status |
