@@ -75,4 +75,5 @@
 - ~~Persist Hydra Launcher → guide hero/top-state behavior.~~ Completed.
 - ~~Persist direct new-tab GitHub repository-link behavior.~~ Completed.
 - ~~Persist final-sidebar reachability safeguard.~~ Completed.
-- Live-verify the complete navigation interaction set from the public Pages URL.
+- Live-verify the complete navigation interaction set from the public Pages URL after deployment run #100.
+- Review the latest static-page security hardening on the live guide.
