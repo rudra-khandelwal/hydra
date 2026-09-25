@@ -92,7 +92,7 @@ Current navigation requirements:
 - Only one GitHub repository button exists: beside the Hydra Launcher title.
 - README → live guide opens in a separate tab.
 - When the guide is opened from GitHub and browser policy exposes an opener, the guide may refresh the originating GitHub tab once; the guide remains open.
-- The hero GitHub button focuses the originating GitHub window when available; direct opens fall back to a normal new-tab repository link.
+- The hero GitHub button is a normal new-tab repository link and does not focus or redirect the originating GitHub tab.
 - User-created research notes start after the fixed guide sections. Fixed section 17 is the project control center; user-created notes therefore begin at 18.
 
 These behaviors must be verified against the deployed guide before being described as live-verified.
@@ -208,3 +208,74 @@ The published browser behavior is still separate from deployment status: source/
 A future AI assistant should:
 
 > Read `docs/PROJECT-MEMORY.md`, inspect the current repository, check `research/VALIDATION.md`, then continue from the documented next action. Never assume that an earlier assistant's “fixed” statement means the live behavior was verified.
+
+## Persistent UI / theme / AI context snapshot — 25 September 2026
+
+This section preserves the current project-relevant working context for future AI/maintainer sessions.
+
+### Canonical visual theme
+The guide must continue using the original dark brown/orange research-console design.
+
+Theme tokens:
+- --bg #15110c
+- --bg2 #0f0c09
+- --panel #1d1811
+- --panel-soft #1a1610
+- --line #3a2f1f
+- --line-soft #2a2318
+- --text #f2e8d5
+- --muted #a8987c
+- --dim #6e6250
+- --accent #e8a33d
+- --accent-soft #8a6526
+- --good #7db894
+- --warn #e0b24f
+- --danger #d9755f
+
+Do not introduce glassmorphism or a separate card language for future navigation additions. New controls should inherit the existing surfaces, borders, monospace labels, transparent states, panel-soft hover, and restrained orange active state.
+
+### Navigation hierarchy
+The Project Map is the primary navigation rail on wide desktop screens. The original detailed sidebar is its follower.
+
+Project Map sequence:
+1. Hydra Launcher
+2. Setup
+3. Build
+4. Security Research
+5. Research
+6. Project Control
+7. Created Notes
+
+The detailed sidebar retains its original 250px styling and is positioned as a fixed independent scroll container.
+
+### Navigation behavior
+- Project Map clicks update the follower sidebar and the main document.
+- Main-sidebar clicks and scroll-spy changes update the Project Map active category.
+- Project Map Hydra Launcher targets #guide-top, restoring the title bar and hero/top state rather than only the Overview section heading.
+- The hero/top state contains the three dots/title bar, windows/source-build/security text, Hydra Launcher heading, and GitHub repo button.
+- The final detailed-sidebar item must remain reachable and clickable; explicit bottom padding is intentional.
+- Created Notes are dynamic and begin at section 18+.
+
+### Project Control styling
+The Open project memory action and all other Project Control Center document links are transparent by default. Accent appears only as subtle translucent feedback on hover/focus. No persistent solid yellow/orange fill is permitted.
+
+### Hero repository-link behavior
+The hero GitHub repo control opens https://github.com/rudra-khandelwal/hydra in a new tab with no opener/focus redirect. GitHub may naturally show the repository README below the repository root; the guide must not manipulate that location.
+
+### Current implementation checkpoints
+- Latest navigation code fix: 91d420803bd759b792f3c3a1e0410b4f30e5eec4
+- Latest Pages deployment checked: run #86, successful, head a6e28425e560cb53dcb038987b0f7225b9f699af
+- Latest deployment success is not equivalent to live-browser verification.
+- The maintainer normally checks the public live link after updates.
+
+### Current note-editor state
+The Research Notes editor supports rich formatting, clickable HTTP/HTTPS links, user-defined titles, edit/update in place, previous-version history, copy, HTML export, clear, dynamic sidebar entries, and deletion of user-created sections only. Fixed guide section 17 is reserved for Project Control Center; user-created notes start at 18.
+
+### Public-repository rule
+All committed project material is public. Never store passwords, tokens, API keys, cookies, private keys, recovery codes, proprietary downloaded software, or raw credential-bearing logs in the repository. Future maintainer publishing must preserve an owner-write / public-read boundary without durable write credentials embedded in static client code.
+
+### Research context
+The project remains a defensive Hydra Launcher build and security-research workspace. Current evidence includes Hydra/Electron HTTPS observations, API-mediated download-source metadata, source-code correlation, and an AV/AMSI control observation. None establishes a malware verdict. The next major research experiment remains a controlled download using a legitimate free/open-source artifact, followed by process/network/filesystem differential observation, hashing, static analysis, Defender/AV observation, and source correlation.
+
+### AI handoff rule
+Future assistants must read docs/PROJECT-MEMORY.md, inspect current repository state, check research/VALIDATION.md, and continue from the documented state. Repository state and dated evidence outrank old conversation assumptions. Private model internals or hidden reasoning are not part of the repository record.
