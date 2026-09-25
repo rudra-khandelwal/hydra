@@ -36,6 +36,12 @@ Created research notes continue at section 18+.
 
 ## Project Map rail
 
+## Current refinement — 25 September 2026
+
+The Project Map uses title-case labels throughout. Its **Hydra Launcher** action targets the guide's hero/top-of-page state (`#guide-top`), matching the main sidebar's **Overview** destination and restoring the fixed title bar at the top of the viewport. The Project Map title has a visible underline to establish it as the navigation rail's heading.
+
+On wide desktop screens, the rail pair is shifted left with explicit configurable spacing so the main detailed sidebar does not sit unnecessarily far to the right. The detailed sidebar itself retains the original visual treatment.
+
 The Project Map is the **primary navigation rail** on sufficiently wide desktop screens. The detailed section sidebar is its **follower** and sits immediately to the right.
 
 Primary Project Map sequence follows the guide's document order:
