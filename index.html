@@ -37,12 +37,16 @@ body{
 .dots span{width:10px;height:10px;border-radius:50%;background:#3a3225}
 .titlebar .path{font:12.5px/1 var(--mono);color:var(--dim)}
 .titlebar .path b{color:var(--muted);font-weight:400}
+.repo-link{margin-left:auto;color:var(--muted);font:12px var(--mono);text-decoration:none;padding:8px 10px;border:1px solid var(--line);border-radius:6px;white-space:nowrap}
+.repo-link:hover,.repo-link:focus-visible{color:var(--accent);border-color:var(--accent-soft)}
+@media(max-width:880px){.repo-link{margin-left:auto}.nav-menu{margin-left:0}}
+
 
 /* ---------- shell layout ---------- */
 .shell{display:flex;max-width:1180px;margin:0 auto;align-items:flex-start}
 .nav{
-  width:250px;flex:none;position:sticky;top:41px;
-  max-height:calc(100vh - 41px);overflow-y:auto;
+  width:250px;flex:none;position:sticky;top:52px;
+  max-height:calc(100dvh - 52px);overflow-y:auto;
   padding:22px 10px 40px 18px;border-right:1px solid var(--line);
 }
 .nav-group-label{font:11.5px var(--mono);color:var(--dim);margin:18px 0 6px 10px}
@@ -305,6 +309,17 @@ button,.action,.note-tool{min-height:var(--touch)}
   .dots span{width:8px;height:8px}
   .note-tool{font-size:12px;padding-left:7px;padding-right:7px}
 }
+@media (min-width:1101px){
+  .nav{
+    position:fixed;
+    top:52px;
+    left:max(0px,calc((100vw - var(--page-max))/2));
+    width:250px;
+    height:calc(100dvh - 52px);
+    max-height:none;
+  }
+  .content{margin-left:250px;width:calc(100% - 250px)}
+}
 @media (min-width:881px) and (max-width:1100px){
   .nav{width:210px}
 }
@@ -331,7 +346,7 @@ button,.action,.note-tool{min-height:var(--touch)}
 <div class="titlebar">
 <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
 <div class="path"><b>hydra-launcher /</b> build-guide.md</div>
-<button class="nav-menu" id="navMenu" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="sideNav">☰ <span>Menu</span></button>
+<button class="nav-menu" id="navMenu" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="sideNav">☰ <span>Menu</span></button><a class="repo-link" href="https://github.com/rudra-khandelwal/hydra" target="_blank" rel="noopener noreferrer" aria-label="Open the Hydra research guide GitHub repository">GitHub repo ↗</a>
 </div>
 <div class="shell">
 <nav class="nav" id="sideNav">
