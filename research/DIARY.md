@@ -159,3 +159,15 @@ The project now explicitly distinguishes **Implemented**, **Deployed**, and **Li
 The current `main` tree was reviewed against the repository map, public-guide source, control documents, research records, security-research scaffolding, provenance notes, and the Pages workflow. The audit found and corrected two current-state documentation drifts: deployment references that still pointed to older Pages runs, and evidence-directory documentation that described reserved folders as if they already existed. The published guide source also contained a Project Map CSS rule that forced its labels to lowercase despite the documented title-case requirement; that rule was corrected and a redundant narrow-screen hide rule was removed.
 
 The latest GitHub Pages run (#108) for the then-current `main` commit completed successfully. Its deploy job log still contains the Node.js `DEP0040` punycode deprecation warning emitted during `actions/deploy-pages@v5`; this remains maintenance debt rather than a deployment failure. Source-level structure and secret-pattern checks were clean in the final audit. Browser-level live verification remains pending because the published page was not directly exercised in this audit pass.
+
+
+## 25 September 2026 — A-to-Z geometry correction
+
+### [CHATGPT] Secondary rail breakpoint audit
+A repository-wide static audit found one remaining layout edge case in the published guide: the Project Map was displayed from 1280px even though the centered 1180px page leaves insufficient outer margin for the 155px Project Map plus its 14px gap before the detailed 250px sidebar. The rail could therefore overlap the detailed sidebar at common desktop widths.
+
+### [CHATGPT] Correction
+The Project Map is now displayed only at viewport widths of 1536px and above. The detailed sidebar remains available at 881px and above, and the mobile slide-out behavior is unchanged.
+
+### Next checkpoint
+Inspect the newest Pages run for the geometry correction, then directly exercise the live guide at representative widths (phone, tablet, 1280px desktop, and 1536px+ wide desktop).

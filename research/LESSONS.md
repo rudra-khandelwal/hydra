@@ -130,3 +130,12 @@ Add a new lesson whenever a recurring mistake, ambiguity, or tooling failure tea
 **Observed mistake:** Deployment notes in the project-memory and validation records still pointed at older Pages runs after newer repository commits had already superseded them.
 
 **Prevention:** When a deployment or audit changes repository state, refresh all current-state references to the newest confirmed HEAD/run. Keep older run numbers only where they are explicitly historical.
+
+
+## L-019 — Do not display a fixed secondary rail before there is room for it
+
+**Observed mistake:** The Project Map was enabled at 1280px even though the page's centered 1180px layout did not leave enough outer margin for the 155px rail plus its 14px gap before the detailed sidebar. At common 1280–1535px desktop widths, the Project Map could overlap the detailed sidebar.
+
+**Correction:** Keep the Project Map hidden until the viewport is at least 1536px wide. This guarantees the centered page margin can contain the secondary rail, gap, and detailed sidebar without overlap.
+
+**Prevention:** When adding fixed side rails, calculate the required outer margin from page width + rail width + gap instead of assuming a breakpoint is wide enough.

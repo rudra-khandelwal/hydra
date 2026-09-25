@@ -186,9 +186,11 @@ Before changing anything:
 
 ## Deployment snapshot — 25 September 2026
 
-The final A-to-Z audit source state was successfully published in GitHub Pages workflow run **#116** for commit `3801b5411a58d8e6a17a863156907106fc3739bc`. The workflow completed with **success**. The deploy job retains the previously observed Node.js `DEP0040` punycode deprecation warning during `actions/deploy-pages@v5`; this is maintenance debt, not a deployment failure.
+The final A-to-Z audit source state before the latest geometry correction was successfully published in GitHub Pages workflow run **#116** for commit `3801b5411a58d8e6a17a863156907106fc3739bc`. The docs-only audit snapshot then published successfully as run **#117** for commit `bc1189cd205bca322245e24200560fa032f6c7e0`.
 
-This documentation snapshot is itself a docs-only follow-up to run #116 and triggers another Pages run. The functional guide state described by this memory was already present in run #116. For the most current deployment status, inspect the newest GitHub Actions run.
+The current main branch now contains an additional layout correction: the Project Map is enabled only from **1536px** upward so the fixed secondary rail cannot overlap the detailed sidebar at narrower desktop widths. This correction requires its own Pages deployment check.
+
+The deploy job retains the previously observed Node.js `DEP0040` punycode deprecation warning during `actions/deploy-pages@v5`; this is maintenance debt, not a deployment failure.
 
 The published browser behavior is still separate from deployment status: successful deployment does not by itself count as live browser verification.
 
@@ -203,7 +205,8 @@ The published browser behavior is still separate from deployment status: success
 - Workflow runtime maintenance: implemented in `.github/workflows/pages.yml`.
 - Final A-to-Z audit guide/source state: implemented and deployed in run #116.
 - Repository-map/evidence-directory documentation audit: corrected and included in the deployed audit state.
-- Project Map title-case rule and redundant responsive override: corrected and included in the deployed audit state.
+- Project Map title-case rule: corrected and included in the deployed audit state.
+- Secondary Project Map rail geometry: corrected in the current main source to require 1536px width; deployment check pending.
 - Live browser behavior: still requires direct exercise after deployment.
 
 ## Handoff instruction
@@ -267,10 +270,10 @@ The hero GitHub repo control opens https://github.com/rudra-khandelwal/hydra in 
 
 ### Current implementation checkpoints
 - Latest navigation/source hardening pass: 3da566756014861a0a82774607d8f13ae6e90309
-- Latest functional UI/source audit state before this docs-only snapshot: commit `3801b5411a58d8e6a17a863156907106fc3739bc`
-- Functional guide state deployed successfully in Pages run #116.
-- This follow-up commit only refreshes the audit record; it does not change the guide's functional source.
-- Latest deployment success is not equivalent to live-browser verification.
+- Latest functional UI/source audit state before the geometry correction: commit `3801b5411a58d8e6a17a863156907106fc3739bc`
+- Docs-only audit snapshot: commit `bc1189cd205bca322245e24200560fa032f6c7e0`, deployed successfully in Pages run #117
+- Current main source includes the 1536px Project Map geometry correction; deployment confirmation is pending
+- Latest deployment success is not equivalent to live-browser verification
 - The maintainer normally checks the public live link after updates.
 
 ### Current note-editor state

@@ -40,6 +40,10 @@ This file separates source implementation from deployment and live behavior.
 
 The final A-to-Z audit guide/source state was deployed successfully in **Pages run #116** for commit `3801b5411a58d8e6a17a863156907106fc3739bc`. The current commit is a documentation-only follow-up that records this deployment snapshot; it does not change the guide's functional source. Browser-level live verification remains pending.
 
+## Layout audit — 25 September 2026
+
+A static geometry audit found that the Project Map was previously enabled too early: at 1280px there was not enough outer margin for the 155px rail plus its 14px gap before the 250px detailed sidebar. The Project Map breakpoint was moved to **1536px** so the two rails do not overlap. Browser-level live verification remains pending.
+
 ## Security hardening audit — 25 September 2026
 
 | Check | Status |
