@@ -392,6 +392,8 @@ button,.action,.note-tool{min-height:var(--touch)}
 <a href="#errors"><span class="idx">14</span>troubleshooting</a>
 <a href="#package"><span class="idx">15</span>package</a>
 <a href="#notes"><span class="idx">16</span>notes</a>
+<div class="nav-group-label">project control</div>
+<a href="#control-center"><span class="idx">17</span>control-center</a>
 </nav>
 <main class="content">
 <div class="banner" id="guide-top">
@@ -756,7 +758,7 @@ yarn install</code></pre>
 </section>
 <section id="notes">
 <h2>Research Notes <span class="tag">16</span></h2>
-<p class="sub">Write a note, choose a section name, format selected text, add links, then save. Every save creates a new section after 16: <code>17</code>, <code>18</code>, <code>19</code>… Created sections are saved in this browser and can be deleted individually. Original guide sections cannot be deleted.</p>
+<p class="sub">Write a note, choose a section name, format selected text, add links, then save. Every save creates a new user section after the fixed guide sections: <code>18</code>, <code>19</code>, <code>20</code>… Section <code>17</code> is reserved for the Project Control Center. Created sections are saved in this browser and can be deleted individually. Original guide sections cannot be deleted.</p>
 <input id="researchNoteTitle" class="note-title" type="text" maxlength="80" placeholder="Section name — e.g. Network observation, Build result, Follow-up">
 <div class="note-editor-wrap">
   <div class="note-toolbar" role="toolbar" aria-label="Research note formatting">
@@ -787,8 +789,30 @@ yarn install</code></pre>
 <tr><td>Final artifact hash recorded</td><td>☐</td></tr>
 </table>
 </section>
+<section class="research-panel" id="control-center">
+<h2>Project Control Center <span class="tag">17</span></h2>
+<p class="sub">This is the live-server access point for the project's canonical memory, goal, repository map, change rules, lessons, and validation state. The detailed Markdown files in GitHub are the source of truth; this panel is the navigation layer.</p>
+<div class="grid6">
+<div class="cell"><b>project memory</b><span>Persistent AI/maintainer handoff, invariants, current research state, mistakes to avoid, and change protocol.</span></div>
+<div class="cell"><b>project goal</b><span>Overall research objective, scope, phases, and success criteria.</span></div>
+<div class="cell"><b>repository map</b><span>Canonical structure and responsibility of every major repository area.</span></div>
+<div class="cell"><b>change control</b><span>Required workflow for inspecting, editing, validating, deploying, and documenting changes.</span></div>
+<div class="cell"><b>lessons</b><span>Recorded mistakes, corrections, and prevention rules so the same failure mode is not repeated.</span></div>
+<div class="cell"><b>validation</b><span>Implementation versus deployment versus live-verification matrix for the guide and research workflow.</span></div>
+</div>
+<div class="actions">
+<a class="action primary" href="https://github.com/rudra-khandelwal/hydra/blob/main/docs/PROJECT-MEMORY.md" target="_blank" rel="noopener noreferrer">Open project memory</a>
+<a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/docs/PROJECT-GOAL.md" target="_blank" rel="noopener noreferrer">Open project goal</a>
+<a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/docs/REPOSITORY-MAP.md" target="_blank" rel="noopener noreferrer">Open repository map</a>
+<a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/docs/CHANGE-CONTROL.md" target="_blank" rel="noopener noreferrer">Open change control</a>
+<a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/research/LESSONS.md" target="_blank" rel="noopener noreferrer">Open lessons</a>
+<a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/research/VALIDATION.md" target="_blank" rel="noopener noreferrer">Open validation</a>
+</div>
+<div class="callout warn"><strong>Verification rule:</strong> “Implemented” means the source contains the intended behavior. “Deployed” means GitHub Pages published the relevant commit. “Live-verified” means the published page was actually exercised. Do not treat these as interchangeable.</div>
+<div class="callout"><strong>Next research goal:</strong> use a legitimate free/open-source artifact for a controlled download experiment, then compare pre/post process, network, filesystem, hash, and Defender observations before any appropriate execution.</div>
+</section>
 <div id="createdSections"></div>
-<p class="foot">Open this HTML file in Edge or Chrome. Code blocks have copy buttons.</p>
+<p class="foot">Open this HTML file in Edge or Chrome. Code blocks have copy buttons. Project control documents are maintained in the public GitHub repository.</p>
 </main>
 </div>
 <script>
@@ -806,7 +830,7 @@ function getEditorText(){return (document.getElementById("researchNotes").innerT
 function formatNote(command){const editor=document.getElementById("researchNotes");editor.focus();document.execCommand(command,false,null)}
 function addDirectLink(){const editor=document.getElementById("researchNotes");editor.focus();const raw=prompt("Enter the full URL (https://…):");if(raw===null)return;const url=safeUrl(raw);if(!url){setNoteStatus("Only http:// or https:// links are allowed");return}const selection=window.getSelection();if(selection&&!selection.isCollapsed&&editor.contains(selection.anchorNode))document.execCommand("createLink",false,url);else document.execCommand("insertHTML",false,"<a href=\"" + escapeHtml(url) + "\">" + escapeHtml(url) + "</a>");setNoteStatus("direct clickable link added")}
 function addNamedLink(){const editor=document.getElementById("researchNotes");editor.focus();const name=prompt("Text to display for the link:");if(name===null)return;const raw=prompt("Enter the full URL (https://…):");if(raw===null)return;const url=safeUrl(raw);if(!url){setNoteStatus("Only http:// or https:// links are allowed");return}const selection=window.getSelection();if(selection&&!selection.isCollapsed&&editor.contains(selection.anchorNode))document.execCommand("createLink",false,url);else document.execCommand("insertHTML",false,"<a href=\"" + escapeHtml(url) + "\">" + escapeHtml(name) + "</a>");setNoteStatus("named clickable link added")}
-function nextSectionNumber(items){return items.reduce((max,item)=>Math.max(max,Number(item.number)||16),16)+1}
+function nextSectionNumber(items){return items.reduce((max,item)=>Math.max(max,Number(item.number)||17),17)+1}
 function makeId(){return window.crypto&&crypto.randomUUID?crypto.randomUUID():String(Date.now())+"-"+Math.random().toString(36).slice(2)}
 function renderCreatedSections(scrollToId){const host=document.getElementById("createdSections");if(!host)return;const items=storageGet().sort((a,b)=>Number(a.number)-Number(b.number));host.innerHTML=items.map(item=>{const title=escapeHtml(item.title||("research-note-"+item.number));const safeHtml=sanitizeNoteHtml(item.html||"");return "<section class=\"research-panel created-note\" id=\"note-section-"+escapeHtml(item.id)+"\" data-created=\"true\"><h2>"+title+" <span class=\"tag\">"+escapeHtml(item.number)+"</span></h2><div class=\"sub\">Created "+escapeHtml(item.date||"")+"</div><div class=\"note-body\">"+safeHtml+"</div><div class=\"created-actions\"><span class=\"sub\">Created section • "+escapeHtml(item.number)+"</span><button class=\"action danger\" onclick=\"deleteCreatedNote(\'"+escapeHtml(item.id)+"\')\">Delete this section</button></div></section>"}).join("");renderCreatedNav(items);if(scrollToId)requestAnimationFrame(()=>{const target=document.getElementById("note-section-"+scrollToId);if(target)target.scrollIntoView({behavior:"smooth",block:"start"})})}
 function renderCreatedNav(items,newId){const nav=document.getElementById("sideNav");if(!nav)return;let group=nav.querySelector(".created-notes-group");if(!items.length){if(group)group.remove();return}if(!group){group=document.createElement("div");group.className="created-notes-group";group.innerHTML="<div class=\"nav-group-label\">created notes</div>";nav.appendChild(group)}group.querySelectorAll("a").forEach(a=>a.remove());items.forEach((item,index)=>{const a=document.createElement("a");a.href="#note-section-"+item.id;a.className="created-nav-link";a.style.animationDelay=(index*35)+"ms";a.innerHTML="<span class=\"idx\">"+escapeHtml(item.number)+"</span>"+escapeHtml(item.title||("research-note-"+item.number));group.appendChild(a)});wireScrollSpy();if(newId){const link=group.querySelector("a[href=\"#note-section-"+CSS.escape(String(newId))+"\"]");if(link)link.classList.add("active")}}
