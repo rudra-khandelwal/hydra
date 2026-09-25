@@ -53,3 +53,6 @@
 - Confirm GitHub README → live guide opens separately and refreshes the originating GitHub tab once.
 - Confirm the single hero GitHub button keeps the guide open while returning focus to the originating GitHub tab, with direct-open fallback.
 - Continue adding research content without creating device-specific duplicate pages.
+
+
+- ~~Update the GitHub Pages workflow to current Node 24-compatible first-party action majors and pin the runner to a stable Ubuntu image.~~ Completed 25 September 2026.
