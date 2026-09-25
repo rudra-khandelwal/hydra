@@ -36,6 +36,17 @@ Created research notes continue at section 18+.
 
 ## Project Map rail
 
+## Navigation synchronization and repository-link rule — 25 September 2026
+
+The two desktop navigation rails are bidirectionally synchronized:
+
+- Clicking a Project Map category scrolls the main detailed sidebar to that category and scrolls the document to the corresponding content.
+- Clicking or scrolling through the main sidebar updates the Project Map's active category.
+- The final detailed-sidebar item remains reachable with explicit bottom scroll space.
+- The Project Map's **Hydra Launcher** category points to the guide hero/top state, not the Overview section heading.
+
+The hero **GitHub repo** button is a normal external repository link. It must open `https://github.com/rudra-khandelwal/hydra` in a new tab and must not use an opener/referrer bridge that redirects focus back to the GitHub tab from which the live guide was opened. GitHub may naturally render the repository README on its root page; that is repository-page behavior, not a guide-navigation target.
+
 ## Current refinement — 25 September 2026
 
 The Project Map uses title-case labels throughout. Its **Hydra Launcher** action targets the guide's hero/top-of-page state (`#guide-top`), matching the main sidebar's **Overview** destination and restoring the fixed title bar at the top of the viewport. The Project Map title has a visible underline to establish it as the navigation rail's heading.
