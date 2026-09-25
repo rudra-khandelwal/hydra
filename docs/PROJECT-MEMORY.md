@@ -119,7 +119,7 @@ The README and public documentation now describe the repository as public. The R
 
 The maintainer explicitly requested that the Open project memory action and the other Project Control Center document links remain transparent by default. The accent should appear as a light translucent treatment only on hover/focus; there should be no persistent solid yellow/orange fill.
 
-The maintainer also requested a compact category sidebar to the left of the main detailed sidebar. The Project Map is the primary navigation rail, ordered as Hydra Launcher → Setup → Build → Security Research → Research → Project Control → Created Notes. Its buttons scroll both the follower sidebar (category heading to the top of its visible scroll area) and the main document (corresponding section heading below the fixed title bar). The follower sidebar is visually subordinate to the Project Map.
+The maintainer also requested a compact category sidebar to the left of the main detailed sidebar. The Project Map is the primary navigation rail, ordered as Hydra Launcher → Setup → Build → Security Research → Research → Project Control → Created Notes. Its buttons scroll both the follower sidebar (category heading near the top of its visible scroll area) and the main document (corresponding section heading below the fixed title bar). The Project Map and follower sidebar now use the original guide's visual system: dark page surface, thin muted borders, monospace navigation, transparent controls, panel-soft hover, and restrained orange active states. No glass/card styling is used for either sidebar.
 
 ## Current research state
 
