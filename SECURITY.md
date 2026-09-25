@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This repository is a private research workspace used to study Hydra and its surrounding runtime behavior.
+This public repository records defensive research into Hydra Launcher and its surrounding runtime behavior.
 
 The research process is evidence-first. A suspicious observation is not automatically treated as proof of malicious behavior.
 
@@ -32,11 +32,15 @@ For each meaningful finding, record:
 - confidence/limitations
 - next validation step
 
+Use:
+
+**Fact → Observation → Hypothesis → Finding → Next Action**
+
 ## Sensitive data
 
-Never commit credentials or raw sensitive logs. Sanitize evidence before publication.
+Never commit credentials or raw sensitive logs.
 
-If a credential has accidentally been committed, rotate/revoke it first and then remove the secret from repository history as appropriate.
+If a credential is accidentally exposed, rotate/revoke it first and then remove it from repository history as appropriate.
 
 ## Third-party downloads
 
