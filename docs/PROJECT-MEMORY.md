@@ -92,6 +92,23 @@ Current navigation requirements:
 
 These behaviors must be verified against the deployed guide before being described as live-verified.
 
+## Current repository-control state
+
+The public repository now has a dedicated control layer:
+
+- `docs/PROJECT-MEMORY.md`
+- `docs/PROJECT-GOAL.md`
+- `docs/REPOSITORY-MAP.md`
+- `docs/CHANGE-CONTROL.md`
+- `research/LESSONS.md`
+- `research/VALIDATION.md`
+
+The live guide exposes these through **17 — Project Control Center**. Fixed guide sections run through 17; user-created research-note sections begin at 18.
+
+The repository uses one canonical checkpoint directory: `research/checkpoints/`. The earlier case-variant `research/CHECKPOINTS/` path has been removed.
+
+The README and public documentation now describe the repository as public. The README no longer lists a nonexistent `scripts/` directory.
+
 ## Current research state
 
 Verified findings currently recorded:
@@ -157,9 +174,18 @@ Before changing anything:
 
 ## Last known deployment checkpoint
 
-Before the current control-structure changes, GitHub Pages workflow run #41 for commit `8e273eaa506f6df4be11d305e58d3e56f284cf84` completed successfully.
+The last confirmed successful GitHub Pages run before the project-control restructuring was workflow run #41 for commit `8e273eaa506f6df4be11d305e58d3e56f284cf84`.
 
-Any newer commit requires checking the newest workflow run again before calling the live deployment verified.
+The project-control restructuring and subsequent workflow-maintenance commits triggered newer runs, several of which were superseded/cancelled by the workflow concurrency policy. The **newest run for the current HEAD must be checked** before calling the current live site fully deployed or live-verified.
+
+## Current control-pass checkpoints
+
+- Project memory and canonical control documents: implemented.
+- Live Project Control Center section 17: implemented.
+- User-created note numbering moved to section 18+: implemented.
+- Public/private documentation consistency audit: implemented.
+- Checkpoint directory case cleanup: implemented.
+- Workflow runtime maintenance: implemented in `.github/workflows/pages.yml`; deployment result for the newest post-maintenance commit must be checked.
 
 ## Handoff instruction
 
