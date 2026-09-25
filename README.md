@@ -52,6 +52,19 @@ Every substantive research checkpoint follows:
 
 Findings should identify their evidence and uncertainty. Hypotheses are not recorded as facts.
 
+## Project control center
+
+The repository now contains a persistent project-memory and verification layer so future work does not depend on hidden conversation context.
+
+- **Project Memory:** [docs/PROJECT-MEMORY.md](docs/PROJECT-MEMORY.md)
+- **Project Goal:** [docs/PROJECT-GOAL.md](docs/PROJECT-GOAL.md)
+- **Repository Map:** [docs/REPOSITORY-MAP.md](docs/REPOSITORY-MAP.md)
+- **Change Control:** [docs/CHANGE-CONTROL.md](docs/CHANGE-CONTROL.md)
+- **Lessons / mistake log:** [research/LESSONS.md](research/LESSONS.md)
+- **Validation matrix:** [research/VALIDATION.md](research/VALIDATION.md)
+
+The live guide exposes these same controls through section **17 — Project Control Center**.
+
 ## Attribution
 
 Research contributions are labelled where practical:
@@ -81,11 +94,12 @@ The project has previously been successfully installed and launched locally with
 ## Repository structure
 
 ```text
-docs/              Project, architecture, build and security methodology
-research/          Chronological diary, agenda, findings and checkpoints
-security-research/ Evidence organization and analysis reports
-scripts/           Reproducible analysis helpers
-upstream/          Upstream relationship and provenance notes
+docs/              Stable project, goal, architecture, memory and methodology docs
+research/          Diary, agenda, findings, lessons, validation and checkpoints
+security-research/ Sanitized evidence organization and analysis reports
+upstream/          Upstream provenance and synchronization notes
+index.html         Public live research guide and Project Control Center
+.github/workflows/ GitHub Pages deployment
 ```
 
 ## Public repository safety
@@ -137,3 +151,5 @@ This repository is an independent research/development workspace. It is not an o
 
 ---
 Last maintained: 25 September 2026
+
+The repository is public; all committed history should be treated as publicly readable.
