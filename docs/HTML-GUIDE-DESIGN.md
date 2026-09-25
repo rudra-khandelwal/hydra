@@ -117,3 +117,10 @@ Navigation is bidirectional. Project Map clicks update the detailed sidebar and 
 The hero GitHub repository control is a normal new-tab link to https://github.com/rudra-khandelwal/hydra with noopener/noreferrer semantics and no opener/focus bridge.
 
 The maintainer checks the public Pages URL after repository updates. Implemented, Deployed, and Live-verified remain separate states.
+
+
+## Static-page security boundary
+
+The guide is intentionally a static GitHub Pages application. Client-side JavaScript is appropriate for navigation, animation/state synchronization, rich Research Notes, validation, and other UI behavior.
+
+The guide must not accept a GitHub personal access token or perform repository Contents writes directly from the browser. Maintainer file publishing uses a handoff to GitHub's authenticated upload UI. A separate backend is required only when the project needs authenticated server-side persistence, GitHub App/OAuth operations, or cross-device Research Note storage.
