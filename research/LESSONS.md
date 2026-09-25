@@ -76,3 +76,28 @@ Add a new lesson whenever a recurring mistake, ambiguity, or tooling failure tea
 **Observed mistake:** Primary and secondary action controls had different visual states; only the primary control appeared filled while secondary controls did not visibly enter the same hover/focus state.
 
 **Prevention:** Define explicit `:hover` and `:focus-visible` states for non-danger action controls and verify keyboard focus as well as pointer hover.
+
+
+## L-012 — Protect the last fixed-sidebar item from overlap and reachability problems
+
+**Observed mistake:** The final detailed-sidebar option became difficult or impossible to click after the Project Map was positioned nearby.
+
+**Prevention:** Keep the Project Map outside the main nav, keep the detailed sidebar above overlapping layers, preserve explicit bottom scroll padding, and test the final item as a real click target.
+
+## L-013 — Secondary navigation must be bidirectionally synchronized
+
+**Observed mistake:** Project Map clicks moved the detailed sidebar and document, but detailed-sidebar navigation did not update the Project Map.
+
+**Prevention:** Treat both rails as one navigation state. Main-sidebar clicks and scroll-spy updates must synchronize the active Project Map category.
+
+## L-014 — Do not let an opener/referrer bridge hijack a normal repository link
+
+**Observed mistake:** The hero GitHub button could focus the originating GitHub tab, making the repository README position appear to be the button destination.
+
+**Prevention:** Keep the hero repository control as a normal external new-tab link without opener/focus redirection.
+
+## L-015 — New navigation must inherit the canonical theme
+
+**Observed mistake:** The secondary Project Map temporarily introduced a glass/card treatment that diverged from the original guide sidebar.
+
+**Prevention:** Reuse the canonical dark surfaces, muted borders, monospace labels, transparent controls, panel-soft hover, and restrained orange active treatment.
