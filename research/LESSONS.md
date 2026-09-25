@@ -101,3 +101,18 @@ Add a new lesson whenever a recurring mistake, ambiguity, or tooling failure tea
 **Observed mistake:** The secondary Project Map temporarily introduced a glass/card treatment that diverged from the original guide sidebar.
 
 **Prevention:** Reuse the canonical dark surfaces, muted borders, monospace labels, transparent controls, panel-soft hover, and restrained orange active treatment.
+
+
+## L-016 — Never collect repository write tokens on a public static page
+
+**Observed mistake:** The live guide temporarily exposed a maintainer upload form that accepted a fine-grained GitHub token and called the GitHub Contents API directly from public client-side JavaScript.
+
+**Why it matters:** The token was not persisted, but the page still became a credential-handling boundary. Any XSS, compromised dependency, malicious browser extension, accidental paste, or future client-side mistake could expose a repository write credential. It also bypassed the project's intended review/change-control boundary by writing directly to main.
+
+**Correction:** Remove token collection and direct Contents API writes from the public page. The guide now validates the intended file/folder locally and opens GitHub's authenticated upload interface. GitHub account/repository permissions remain the actual write boundary.
+
+## L-017 — Browser-local research notes are not repository persistence
+
+**Observed gap:** Research Notes are stored in browser localStorage, so they persist only in the current browser profile.
+
+**Prevention:** Describe them as browser-local unless a real backend/GitHub synchronization layer is implemented. Do not call them cross-device or server-persistent data.
