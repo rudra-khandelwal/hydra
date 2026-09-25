@@ -239,10 +239,24 @@ textarea:focus{border-color:var(--accent-soft)}
 .publisher-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 @media(max-width:600px){.publisher-grid{grid-template-columns:1fr}.publisher-field.full{grid-column:auto}}
 
-.control-actions .action{background:transparent}
-.control-actions .action:not(.danger):hover,.control-actions .action:not(.danger):focus-visible{background:rgba(232,163,61,.10);border-color:var(--accent-soft);color:var(--text);outline:none}
-.control-actions .action.primary{background:transparent;border-color:var(--line);color:var(--muted)}
-.control-actions .action.primary:hover,.control-actions .action.primary:focus-visible{background:rgba(232,163,61,.10);border-color:var(--accent-soft);color:var(--text)}
+.control-actions .action,
+.control-actions .action:visited{background:transparent;border-color:var(--line);color:var(--muted)}
+.control-actions .action:not(.danger):hover,
+.control-actions .action:not(.danger):focus-visible,
+.control-actions .action:not(.danger):active{
+  background:rgba(232,163,61,.10);
+  border-color:var(--accent-soft);
+  color:var(--text);
+  outline:none
+}
+.control-actions .action.primary,
+.control-actions .action.primary:hover,
+.control-actions .action.primary:focus-visible,
+.control-actions .action.primary:active{
+  background:transparent;
+  border-color:var(--line);
+  color:var(--muted)
+}
 
 @keyframes createdSectionIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 /* ---------- responsive foundation: phone / tablet / desktop ---------- */
