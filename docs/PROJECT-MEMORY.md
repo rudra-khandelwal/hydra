@@ -184,13 +184,13 @@ Before changing anything:
 - `.github/workflows/pages.yml` — live deployment workflow
 - `index.html` — published live guide
 
-## Last known deployment checkpoint
+## Deployment snapshot — 25 September 2026
 
-The last confirmed successful GitHub Pages deployment before the final A-to-Z audit fixes was workflow run **#108** for main commit `3a2444089df3fa6943d52e7ba41da0a513f6b924`. That deployment succeeded, with the known Node.js `DEP0040` punycode deprecation warning during `actions/deploy-pages@v5`.
+The final A-to-Z audit source state was successfully published in GitHub Pages workflow run **#116** for commit `3801b5411a58d8e6a17a863156907106fc3739bc`. The workflow completed with **success**. The deploy job retains the previously observed Node.js `DEP0040` punycode deprecation warning during `actions/deploy-pages@v5`; this is maintenance debt, not a deployment failure.
 
-The subsequent A-to-Z audit fixes are committed on `main` after run #108. The newest Pages workflow runs have been delayed/cancelled by the workflow concurrency queue, so the audited HEAD should be treated as **source-correct but not yet confirmed as deployed** until the newest run for the audited HEAD completes.
+This documentation snapshot is itself a docs-only follow-up to run #116 and triggers another Pages run. The functional guide state described by this memory was already present in run #116. For the most current deployment status, inspect the newest GitHub Actions run.
 
-The published browser behavior is still separate from deployment status: source/deployment success does not by itself count as live browser verification.
+The published browser behavior is still separate from deployment status: successful deployment does not by itself count as live browser verification.
 
 ## Current control-pass checkpoints
 
@@ -201,8 +201,9 @@ The published browser behavior is still separate from deployment status: source/
 - Checkpoint directory case cleanup: implemented.
 - Repository-map tree audit: corrected to match the current tracked tree.
 - Workflow runtime maintenance: implemented in `.github/workflows/pages.yml`.
-- Last confirmed Pages deployment: run #108 for commit `3a2444089df3fa6943d52e7ba41da0a513f6b924`.
-- A-to-Z audit fixes were added after run #108; their deployment is pending confirmation from the newest Pages run.
+- Final A-to-Z audit guide/source state: implemented and deployed in run #116.
+- Repository-map/evidence-directory documentation audit: corrected and included in the deployed audit state.
+- Project Map title-case rule and redundant responsive override: corrected and included in the deployed audit state.
 - Live browser behavior: still requires direct exercise after deployment.
 
 ## Handoff instruction
@@ -266,11 +267,9 @@ The hero GitHub repo control opens https://github.com/rudra-khandelwal/hydra in 
 
 ### Current implementation checkpoints
 - Latest navigation/source hardening pass: 3da566756014861a0a82774607d8f13ae6e90309
-- Latest functional UI/source hardening commit: 56b95d50113030dcb85bca92a7818a8597de1b35
-- Current main HEAD is newer than the last confirmed deployment because the A-to-Z audit applied additional fixes.
-- Last confirmed Pages deployment checked: run #108, successful, head 3a2444089df3fa6943d52e7ba41da0a513f6b924
-- Newest audited HEAD is pending deployment confirmation.
-- The last confirmed deploy job emitted the Node.js DEP0040/punycode deprecation warning noted above.
+- Latest functional UI/source audit state before this docs-only snapshot: commit `3801b5411a58d8e6a17a863156907106fc3739bc`
+- Functional guide state deployed successfully in Pages run #116.
+- This follow-up commit only refreshes the audit record; it does not change the guide's functional source.
 - Latest deployment success is not equivalent to live-browser verification.
 - The maintainer normally checks the public live link after updates.
 
