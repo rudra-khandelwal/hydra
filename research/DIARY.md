@@ -140,3 +140,7 @@ The mobile navigation becomes a touch-friendly slide-out menu with keyboard Esca
 
 ### [CHATGPT] Responsive design basis
 The responsive changes follow the current web platform approach of flexible layouts, media/container-aware adaptation, responsive typography, touch interaction, accessibility, and overflow-safe components. The implementation keeps the guide as a single HTML page rather than creating separate desktop/mobile versions.
+
+
+### [CHATGPT] GitHub Actions runtime warning cleanup
+The GitHub Pages workflow was updated after a successful deployment still reported a Node.js 20 deprecation annotation. First-party actions were moved to Node 24-compatible current major versions: `checkout@v7`, `configure-pages@v6`, `upload-pages-artifact@v5`, and `deploy-pages@v5`. The runner was pinned to `ubuntu-24.04` so the repository is not silently moved by the upcoming `ubuntu-latest` → Ubuntu 26.04 migration. The warning was treated as maintenance debt rather than a deployment failure.
