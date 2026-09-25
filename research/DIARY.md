@@ -81,6 +81,9 @@ The main README now contains one direct live-guide link, rather than a large ban
 ### [CHATGPT] Live-guide navigation correction
 The public guide navigation was corrected so desktop/tablet side navigation stays fixed while the content scrolls. The Overview link now targets the guide hero ("windows · source build · security-minded workflow" / "Hydra Launcher") instead of the Overview section heading. The top-bar repository link was replaced with a single GitHub repo button beside the Hydra Launcher title. When the guide was opened from GitHub, the button can reuse the originating GitHub tab without closing the guide; direct opens fall back to a new repository tab. The README live-guide link was changed to open the guide in a new tab.
 
+### [CHATGPT] Live-guide navigation hardening
+The responsive navigation was consolidated so desktop/tablet uses a single fixed sidebar model and mobile keeps the slide-out model. The duplicate desktop CSS override was removed, the old title-bar repository button was removed so only the hero GitHub button remains, and the Overview target received an explicit scroll offset. The GitHub→guide opener bridge now refreshes the originating GitHub tab once via reload and the hero repository button focuses that originating tab when available; direct opens fall back to the repository link in a new tab.
+
 ### [CHATGPT] Research notes editor redesign
 The public guide's Research Notes section was upgraded from a plain text note workflow to a rich editor. A saved note now creates a new numbered section after the original guide sections (17, 18, 19, …), with a user-defined section title and a corresponding sidebar entry.
 
