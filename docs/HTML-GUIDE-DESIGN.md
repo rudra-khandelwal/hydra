@@ -22,13 +22,13 @@ Core visual rules:
 
 The main sidebar is the detailed section navigator. On desktop it remains fixed while document content scrolls.
 
-Fixed guide group order:
+Project Map / fixed guide group order:
 
 1. Hydra Launcher
 2. Setup
 3. Build
-4. Research
-5. Security Research
+4. Security Research
+5. Research
 6. Project Control
 7. Created Notes (dynamic, after fixed sections)
 
@@ -102,3 +102,18 @@ A repository commit or successful Actions run must never be described as live-ve
 - Preserve the existing mobile slide-out navigation.
 - Search for duplicate UI elements after navigation/layout changes.
 - Keep public-page UI free of long-lived repository write credentials.
+
+
+## Persistent final UI context
+
+The original dark brown/orange research-console theme is canonical for the entire guide. The Project Map and detailed sidebar must look like members of the same system, not like separate component libraries.
+
+Canonical visual tokens are defined in project memory. The core rule is: dark surfaces, thin muted borders, monospace navigation labels, transparent controls, panel-soft hover, and restrained orange active/focus treatment. Do not introduce glassmorphism.
+
+The Project Map is the primary rail on wide desktop. The detailed 250px sidebar is the follower. Project Map order is Hydra Launcher, Setup, Build, Security Research, Research, Project Control, Created Notes.
+
+Navigation is bidirectional. Project Map clicks update the detailed sidebar and main document. Detailed-sidebar navigation and scroll-spy state update the Project Map active category. Hydra Launcher targets #guide-top, which restores the fixed title bar and hero. The last detailed-sidebar item must remain reachable.
+
+The hero GitHub repository control is a normal new-tab link to https://github.com/rudra-khandelwal/hydra with noopener/noreferrer semantics and no opener/focus bridge.
+
+The maintainer checks the public Pages URL after repository updates. Implemented, Deployed, and Live-verified remain separate states.
