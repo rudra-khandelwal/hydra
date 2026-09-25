@@ -63,3 +63,16 @@ The purpose is not blame. The purpose is to prevent the same failure mode from r
 ## Maintenance rule
 
 Add a new lesson whenever a recurring mistake, ambiguity, or tooling failure teaches a reusable project rule.
+
+
+## L-010 — Never place a literal closing script tag inside page JavaScript strings
+
+**Observed mistake:** The research-note export function contained a literal `</script>` inside a JavaScript template/string expression. The HTML parser interpreted that sequence as the end of the page's real script element, causing the remainder of the JavaScript source to appear visibly on the live page.
+
+**Prevention:** When JavaScript constructs HTML containing a script element, do not place a literal closing `</script>` sequence in the surrounding page source. Build it safely (for example by splitting the string as `</scr`+`ipt>`), and verify that the published page does not expose source code as text.
+
+## L-011 — Interactive action links need explicit hover/focus treatment
+
+**Observed mistake:** Primary and secondary action controls had different visual states; only the primary control appeared filled while secondary controls did not visibly enter the same hover/focus state.
+
+**Prevention:** Define explicit `:hover` and `:focus-visible` states for non-danger action controls and verify keyboard focus as well as pointer hover.
