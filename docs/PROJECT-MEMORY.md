@@ -58,6 +58,11 @@ These rules are persistent:
 - Do not upgrade a hypothesis into a finding without evidence.
 - Keep historical diary entries; do not rewrite history as if later work happened earlier.
 - Keep the live guide responsive without creating separate device-specific pages.
+- The maintainer normally opens the current public GitHub Pages live link after each repository update; treat this as the expected browser-check path, while still distinguishing deployed state from live verification.
+- The live guide uses a dark brown/orange research-console theme. Project Control links are transparent by default with only a subtle translucent accent on hover/focus.
+- On wide desktop screens, a compact Project Map rail sits to the left of the main fixed sidebar. Its category buttons scroll the main sidebar to Hydra Launcher, Setup, Build, Created Notes, Project Control, Security Research, or Research.
+- The Project Map rail is hidden on narrower screens to protect the existing responsive layout.
+- Detailed UI decisions are recorded in docs/HTML-GUIDE-DESIGN.md.
 - When changing the live guide, update the GitHub repository first; GitHub Pages is deployment output.
 - After every material change, inspect the resulting diff/state before reporting completion.
 - A green GitHub Actions run is not automatically a clean run; inspect warnings/annotations too.
@@ -108,6 +113,13 @@ The live guide exposes these through **17 — Project Control Center**. Fixed gu
 The repository uses one canonical checkpoint directory: `research/checkpoints/`. The earlier case-variant `research/CHECKPOINTS/` path has been removed.
 
 The README and public documentation now describe the repository as public. The README no longer lists a nonexistent `scripts/` directory.
+
+
+## Current UI preference checkpoint — 25 September 2026
+
+The maintainer explicitly requested that the Open project memory action and the other Project Control Center document links remain transparent by default. The accent should appear as a light translucent treatment only on hover/focus; there should be no persistent solid yellow/orange fill.
+
+The maintainer also requested a compact category sidebar to the left of the main detailed sidebar. Clicking a category such as Hydra Launcher, Setup, Build, Created Notes, Project Control, Security Research, or Research should scroll the main sidebar to that category rather than jumping the document itself.
 
 ## Current research state
 
