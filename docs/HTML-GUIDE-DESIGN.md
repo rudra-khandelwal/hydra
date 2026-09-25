@@ -36,21 +36,26 @@ Created research notes continue at section 18+.
 
 ## Project Map rail
 
-A compact secondary rail sits to the **left of the main sidebar** on sufficiently wide desktop screens.
+The Project Map is now the **primary navigation rail** on sufficiently wide desktop screens. The detailed section sidebar is its **follower** and sits immediately to the right of it.
 
-It is intentionally smaller than the main sidebar and contains category buttons:
+Primary Project Map sequence follows the guide's document order:
 
-- Hydra Launcher
-- Setup
-- Build
-- Created Notes
-- Project Control
-- Security Research
-- Research
+1. Hydra Launcher
+2. Setup
+3. Build
+4. Security Research
+5. Research
+6. Project Control
+7. Created Notes
 
-The project-map buttons do **not** scroll the document directly. They scroll the main navigation sidebar to the matching category, keeping the two-sidebar relationship explicit.
+Each Project Map button performs two coordinated actions:
 
-The project map is hidden below the wide-desktop breakpoint so it cannot crowd the main sidebar or content on smaller screens.
+- scrolls the follower sidebar so the matching category heading is positioned at the top of the sidebar's visible scroll area; any remaining empty space below is left alone;
+- scrolls the main document to the corresponding content section, with the section heading aligned below the fixed title bar.
+
+The Project Map uses the stronger themed panel treatment. The follower sidebar uses a quieter translucent treatment and is explicitly labeled as following the Project Map.
+
+The Project Map is hidden below the wide-desktop breakpoint so it cannot crowd the main sidebar or content on smaller screens.
 
 ## Control Center action styling
 
