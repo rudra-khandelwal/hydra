@@ -264,7 +264,8 @@ The hero GitHub repo control opens https://github.com/rudra-khandelwal/hydra in 
 
 ### Current implementation checkpoints
 - Latest navigation/source hardening pass: 3da566756014861a0a82774607d8f13ae6e90309
-- Latest Pages deployment checked: run #86, successful, head a6e28425e560cb53dcb038987b0f7225b9f699af
+- Latest Pages deployment checked: run #100, successful, head 4679ecc3ea42133709ba94d781ace404d9b16c79
+- Current source hardening commit: 4679ecc3ea42133709ba94d781ace404d9b16c79
 - Latest deployment success is not equivalent to live-browser verification.
 - The maintainer normally checks the public live link after updates.
 
