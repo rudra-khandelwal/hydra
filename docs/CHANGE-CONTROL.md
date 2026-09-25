@@ -70,10 +70,10 @@ Before every public commit:
 When a change alters project state:
 
 - update `PROJECT-MEMORY.md`;
-- update `REPOSITORY-MAP.md) when file structure changes;
-- update `research/VALIDATION.md) for verification status;
-- update `research/DIARY.md) for substantive research/engineering events;
-- update `research/AGENDA.md) when a task is completed or added.
+- update `REPOSITORY-MAP.md` when file structure changes;
+- update `research/VALIDATION.md` for verification status;
+- update `research/DIARY.md` for substantive research/engineering events;
+- update `research/AGENDA.md` when a task is completed or added.
 
 ## 7. Commit discipline
 
