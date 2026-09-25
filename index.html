@@ -37,9 +37,6 @@ body{
 .dots span{width:10px;height:10px;border-radius:50%;background:#3a3225}
 .titlebar .path{font:12.5px/1 var(--mono);color:var(--dim)}
 .titlebar .path b{color:var(--muted);font-weight:400}
-.repo-link{margin-left:auto;color:var(--muted);font:12px var(--mono);text-decoration:none;padding:8px 10px;border:1px solid var(--line);border-radius:6px;white-space:nowrap}
-.repo-link:hover,.repo-link:focus-visible{color:var(--accent);border-color:var(--accent-soft)}
-@media(max-width:880px){.repo-link{margin-left:auto}.nav-menu{margin-left:0}}
 
 
 /* ---------- shell layout ---------- */
@@ -65,6 +62,15 @@ body{
 .banner{padding:52px 6px 30px;max-width:640px}
 .banner .kicker{font:12.5px var(--mono);color:var(--accent);margin:0 0 14px}
 .banner h1{font:600 42px/1.15 var(--sans);letter-spacing:-.5px;margin:0 0 14px;color:var(--text)}
+.hero-title-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.hero-title-row h1{margin-bottom:0}
+.repo-button{
+  display:inline-flex;align-items:center;justify-content:center;min-height:40px;
+  padding:8px 12px;border:1px solid var(--line);border-radius:6px;
+  background:#15100c;color:var(--muted);text-decoration:none;
+  font:12px var(--mono);white-space:nowrap
+}
+.repo-button:hover,.repo-button:focus-visible{color:var(--accent);border-color:var(--accent-soft)}
 .banner p{color:var(--muted);font-size:16px;margin:0 0 20px}
 .envrow{display:flex;flex-wrap:wrap;gap:8px 10px;font:12.5px var(--mono)}
 .envrow span{color:var(--dim)}
@@ -195,8 +201,10 @@ textarea:focus{border-color:var(--accent-soft)}
   --content-max:900px;
   --gutter:clamp(14px,3vw,30px);
   --touch:44px;
+  --nav-width:250px;
 }
 html{
+  scroll-padding-top:52px;
   min-width:320px;
   overflow-x:hidden;
   -webkit-text-size-adjust:100%;
@@ -228,7 +236,7 @@ body{
 .nav-menu:hover,.nav-menu:focus-visible{border-color:var(--accent-soft);color:var(--accent)}
 .shell{width:min(100%,var(--page-max))}
 .content{padding-left:var(--gutter);padding-right:var(--gutter)}
-.banner{max-width:var(--content-max)}
+.banner{max-width:var(--content-max);scroll-margin-top:52px}
 .banner h1{font-size:clamp(30px,4vw,42px)}
 .banner p{max-width:70ch}
 .research-panel{max-width:100%;overflow:hidden}
@@ -246,8 +254,27 @@ button,.action,.note-tool{min-height:var(--touch)}
 .callout,.banner-note,.created-note .note-body{overflow-wrap:anywhere}
 @media (max-width:1100px){
   .shell{max-width:100%}
-  .nav{width:220px}
+  :root{--nav-width:210px}
+  .nav{width:var(--nav-width)}
   .content{padding-right:22px}
+}
+@media (min-width:881px){
+  .shell{position:relative}
+  .nav{
+    position:fixed;
+    z-index:35;
+    top:52px;
+    left:max(0px,calc((100vw - var(--page-max))/2));
+    width:var(--nav-width);
+    height:calc(100dvh - 52px);
+    max-height:none;
+    overflow-y:auto;
+  }
+  .content{
+    width:calc(100% - var(--nav-width));
+    margin-left:var(--nav-width);
+    flex:none;
+  }
 }
 @media (max-width:880px){
   .titlebar{position:sticky}
@@ -282,6 +309,8 @@ button,.action,.note-tool{min-height:var(--touch)}
   .nav-menu span{display:none}
   .banner{padding-left:0;padding-right:0}
   .banner h1{font-size:clamp(28px,9vw,36px)}
+  .hero-title-row{align-items:flex-start}
+  .repo-button{min-height:44px}
   .banner p{font-size:15px}
   section{padding:24px 0}
   .research-panel{margin:20px 0;padding:18px;border-radius:12px}
@@ -320,9 +349,6 @@ button,.action,.note-tool{min-height:var(--touch)}
   }
   .content{margin-left:250px;width:calc(100% - 250px)}
 }
-@media (min-width:881px) and (max-width:1100px){
-  .nav{width:210px}
-}
 @media (hover:none){
   .nav a:hover,.action:hover,.note-tool:hover{background:inherit}
 }
@@ -351,7 +377,7 @@ button,.action,.note-tool{min-height:var(--touch)}
 <div class="shell">
 <nav class="nav" id="sideNav">
 <div class="nav-group-label">hydra launcher</div>
-<a href="#overview"><span class="idx">00</span>overview</a>
+<a href="#guide-top"><span class="idx">00</span>overview</a>
 <div class="nav-group-label">setup</div>
 <a href="#requirements"><span class="idx">01</span>requirements</a>
 <a href="#git"><span class="idx">02</span>git</a>
@@ -378,9 +404,9 @@ button,.action,.note-tool{min-height:var(--touch)}
 <a href="#notes"><span class="idx">16</span>notes</a>
 </nav>
 <main class="content">
-<div class="banner">
+<div class="banner" id="guide-top">
 <p class="kicker">windows · source build · security-minded workflow</p>
-<h1>Hydra Launcher</h1>
+<div class="hero-title-row"><h1>Hydra Launcher</h1><a class="repo-button" href="https://github.com/rudra-khandelwal/hydra" target="_blank" rel="opener" onclick="openHydraRepo(event)">GitHub repo ↗</a></div>
 <p>A clean, beginner-friendly path from source code to a working development build — and a plan for checking what the build actually does before you trust it.</p>
 <div class="envrow"><span><b>os:</b> windows 11</span><span><b>node:</b> 24.19.0</span><span><b>toolchain:</b> vs2022 build tools</span><span><b>rust:</b> 1.98.1 msvc</span><span><b>yarn:</b> 1.22.22</span></div>
 <div class="banner-note">
@@ -797,33 +823,7 @@ function renderCreatedNav(items,newId){const nav=document.getElementById("sideNa
 function saveNotes(){const editor=document.getElementById("researchNotes");const text=getEditorText();const html=getEditorHtml();if(!text||!html){setNoteStatus("write something before saving");editor.focus();return}const items=storageGet();const number=nextSectionNumber(items);const title=(document.getElementById("researchNoteTitle").value||"").trim()||("research-note-"+number);const item={id:makeId(),number:number,title:title,html:html,date:new Date().toLocaleString()};items.push(item);if(!storageSet(items))return;editor.innerHTML="";document.getElementById("researchNoteTitle").value="";setNoteStatus("saved as section "+number);renderCreatedSections(item.id)}
 async function copyNotes(){const editor=document.getElementById("researchNotes");const html=getEditorHtml();const text=editor.innerText||"";try{if(navigator.clipboard&&navigator.clipboard.write){const data=new ClipboardItem({"text/html":new Blob([html],{type:"text/html"}),"text/plain":new Blob([text],{type:"text/plain"})});await navigator.clipboard.write([data])}else await navigator.clipboard.writeText(text)}catch(e){try{await navigator.clipboard.writeText(text)}catch(err){const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}}setNoteStatus("current research note copied")}
 function downloadNotes(){const html=getEditorHtml();const title=escapeHtml(document.getElementById("researchNoteTitle").value.trim()||"Hydra Research Note");const doc="<!doctype html><html><head><meta charset=\"utf-8\"><title>"+title+"</title></head><body><h1>"+title+"</h1>"+html+"<script>
-(function(){
-  const menu=document.getElementById('navMenu');
-  const nav=document.getElementById('sideNav');
-  if(!menu||!nav)return;
-  const close=()=>{
-    nav.classList.remove('open');
-    document.body.classList.remove('nav-open');
-    menu.setAttribute('aria-expanded','false');
-    menu.setAttribute('aria-label','Open navigation');
-  };
-  const open=()=>{
-    nav.classList.add('open');
-    document.body.classList.add('nav-open');
-    menu.setAttribute('aria-expanded','true');
-    menu.setAttribute('aria-label','Close navigation');
-  };
-  menu.addEventListener('click',()=>nav.classList.contains('open')?close():open());
-  nav.addEventListener('click',e=>{
-    if(e.target.closest('a') && window.matchMedia('(max-width: 880px)').matches) close();
-  });
-  document.addEventListener('keydown',e=>{
-    if(e.key==='Escape') close();
-  });
-  window.addEventListener('resize',()=>{
-    if(!window.matchMedia('(max-width: 880px)').matches) close();
-  });
-})();
+
 </script>
 </body></html>";const blob=new Blob([doc],{type:"text/html;charset=utf-8"});const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="Hydra-Research-Note.html";a.click();URL.revokeObjectURL(url);setNoteStatus("current note exported as HTML")}
 function clearNotes(){document.getElementById("researchNotes").innerHTML="";document.getElementById("researchNoteTitle").value="";setNoteStatus("editor cleared")}
@@ -831,6 +831,53 @@ function deleteCreatedNote(id){const items=storageGet();const item=items.find(x=
 function wireScrollSpy(){const navLinks=[...document.querySelectorAll("#sideNav a")];const sections=navLinks.map(a=>document.querySelector(a.getAttribute("href"))).filter(Boolean);if(window.__hydraSpy)window.__hydraSpy.disconnect();window.__hydraSpy=new IntersectionObserver(entries=>{entries.forEach(entry=>{const link=document.querySelector("#sideNav a[href=\"#"+CSS.escape(entry.target.id)+"\"]");if(!link)return;if(entry.isIntersecting)link.classList.add("active");else link.classList.remove("active")})},{rootMargin:"-20% 0px -70% 0px"});sections.forEach(s=>window.__hydraSpy.observe(s))}
 (function loadNotes(){renderCreatedSections()})();
 wireScrollSpy();
+(function(){
+  const menu=document.getElementById('navMenu');
+  const nav=document.getElementById('sideNav');
+  if(menu&&nav){
+    const close=()=>{
+      nav.classList.remove('open');
+      document.body.classList.remove('nav-open');
+      menu.setAttribute('aria-expanded','false');
+      menu.setAttribute('aria-label','Open navigation');
+    };
+    const open=()=>{
+      nav.classList.add('open');
+      document.body.classList.add('nav-open');
+      menu.setAttribute('aria-expanded','true');
+      menu.setAttribute('aria-label','Close navigation');
+    };
+    menu.addEventListener('click',()=>nav.classList.contains('open')?close():open());
+    nav.addEventListener('click',e=>{
+      if(e.target.closest('a') && window.matchMedia('(max-width: 880px)').matches) close();
+    });
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+    window.addEventListener('resize',()=>{if(!window.matchMedia('(max-width: 880px)').matches)close()});
+  }
+})();
+
+(function refreshGithubOpenerOnce(){
+  const ref=document.referrer||'';
+  if(!window.opener || !/^https:\/\/github\.com\//i.test(ref)) return;
+  try{
+    const key='hydraGuideGithubRefreshed';
+    if(sessionStorage.getItem(key)) return;
+    sessionStorage.setItem(key,'1');
+    window.opener.location.href=ref;
+  }catch(e){}
+})();
+
+function openHydraRepo(event){
+  const ref=document.referrer||'';
+  const cameFromGithub=/^https:\/\/github\.com\//i.test(ref);
+  if(cameFromGithub && window.opener && !window.opener.closed){
+    try{
+      event.preventDefault();
+      window.opener.location.href='https://github.com/rudra-khandelwal/hydra';
+      window.opener.focus();
+    }catch(e){}
+  }
+}
 </script>
 </body>
 </html>
