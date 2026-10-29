@@ -77,3 +77,21 @@
 - ~~Persist final-sidebar reachability safeguard.~~ Completed.
 - Live-verify the complete navigation interaction set from the public Pages URL after deployment run #100.
 - Review the latest static-page security hardening on the live guide.
+
+
+### 2026-10-29 — Hydra runtime and controlled-download investigation
+
+Use the detailed handoff at [research/checkpoints/2026-10-29-hydra-chat-handoff.md](checkpoints/2026-10-29-hydra-chat-handoff.md) before continuing. Do not assume the local application is currently running or that the earlier scan has been repeated.
+
+- [ ] Inspect current local Hydra checkout, branch/commit, and Git status.
+- [ ] Launch from the VS2022 Developer Command Prompt using the exact command sequence preserved in `Hydra-Memory/README.md`.
+- [ ] Verify current official `MAIN_VITE_API_URL` configuration and how it is injected into development/build.
+- [ ] Test API/catalogue behavior without downloading content.
+- [ ] Diagnose “No download available” as API/configuration, catalogue response, source metadata, or source availability.
+- [ ] Select a legitimate free/open-source test artifact and complete the pre-download checklist in the dated handoff.
+- [ ] Perform a download-only test first; capture process/network/filesystem deltas, file metadata, and SHA-256.
+- [ ] Inspect the artifact and security-tool results before deciding whether any execution test is justified.
+- [ ] Do not execute an unknown installer or binary without a separate explicit decision and an isolated test plan.
+- [ ] Publish sanitized evidence and update `research/DIARY.md`, `research/FINDINGS.md`, `research/VALIDATION.md`, and this agenda as evidence becomes available.
+
+Why this phase exists: build success, API/catalogue success, source trust, download behavior, and the safety of downloaded files are separate questions. The research must distinguish them and preserve reproducible evidence without overstating conclusions.
