@@ -234,9 +234,6 @@ Useful future entries include exact commands that worked, new errors/fixes, pack
 ## Continuation rule
 If the user says "continue Hydra", start from this memory instead of asking them to repeat the entire setup history.
 
-End of Hydra Master Memory Lane.
-
-
 ## 2026-10-29 conversation handoff — repository scan and launch prompt
 
 A dated account of the repository scan request, scan scope and limitations, reported findings, last known local build/runtime state, and follow-up is recorded in [research/checkpoints/2026-10-29-hydra-chat-handoff.md](../research/checkpoints/2026-10-29-hydra-chat-handoff.md). This entry supplements the prior memory; it does not claim the local Hydra app is currently running or that the repository scan was repeated on this date.
@@ -255,3 +252,5 @@ yarn dev
 ```
 
 This is the preserved development launch sequence, not a claim that it was run successfully during this conversation.
+
+End of Hydra Master Memory Lane.
