@@ -1,6 +1,6 @@
 # Hydra — Master Memory Lane
 
-Last consolidated: 2026-09-26
+Last consolidated: 2026-10-29
 
 ## Purpose
 Canonical handoff record for continuing the user's Hydra Launcher work across future chats. Read this before continuing Hydra work. Do not repeat setup that is already confirmed working. Prefer current repository files over old chat instructions when the project changes. Distinguish confirmed facts from assumptions, reports, and unresolved issues.
@@ -235,3 +235,23 @@ Useful future entries include exact commands that worked, new errors/fixes, pack
 If the user says "continue Hydra", start from this memory instead of asking them to repeat the entire setup history.
 
 End of Hydra Master Memory Lane.
+
+
+## 2026-10-29 conversation handoff — repository scan and launch prompt
+
+A dated account of the repository scan request, scan scope and limitations, reported findings, last known local build/runtime state, and follow-up is recorded in [research/checkpoints/2026-10-29-hydra-chat-handoff.md](../research/checkpoints/2026-10-29-hydra-chat-handoff.md). This entry supplements the prior memory; it does not claim the local Hydra app is currently running or that the repository scan was repeated on this date.
+
+### Exact user-provided launch prompt
+
+Run in a VS2022 Developer Command Prompt:
+
+```bat
+cd /d C:\Users\rudra\Downloads\hydra
+set CMAKE_GENERATOR=Visual Studio 17 2022
+set CMAKE_GENERATOR_PLATFORM=x64
+set VCPKG_VISUAL_STUDIO_PATH=C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools
+set VCPKG_PLATFORM_TOOLSET=v143
+yarn dev
+```
+
+This is the preserved development launch sequence, not a claim that it was run successfully during this conversation.
