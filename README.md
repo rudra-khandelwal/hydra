@@ -12,6 +12,12 @@ This repository is Rudra Khandelwal's public workspace for building, understandi
 
 The work is intentionally separated from the upstream project so that local experiments, research notes, test evidence, build configuration, and security findings can be developed without presenting them as official Hydra project statements.
 
+## Continue in a new chat or OpenHands
+
+Start with **[New Chat / OpenHands Start Here](docs/NEW-CHAT-OPENHANDS-START-HERE.md)** for the portable project context, previous build failures and fixes, current repository review, copy/paste continuation prompt, and the pre-download safety checklist.
+
+The detailed dated record is [2026-10-29 Hydra Chat Handoff](research/checkpoints/2026-10-29-hydra-chat-handoff.md). Read the canonical memory and validation records before changing code or starting a test.
+
 ## What we are doing
 
 We are studying the application through:
@@ -29,7 +35,7 @@ We are studying the application through:
 
 The research goal is **measurement and documentation**, not a predetermined conclusion about whether the software is safe or unsafe.
 
-The 25 September 2026 checkpoint records API-mediated download-source metadata, client-side source synchronization, and the antivirus/AMSI control result. No malware verdict has been established, and no third-party game/software executable has been downloaded or executed as part of this checkpoint.
+The 25 September 2026 checkpoint records API-mediated download-source metadata, client-side source synchronization, and the antivirus/AMSI control result. No malware verdict has been established, and no third-party game/software executable has been downloaded or executed as part of that checkpoint.
 
 ## Important trust boundaries
 
@@ -150,6 +156,5 @@ The guide preserves the earlier Claude visual design while incorporating the cur
 This repository is an independent research/development workspace. It is not an official Hydra repository and does not speak for the Hydra maintainers.
 
 ---
-Last maintained: 25 September 2026
 
-The repository is public; all committed history should be treated as publicly readable.
+Last maintained: 29 October 2026
