@@ -500,6 +500,7 @@ button,.action,.note-tool{min-height:var(--touch)}
 <a href="#notes"><span class="idx">16</span>Notes</a>
 <div class="nav-group-label" id="navGroupProjectControl">Project Control</div>
 <a href="#control-center"><span class="idx">17</span>Control-Center</a>
+<a href="#ai-agent-quickstart"><span class="idx">•</span>AI-Agent-Quickstart</a>
 </nav>
 <aside class="project-map" id="projectMap" aria-label="Project Map">
   <div class="project-map-title">Project Map</div>
@@ -926,6 +927,26 @@ yarn install</code></pre>
 <a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/docs/CHANGE-CONTROL.md" target="_blank" rel="noopener noreferrer">Open change control</a>
 <a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/research/LESSONS.md" target="_blank" rel="noopener noreferrer">Open lessons</a>
 <a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/research/VALIDATION.md" target="_blank" rel="noopener noreferrer">Open validation</a>
+</div>
+<div class="research-panel" id="ai-agent-quickstart">
+<h3>AI Agent &amp; Daily Quick Start</h3>
+<p class="sub">One place for copy/paste commands, VS2022/PowerShell/CMD/VS Code launch paths, Docker and OpenHands session setup, persistent handoff instructions, and the current verified setup status.</p>
+<div class="actions control-actions">
+<a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/docs/AI-AGENT-QUICKSTART.md" target="_blank" rel="noopener noreferrer">Open full quick-start guide</a>
+<a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/Hydra-Memory/README.md" target="_blank" rel="noopener noreferrer">Open canonical Hydra memory</a>
+<a class="action" href="https://github.com/rudra-khandelwal/hydra/blob/main/research/checkpoints/2026-10-29-hydra-chat-handoff.md" target="_blank" rel="noopener noreferrer">Open latest detailed handoff</a>
+</div>
+<h3>Quick commands</h3>
+<p class="mini">Open the actual application checkout in VS Code:</p>
+<pre><button class="copy">copy</button><code>code -r "C:\Users\rudra\Downloads\hydra"</code></pre>
+<p class="mini">Run Hydra in the VS2022 x64 Developer Command Prompt:</p>
+<pre><button class="copy">copy</button><code>cd /d C:\Users\rudra\Downloads\hydra
+set CMAKE_GENERATOR=Visual Studio 17 2022
+set CMAKE_GENERATOR_PLATFORM=x64
+set VCPKG_VISUAL_STUDIO_PATH=C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools
+set VCPKG_PLATFORM_TOOLSET=v143
+yarn dev</code></pre>
+<div class="callout warn"><strong>OpenHands status:</strong> WSL 2 and Docker CLI were present in the last machine check, but Docker Engine was not reachable. Start Docker Desktop and verify with <code>docker info</code> and <code>docker run --rm hello-world</code>. OpenHands itself and its earlier proposed container command have not yet been verified on this machine. Use the full quick-start guide for the safe lifecycle and validation notes.</div>
 </div>
 <div class="publisher-panel" id="publisher">
 <h3>Maintainer GitHub upload</h3>
