@@ -253,4 +253,10 @@ yarn dev
 
 This is the preserved development launch sequence, not a claim that it was run successfully during this conversation.
 
+## 2026-10-31 — AI agent and daily quick-start guide
+
+The dedicated copy/paste command and AI-agent setup guide is [docs/AI-AGENT-QUICKSTART.md](../docs/AI-AGENT-QUICKSTART.md). It covers opening the actual application checkout in VS Code, the known VS2022 x64 launch sequence, PowerShell/CMD/VS Code workflows, Docker/WSL readiness, OpenHands session lifecycle, security restrictions, and current validation status. The live guide exposes it under **Project Control Center → AI Agent & Daily Quick Start**.
+
+Important: Docker Engine was not reachable in the user's last supplied check, 2026-10-31. OpenHands installation/launch has not yet been verified. Treat previously suggested OpenHands image tags and container commands as unverified until checked against current official instructions and tested on the machine. Do not claim a one-click launcher exists until it is created and validated.
+
 End of Hydra Master Memory Lane.
