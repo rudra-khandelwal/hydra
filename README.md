@@ -68,7 +68,7 @@ The live guide exposes these same controls through section **17 — Project Cont
 ## Current project state
 
 - [Current verified state and safe next steps](docs/CURRENT-STATE.md)
-- [Latest dated handoff](research/checkpoints/2026-11-04-putty-static-analysis-handoff.md)
+- [Latest dated handoff](research/checkpoints/2026-11-04-putty-embedded-help-metadata.md)
 - [AI quickstart](docs/AI-AGENT-QUICKSTART.md)
 - [Five-message handoff cadence](docs/HANDOFF-CADENCE.md)
 
