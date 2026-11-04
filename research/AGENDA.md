@@ -58,3 +58,16 @@ Historical agenda entries and completed milestones are retained in the research 
 - [ ] If that gate is met, prepare a fresh read-only pre-download baseline and request explicit approval for a precisely scoped download-only Hydra test.
 
 **Final disposition (4 November 2026):** No approved artifact is available from the existing Hydra sources based on the completed focused checks. The Hydra download-path experiment remains blocked. This is an evidence/authorization limitation, not a malware finding or a safety verdict about Hydra or any source. Do not broaden catalogue searches by default. A separate direct-from-official-publisher artifact analysis could be considered later, but it would not test Hydra's download path.
+
+
+### 2026-11-04 — Official-publisher artifact-analysis candidate phase
+- [x] Preserve the separate finding that no existing Hydra source entry is currently verified as an authorized test artifact.
+- [x] Record the reported official-publisher candidate evidence for PuTTY 0.85, 7-Zip 26.05, and Notepad++ 8.9.8.1, including unresolved fields.
+- [x] Document a separate official-publisher static-analysis plan and its evidence limitations.
+- [x] Select PuTTY 0.85 as a provisional preference only; package size and exact package-specific signing details remain unresolved.
+- [ ] Verify PuTTY's exact selected Windows package, package size, expected signing identity, and applicable signature/checksum route from official sources.
+- [ ] Present the exact package and download-only plan for explicit approval; do not download before approval.
+- [ ] After any separately approved direct official download, perform hash, signature, Defender, and static package inspection without execution.
+- [ ] Keep Hydra download-path research separate and blocked until an exact existing Hydra entry is independently verified as an official or explicitly authorized distribution.
+
+**Current disposition:** The candidate-review and static-analysis plan is documented, but there is no approved artifact and no download. Direct official-publisher analysis will not be represented as a Hydra download-path test. See [official-publisher candidate checkpoint](checkpoints/2026-11-04-official-publisher-static-analysis-candidates.md).
