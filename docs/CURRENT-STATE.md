@@ -150,9 +150,42 @@ Next, compare the exact public JSON metadata files referenced by the two configu
 
 Read-only inspection in this pass: `rg` targeted searches in `src/main`, `src/types`, and renderer source; `Get-Content` of `src/main/events/download-sources/{add-download-source,sync-download-sources}.ts`, `src/main/services/user/sync-download-sources.ts`, `src/types/index.ts`, and the game-details request block; public upstream FAQ and issue #2381/comment review; and `git status --short`, `git rev-parse HEAD`, `git branch --show-current`. No tests were run; no app files were changed; the working-tree changes remain preserved.
 
+
+## Source collections and settings clarification — 4 November 2026
+
+### Clarification
+
+The user confirmed Hydra does not offer an edit-in-place action for a configured source URL: Settings displays the URL read-only and offers removal. Do not remove, replace, or otherwise disturb the existing onlinefix or FitGirl sources. This is a constraint for future guidance; no source action was taken.
+
+### Collection, storage, and synchronization behavior in the app client
+
+- `src/renderer/src/pages/settings/add-download-source-modal.tsx` accepts a syntactically valid URL and invokes `addDownloadSource`; the Settings row shows the URL read-only and a Remove action.
+- `src/main/events/download-sources/add-download-source.ts` posts the supplied URL to `/download-sources`; the API response is a `DownloadSource` object and is saved locally in the LevelDB `downloadSources` sublevel keyed by its ID. For signed-in users with active subscription, the URL is also posted to `/profile/download-sources`.
+- `src/main/events/download-sources/sync-download-sources.ts` sends locally stored IDs to `/download-sources/sync`, merges returned `DownloadSource` objects into the local records, and stores them by ID. `src/main/services/user/sync-download-sources.ts` reads `/profile/download-sources` and adds returned objects when their URL is not already stored.
+- Thus source records and URLs are persisted locally, and the API also returns source objects containing the URL. The app's client-side source metadata includes `id`, `name`, `url`, `status`, `downloadCount`, optional `fingerprint`, and timestamps.
+- The UI text and input placeholder describe a direct URL to a `.json` file. The client source type `DownloadSourceDownload` defines per-entry `title`, `uris: string[]`, `uploadDate`, and `fileSize`. The likely collection shape is a JSON list of these entries; the client checkout does not contain the private service's validation/parser, so exact root-shape and server-side constraints are not independently verified here.
+
+The code establishes a source URL pointing to a remote JSON collection. It does not establish that every collection is curated, has a fixed/limited game set, or contains one record per game. No source JSON URLs or contents were exposed or fetched in this investigation.
+
+### Counts and title visibility
+
+Settings renders `DownloadSource.downloadCount` with localized wording for **download options**, not unique games. Clicking that row navigates to the Catalogue with the source fingerprint filter. Catalogue search sends configured source IDs and the fingerprint filters to `/catalogue/search`, then renders matching catalogue records/titles. This existing path can show catalogue titles attributed to a source, subject to the backend's title-matching behavior documented in the prior checkpoint.
+
+A unique-game count should not reuse `downloadCount`: a source may have multiple options per game, and title matching is not exact identity matching. A separately labeled count could use the source-filtered catalogue result count if the API defines it as distinct games; that backend semantic is not exposed in the public client. Any title list should be labeled as catalogue matches for that source, not a guaranteed exact Steam-ID mapping.
+
+### Adding another source safely
+
+Hydra's UI flow is Settings → Download Sources → Add source. The user supplies a URL that points directly to a JSON file; the client checks URL syntax, then asks the Hydra API to register it; the private endpoint's validation details are not present in the client code. The record format described by the client is one entry with `title`, `uris` (string array), `uploadDate`, and `fileSize`; the UI expects the service to accept the collection. Use only a source URL published by a maintainer you trust, preferably HTTPS, and content you are legally authorized to access. Do not add a source merely because its name resembles a known publisher, and do not remove onlinefix or FitGirl to try another URL.
+
+### Evidence and limitations
+
+Read-only source files: `src/types/index.ts`; `src/renderer/src/pages/settings/{settings-download-sources.tsx,add-download-source-modal.tsx}`; `src/main/events/download-sources/{add-download-source.ts,sync-download-sources.ts,get-download-sources.ts,remove-download-source.ts}`; `src/main/services/user/sync-download-sources.ts`; `src/main/level/sublevels/download-sources.ts`; and `src/renderer/src/pages/catalogue/catalogue.tsx`. Public upstream source FAQ and the maintainer statement about the closed production backend remain linked in the previous section. No source URL was fetched, no source was added/removed, no application file changed, and no test ran. Checkout status remains `M package.json`, `M yarn.lock`, and `?? security-research/` at app HEAD `fdbc5272720f96a634428ea47e33143fe4d4d393`.
+
+Next step, if source-by-source title coverage is needed: obtain the exact public JSON URLs from the user or source publishers, then inspect only record titles and counts with all URI values redacted. Do not infer or guess URLs.
+
 ## Five-message handoff checkpoint
 
-**Counter after this handoff: 3 of 5 user messages.** Each AI continuing the project must read [handoff cadence](HANDOFF-CADENCE.md), increment the counter for each new user message about this project, and update the current handoff plus diary/agenda when message 5 is reached. Record the new counter in the replacement handoff. Also update immediately for any material change or when work pauses. There is no verified background counter or automatic GitHub writer; do not claim that this cadence runs automatically.
+**Counter after this handoff: 4 of 5 user messages.** Each AI continuing the project must read [handoff cadence](HANDOFF-CADENCE.md), increment the counter for each new user message about this project, and update the current handoff plus diary/agenda when message 5 is reached. Record the new counter in the replacement handoff. Also update immediately for any material change or when work pauses. There is no verified background counter or automatic GitHub writer; do not claim that this cadence runs automatically.
 
 ## Public-repository review
 
