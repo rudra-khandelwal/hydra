@@ -191,3 +191,14 @@ A current-state guide, dated handoff, and manual five-user-message checkpoint we
 
 ### [CHATGPT] Source collection inventory access blocked
 A read-only review of the configured source records confirmed exact JSON URLs were present locally; the URLs were not copied into this public diary. Hydra Settings showed onlinefix at 2,843 and FitGirl at 7,210 download options. Direct GET attempts to the exact configured URLs both returned HTTP 403 Forbidden. No URI fields were read or retained, and no alternate path was attempted. Unique-title, duplicate-title, overlap, and target-title counts therefore remain unknown. Next action is to obtain publisher-authorized read-only access/export for these same JSON files. No sources or app files changed; existing app worktree changes remain preserved.
+
+## 4 November 2026 — Security-first objective reaffirmed
+
+### [USER] Existing security work and remaining experiment
+The user confirmed that the prior work should be treated as substantial completed security research. Existing records already document Windows runtime baseline collection, Hydra/Electron process and HTTPS observations, source/API metadata correlation, source trust-boundary review, client-code inspection, and the EICAR/AMSI interception observation. The EICAR string was blocked during PowerShell assignment; no valid EICAR file or quarantine event was established.
+
+### [CODEX REPORT] Artifact selection
+Hydra v4.1.4 was checked for OpenTTD, which displayed “No downloads available.” The report did not establish a clearly legitimate, free/open-source, authorized artifact through the existing OnlineFix and FitGirl sources. No download was started. Defender status, download location, free space, and fresh machine baseline were not checked during this pass.
+
+### [CHATGPT] Priority decision
+The catalogue/source-availability detour must not displace the original security objective. The next major experiment remains a download-only test through Hydra, but only after identifying one exact artifact with verifiable publisher provenance and clear permission for the distribution route. A direct publisher download may support a separate artifact-analysis experiment, but cannot be represented as a Hydra download-path test. No app code, settings, sources, or local checkout state were changed by this documentation entry.
