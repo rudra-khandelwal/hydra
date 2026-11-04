@@ -73,3 +73,19 @@ No final security verdict has been established.
 **Finding:** Antivirus/AMSI interception was demonstrated at the command/script-content stage. A valid EICAR test file and quarantine event were not established, so this should not be recorded as a completed file-quarantine test.
 
 **Next Action:** No further EICAR testing is required for this phase. Use normal Defender scanning on the legitimate controlled artifact in the next experiment.
+
+
+## F-005 — Controlled Hydra download remains unperformed
+
+**Date:** 4 November 2026  
+**Status:** Blocked pending a verified authorized artifact
+
+**Fact:** The latest report states that Hydra v4.1.4 showed “No downloads available” for OpenTTD. No alternative artifact with verifiable official publisher provenance and clear permission through the existing configured sources was identified. No download was started.
+
+**Observation:** The current blocker is test-artifact selection through the existing Hydra configuration, not a demonstrated Hydra download failure or malware finding.
+
+**Finding:** The controlled Hydra download and resulting artifact inspection remain the principal unfinished experiment. The catalogue/source investigation should only continue insofar as it helps identify an authorized candidate.
+
+**Limitations:** Defender status, download directory, available disk space, and a fresh process/network/filesystem baseline were not checked in the latest artifact-selection pass. No inference can be made about the safety of an artifact that was not downloaded and examined.
+
+**Next Action:** Identify one exact, clearly authorized free/open-source artifact available through the existing Hydra configuration. Verify its publisher and distribution permission. Present the candidate and download-only plan for user approval before downloading. Do not change app settings or sources, or install/execute anything.
