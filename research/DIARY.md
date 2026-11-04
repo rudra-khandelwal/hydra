@@ -187,3 +187,7 @@ The local checkout at `fdbc5272720f96a634428ea47e33143fe4d4d393` reads `MAIN_VIT
 
 ### [CHATGPT] Documentation continuity and cadence
 A current-state guide, dated handoff, and manual five-user-message checkpoint were added to the public docs workflow. The counter is 0/5 after this handoff. There is no reliable automatic cross-chat counter or background repository writer.
+
+
+### [CHATGPT] Source collection inventory access blocked
+A read-only review of the configured source records confirmed exact JSON URLs were present locally; the URLs were not copied into this public diary. Hydra Settings showed onlinefix at 2,843 and FitGirl at 7,210 download options. Direct GET attempts to the exact configured URLs both returned HTTP 403 Forbidden. No URI fields were read or retained, and no alternate path was attempted. Unique-title, duplicate-title, overlap, and target-title counts therefore remain unknown. Next action is to obtain publisher-authorized read-only access/export for these same JSON files. No sources or app files changed; existing app worktree changes remain preserved.
