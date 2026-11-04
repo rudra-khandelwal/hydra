@@ -123,4 +123,14 @@ The exact onlinefix and FitGirl JSON URLs are available in Hydra's local source 
 - [ ] Perform the approved download-only Hydra experiment; capture sanitized process/network/filesystem evidence and artifact metadata, hashes, signatures, Defender results, and static inspection.
 - [ ] Report evidence before considering any installation or execution; execution requires separate explicit approval and an isolated environment.
 
+
+### 2026-11-04 — Mindustry candidate review
+- [x] Record the supplied read-only candidate review and no-go decision for Mindustry (Steam app 1127400).
+- [x] Record that Hydra v4.1.4 showed one OnlineFix option but the specific payload/release and distribution authorization were not verified.
+- [x] Record OpenTTD's “No downloads available” result and that no qualifying candidate was found.
+- [ ] Continue read-only search for an exact authorized artifact available through the existing Hydra configuration; do not weaken criteria or change sources.
+- [ ] Only after a qualifying candidate is evidenced, prepare a fresh baseline and request explicit approval for a download-only Hydra test.
+
+See [Mindustry candidate review](checkpoints/2026-11-04-mindustry-candidate-review.md).
+
 **Priority correction:** catalogue coverage/missing-title work is no longer the main workstream. Resume it only when it directly helps identify an authorized test artifact. See [2026-11-04 security continuation checkpoint](checkpoints/2026-11-04-security-continuation.md).
