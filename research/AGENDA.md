@@ -106,3 +106,8 @@ Why this phase exists: build success, API/catalogue success, source trust, downl
 - [ ] Confirm or reject a matching defect with reproducible evidence before considering an app change.
 
 **Current disposition:** source coverage limitation is supported by screenshots; an application bug is not established. See [current state](../docs/CURRENT-STATE.md) and the [4 November handoff](checkpoints/2026-11-04-download-source-investigation.md).
+
+
+## Source collection inventory status — 4 November 2026
+
+The exact onlinefix and FitGirl JSON URLs are available in Hydra's local source records, but direct read-only GETs both returned HTTP 403. No JSON payload was parsed, so unique-title counts and source-level membership remain unknown. Do not try guessed URLs, mirrors, or alternate endpoints. Resume this item only with publisher-authorized access to the exact configured files; count titles and duplicates locally without retaining URI values. Existing sources and application checkout remain untouched.
