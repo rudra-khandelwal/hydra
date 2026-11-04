@@ -204,3 +204,14 @@ No source was added, removed, or replaced. No application file, dependency, or e
 ## Public-repository review
 
 This repository is public, and its full history remains public. Before each write, inspect the complete diff/content for credentials, personal data, raw logs, signed URLs, copyrighted files, or other material that should not be published. Keep screenshots local unless separately reviewed and intentionally approved for publication.
+
+
+## Official-publisher artifact analysis — PuTTY 0.85 (4 November 2026)
+
+The user approved a download-only security analysis of the official PuTTY 0.85 64-bit x86 standalone executable. The artifact is stored separately under %USERPROFILE%\\Downloads\\hydra-security-research\\putty-0.85; the public record omits the local account path. The reported file is putty.exe, 1,706,136 bytes, SHA-256 d01fdb5aae8f112526040a39b0bfb9e27d813003178645e65f8d1cfdb2a26c87. The hash exactly matched the w64/putty.exe entry in the official sha256sums manifest.
+
+Windows reported a valid Authenticode signature with signer Simon Tatham. The executable GPG signature and the clear-signed sha256sums.gpg manifest both produced Good signature using fingerprint 1A07 DAC0 F220 CF12 248E A719 5C67 D0F8 8BC3 E5B5. The original 17,124-byte manifest signature was preserved; its initial verification failure was caused by treating a clear-signed message as a detached signature. GPG does not certify/trust the key in the local keyring, so an independent trust path remains unestablished. Defender's command-line scan reported no threats, but the Defender status cmdlet could not load and real-time protection status was not independently recorded.
+
+Codex attempted static inspection but could not proceed: objdump, strings, dumpbin, llvm-readobj, and sigcheck were unavailable, and Python was inaccessible. No analysis tool was installed. There are no verified findings for PE sections, imports/exports, resources beyond version/help metadata, embedded strings/endpoints, dependencies, packing, or obfuscation. Static inspection remains pending. PuTTY was not opened, executed, or installed. No app checkout, Hydra setting, or configured source was changed.
+
+This direct official-publisher artifact analysis is separate from the Hydra download-path experiment. The latter remains blocked because no exact existing Hydra source entry has been verified as an official or explicitly authorized distribution. See [PuTTY artifact-analysis handoff](../research/checkpoints/2026-11-04-putty-static-analysis-handoff.md).
