@@ -82,3 +82,24 @@ A static geometry audit found that the Project Map was previously enabled too ea
 ## Rule
 
 Never mark a live-browser behavior “verified” from source inspection alone.
+
+
+## Security research status — 4 November 2026 (reconciled)
+
+| Check | Status | Evidence/limitation |
+|---|---|---|
+| Windows runtime baseline | Complete (historical) | Processes, established network connections, and repository files were recorded. Re-capture only when a new controlled experiment needs a fresh baseline. |
+| Hydra/Electron process and HTTPS observations | Observed (historical) | Process-to-HTTPS association recorded; not a complete endpoint-purpose/security verdict. |
+| Source/API metadata correlation | Complete (historical) | Source IDs and an API-returned record were observed and correlated with client code. Does not establish tracker/peer transfer or artifact behavior. |
+| Trust-boundary review | Complete (architectural) | Hydra client, API, community metadata, and third-party infrastructure distinguished. |
+| Client-code inspection | Complete for prior scope | Relevant source storage, sync, request, and URI-filter paths inspected; not a full code security audit. |
+| EICAR/AMSI interception | Observed with limitation | EICAR string blocked during PowerShell assignment. No valid EICAR file or quarantine event established. |
+| Authorized artifact available through existing Hydra sources | Blocked / not established | OpenTTD showed “No downloads available”; no alternative authorized candidate verified. |
+| Fresh pre-download Defender/directory/disk/baseline preparation | Not performed for latest selection | Do only after a candidate is identified and before download. |
+| Controlled download through Hydra | Pending | No download started. |
+| Download-time process/network/filesystem differential | Pending | No controlled download experiment. |
+| Artifact hash/signature/Defender/static inspection | Pending | No test artifact downloaded. |
+| Isolated installation/execution behavior | Not performed | Requires separate explicit approval and isolated environment. |
+| Final security verdict | Not established | Existing observations do not prove overall safety or maliciousness. |
+
+Direct download from an official publisher may be used for a separate artifact-analysis exercise, but it must not be counted as a Hydra download-path test.
