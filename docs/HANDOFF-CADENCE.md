@@ -1,7 +1,7 @@
 # Five-Message Handoff Cadence
 
-**Current counter:** 0 of 5 user messages since the 4 November 2026 handoff.  
-**Current checkpoint:** [4 November 2026 handoff](../research/checkpoints/2026-11-04-download-source-investigation.md)
+**Current counter:** 0 of 5 user messages since the PuTTY artifact-analysis handoff.  
+**Current checkpoint:** [PuTTY artifact-analysis handoff](../research/checkpoints/2026-11-04-putty-static-analysis-handoff.md)
 
 ## Required routine for every AI continuing this project
 
