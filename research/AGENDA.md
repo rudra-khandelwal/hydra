@@ -111,3 +111,16 @@ Why this phase exists: build success, API/catalogue success, source trust, downl
 ## Source collection inventory status — 4 November 2026
 
 The exact onlinefix and FitGirl JSON URLs are available in Hydra's local source records, but direct read-only GETs both returned HTTP 403. No JSON payload was parsed, so unique-title counts and source-level membership remain unknown. Do not try guessed URLs, mirrors, or alternate endpoints. Resume this item only with publisher-authorized access to the exact configured files; count titles and duplicates locally without retaining URI values. Existing sources and application checkout remain untouched.
+
+### 2026-11-04 — Return to security-first controlled download
+
+- [x] Preserve the earlier security checks as completed historical work; do not repeat them without an identified evidence gap.
+- [x] Record the latest OpenTTD availability check (“No downloads available”) and the fact that no suitable authorized artifact has yet been identified.
+- [x] Record that no download was started and that Defender/download-directory/free-space preparation checks were not performed.
+- [ ] Identify one exact, clearly authorized free/open-source artifact actually available through the existing Hydra configuration.
+- [ ] Verify publisher provenance and permission for the actual distribution route; do not assume OnlineFix or FitGirl entries are authorized.
+- [ ] After candidate identification, prepare a fresh read-only baseline and obtain user approval of the exact download-only plan.
+- [ ] Perform the approved download-only Hydra experiment; capture sanitized process/network/filesystem evidence and artifact metadata, hashes, signatures, Defender results, and static inspection.
+- [ ] Report evidence before considering any installation or execution; execution requires separate explicit approval and an isolated environment.
+
+**Priority correction:** catalogue coverage/missing-title work is no longer the main workstream. Resume it only when it directly helps identify an authorized test artifact. See [2026-11-04 security continuation checkpoint](checkpoints/2026-11-04-security-continuation.md).
