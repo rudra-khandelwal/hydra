@@ -95,3 +95,21 @@ Direct-from-official-publisher analysis is a distinct experiment. It cannot be c
 | Hydra download-path experiment | Still blocked | PuTTY is a direct official-publisher artifact, not an artifact obtained through Hydra. No existing Hydra source entry has verified authorization. |
 
 See [PuTTY artifact-analysis handoff](checkpoints/2026-11-04-putty-static-analysis-handoff.md).
+
+
+## PuTTY 0.85 expanded static analysis — 4 November 2026
+
+| Check | Status | Evidence/limitation |
+|---|---|---|
+| PE headers/sections/imports/exports | Completed (reported) | Existing Visual Studio dumpbin; all three options exit code 0; x64 Windows GUI PE; no exports listed. |
+| Printable ASCII/UTF-16LE strings | Completed (reported) | 10,241 ASCII and 1,045 UTF-16LE strings; reviewed endpoint/API indicators had plausible context; no clearly malicious string identified. |
+| Section entropy | Completed (reported) | `.rsrc` 7.8331 bits/byte; entropy is not proof of packing. |
+| PE resource directory | Completed (reported) | 24 resource leaves, no malformed/out-of-bounds branches reported; version and manifest identified. |
+| Embedded HTML Help directory metadata | Completed (reported) | ITSF v3/ITSP v1; 561 PMGL entries, five PMGL chunks and one PMGI chunk; nine section-0 entries and 552 LZX section-1 entries. No content decompression or extraction. |
+| Embedded help content/default topic | Not inspected | No internal files or #SYSTEM contents read; `/index.html` is filename-only candidate. |
+| Runtime behavior/network activity | Not performed | PuTTY was never loaded, launched, installed, or executed. |
+| Artifact integrity | Unchanged (reported) | 1,706,136 bytes; SHA-256 d01fdb5aae8e112526040a39b0bfb9e27d813003178645e65f8d1cfdb2a26c87. |
+| Overall safety verdict | Not established | No clearly malicious indicator in inspected static evidence is not proof of safety. |
+| Hydra download-path experiment | Still blocked | PuTTY came directly from official publisher, not through Hydra; authorization/provenance of an existing configured source entry remains unverified. |
+
+See the [PuTTY embedded-help metadata checkpoint](https://github.com/rudra-khandelwal/hydra/blob/main/research/checkpoints/2026-11-04-putty-embedded-help-metadata.md).
