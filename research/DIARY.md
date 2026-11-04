@@ -149,3 +149,13 @@ The follow-up search checked Mindustry, OpenTTD, Hedgewars, Battle for Wesnoth, 
 
 ### [CHATGPT] Security decision
 No artifact is approved. The controlled Hydra download remains blocked on provenance/authorization evidence. Failure to meet the candidate gate is not evidence that Hydra or any configured source is malicious. The next useful step is narrow: verify one exact existing source record against official publisher/release evidence, without opening download links or changing configuration. Only after that should a fresh pre-download baseline and explicit download-only approval be considered.
+
+
+### [CODEX REPORT] Final targeted provenance check — no qualifying artifact
+The final targeted read-only review did not identify an existing Hydra entry that could be independently matched to an official free/open-source project release or an explicitly authorized distributor. No qualifying test artifact is available from the existing Hydra sources based on the checks completed.
+
+Mindustry remains an unapproved lead only: Hydra v4.1.4 showed one OnlineFix option, while the official Mindustry repository and GPL-3.0 licence establish project identity/licensing but do not link OnlineFix to an official release or authorize that specific distribution. The specific option and URI were not opened. OpenTTD, Hedgewars, Battle for Wesnoth, and SuperTuxKart had already failed to produce a qualifying entry in the focused checks.
+
+The investigation stopped without opening download links, exposing URIs, bypassing HTTP 403, changing Hydra settings/sources, modifying the application checkout, downloading, installing, or executing anything. No new malware or safety conclusion follows from this candidate-selection result.
+
+**Disposition:** Keep the Hydra download-path experiment blocked until new exact-source provenance and authorization evidence is available. Do not broaden catalogue searches by default. A direct-from-official-publisher artifact analysis, if separately approved later, would not test Hydra's download path.
