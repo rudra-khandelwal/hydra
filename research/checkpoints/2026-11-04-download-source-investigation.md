@@ -183,6 +183,20 @@ Read-only source files: `src/types/index.ts`; `src/renderer/src/pages/settings/{
 
 Next step, if source-by-source title coverage is needed: obtain the exact public JSON URLs from the user or source publishers, then inspect only record titles and counts with all URI values redacted. Do not infer or guess URLs.
 
+
+## Source collection inventory attempt — 4 November 2026
+
+Hydra Settings exposed the exact configured JSON URLs in the local source records (the URLs are intentionally omitted from this public checkpoint). Both records were named onlinefix and FitGirl and showed status Up to date. The displayed `downloadCount` values were 2,843 and 7,210 respectively; these are **download-option counts**, not unique-title counts.
+
+Read-only GET requests were made to the exact URLs shown in Settings. Both returned HTTP 403 Forbidden. No response body or source JSON was retained or parsed, and no alternate host, mirror, endpoint, or access path was tried. The cause of the 403 (access policy, anti-automation, or another server rule) is unknown.
+
+Consequently, total source JSON records, unique titles, duplicate titles, titles shared by sources, and exact source-level inclusion of Geometry Dash, Schedule I, original Granny, Granny Remake, and Granny: Escape Together could not be computed from the files. Earlier per-game API evidence remains: Schedule I returned 16 onlinefix options; Geometry Dash returned an empty array. Those API results do not establish whether either title is present in the underlying JSON collection.
+
+Relevant client code reviewed read-only: `src/types/index.ts`; `src/main/events/download-sources/add-download-source.ts`; `src/main/events/download-sources/sync-download-sources.ts`; `src/main/events/download-sources/get-download-sources.ts`; `src/main/events/download-sources/remove-download-source.ts`; `src/main/services/user/sync-download-sources.ts`; `src/main/level/sublevels/download-sources.ts`; `src/renderer/src/pages/settings/add-download-source-modal.tsx`; `src/renderer/src/pages/settings/settings-download-sources.tsx`; `src/renderer/src/pages/catalogue/catalogue.tsx`.
+
+Next step: obtain read-only access to the same two source JSON files from their publishers (for example, a publisher-provided export or permissioned access). Then compute counts and target-title matches locally while retaining only title/count metadata. Do not guess URLs, use third-party mirrors, or change the configured sources.
+
+No source was added, removed, or replaced. No application file, dependency, or existing working-tree change was modified. No tests were run or game content downloaded.
 ## Handoff counter
 
-**User-message count since this handoff: 4/5.** Follow [HANDOFF-CADENCE.md](../../docs/HANDOFF-CADENCE.md). Update the current state and dated checkpoint at the fifth project-related user message, and sooner for meaningful state changes or before pausing. This is a documented manual checkpoint; no reliable automatic cross-chat counter or background GitHub updater has been configured.
+**User-message count since this handoff: 0/5.** Follow [HANDOFF-CADENCE.md](../../docs/HANDOFF-CADENCE.md). Update the current state and dated checkpoint at the fifth project-related user message, and sooner for meaningful state changes or before pausing. This is a documented manual checkpoint; no reliable automatic cross-chat counter or background GitHub updater has been configured.
