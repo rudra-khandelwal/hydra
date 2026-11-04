@@ -31,106 +31,19 @@
 9. Produce dated findings.
 10. Review every future commit for credentials, personal data, raw sensitive logs, and other material that should not be public.
 
+### Existing checkpoints
+Historical agenda entries and completed milestones are retained in the research diary and dated checkpoints.
 
-### 2026-09-25
-- ~~Correlate configured source IDs with Hydra API download-source requests.~~ Completed.
-- ~~Confirm API-returned source metadata and source-name association.~~ Completed.
-- ~~Correlate API source handling with the Hydra client source-synchronization code.~~ Completed.
-- ~~Record the antivirus control result without overstating it as a completed EICAR file quarantine test.~~ Completed.
-- Perform a controlled download test using a legitimate free/open-source artifact.
-- Record pre/post process, network, and filesystem state.
-- Hash and statically inspect the downloaded artifact before any execution.
-- Correlate observed downloader behavior with Hydra source code.
-- Add a dated finding only when the evidence supports one.
+### 2026-11-04 — Controlled Hydra download candidate selection
+- [x] Preserve prior security observations as historical completed work; repeat only for a defined evidence gap.
+- [x] Record OpenTTD's “No downloads available” observation.
+- [x] Record Mindustry's OnlineFix option as an unverified candidate, not an approved test artifact.
+- [x] Perform a second focused read-only search covering Mindustry, OpenTTD, Hedgewars, Battle for Wesnoth, and SuperTuxKart.
+- [x] Record that no checked game met every eligibility requirement.
+- [ ] Identify an exact existing Hydra source entry whose specific distribution can be matched to an official release or explicitly authorized distributor.
+- [ ] Verify exact publisher provenance and redistribution permission without opening download links or exposing URI values.
+- [ ] Only after a qualifying candidate is evidenced, prepare a fresh read-only pre-download baseline and present the exact download-only plan for explicit approval.
+- [ ] Perform the approved Hydra download-only experiment; capture sanitized process/network/filesystem deltas and artifact metadata, hashes, signatures, Defender results, and static inspection.
+- [ ] Report evidence before considering installation or execution; that requires a separate explicit approval and isolated environment.
 
-
-### 2026-09-25 — Responsive guide
-- ~~Create a single responsive foundation for desktop/laptop/tablet/phone layouts.~~ Completed.
-- ~~Add touch-friendly mobile navigation and safe-area handling.~~ Completed.
-- ~~Make grids, tables, code blocks, note controls, and research panels adapt to narrow screens.~~ Completed.
-- Validate the live guide on representative desktop, tablet, and phone viewport sizes after the next GitHub Pages deployment.
-- Confirm the desktop sidebar remains fixed during anchor navigation and document scroll.
-- Confirm GitHub README → live guide opens separately and refreshes the originating GitHub tab once.
-- Confirm the single hero GitHub button keeps the guide open while returning focus to the originating GitHub tab, with direct-open fallback.
-- Continue adding research content without creating device-specific duplicate pages.
-
-
-- ~~Update the GitHub Pages workflow to current Node 24-compatible first-party action majors and pin the runner to a stable Ubuntu image.~~ Completed 25 September 2026.
-
-### 2026-09-25 — Project control and repository consistency
-- ~~Create canonical project memory for future AI/maintainer handoff.~~ Completed.
-- ~~Create project goal and success-criteria document.~~ Completed.
-- ~~Create repository map and change-control document.~~ Completed.
-- ~~Create lessons/mistake-prevention log and validation matrix.~~ Completed.
-- ~~Expose the control documents through live guide section 17.~~ Completed.
-- ~~Correct stale public/private documentation.~~ Completed.
-- ~~Consolidate checkpoint directory case variants into `research/checkpoints/`.~~ Completed.
-- Live-verify the new Project Control Center and current sidebar/README opener behavior after the newest Pages deployment.
-
-
-### 2026-09-25 — UI context preservation
-- ~~Persist the original dark brown/orange guide theme and tokens.~~ Completed.
-- ~~Persist the Project Map as primary navigation and the detailed sidebar as follower.~~ Completed.
-- ~~Persist bidirectional Project Map / sidebar synchronization.~~ Completed.
-- ~~Persist Hydra Launcher → guide hero/top-state behavior.~~ Completed.
-- ~~Persist direct new-tab GitHub repository-link behavior.~~ Completed.
-- ~~Persist final-sidebar reachability safeguard.~~ Completed.
-- Live-verify the complete navigation interaction set from the public Pages URL after deployment run #100.
-- Review the latest static-page security hardening on the live guide.
-
-
-### 2026-10-29 — Hydra runtime and controlled-download investigation
-
-Use the detailed handoff at [research/checkpoints/2026-10-29-hydra-chat-handoff.md](checkpoints/2026-10-29-hydra-chat-handoff.md) before continuing. Do not assume the local application is currently running or that the earlier scan has been repeated.
-
-- [ ] Inspect current local Hydra checkout, branch/commit, and Git status.
-- [ ] Launch from the VS2022 Developer Command Prompt using the exact command sequence preserved in `Hydra-Memory/README.md`.
-- [ ] Verify current official `MAIN_VITE_API_URL` configuration and how it is injected into development/build.
-- [ ] Test API/catalogue behavior without downloading content.
-- [ ] Diagnose “No download available” as API/configuration, catalogue response, source metadata, or source availability.
-- [ ] Select a legitimate free/open-source test artifact and complete the pre-download checklist in the dated handoff.
-- [ ] Perform a download-only test first; capture process/network/filesystem deltas, file metadata, and SHA-256.
-- [ ] Inspect the artifact and security-tool results before deciding whether any execution test is justified.
-- [ ] Do not execute an unknown installer or binary without a separate explicit decision and an isolated test plan.
-- [ ] Publish sanitized evidence and update `research/DIARY.md`, `research/FINDINGS.md`, `research/VALIDATION.md`, and this agenda as evidence becomes available.
-
-Why this phase exists: build success, API/catalogue success, source trust, download behavior, and the safety of downloaded files are separate questions. The research must distinguish them and preserve reproducible evidence without overstating conclusions.
-
-
-### 2026-11-04 — Download-source coverage investigation
-- [x] Record screenshots for source counts/status and the four named game entries.
-- [x] Inspect current local API configuration and the app request/filter paths read-only.
-- [x] Preserve app checkout and user-reported modifications; do not change application files.
-- [ ] Capture a sanitized, read-only game-specific API response for one listed and one unlisted catalogue entry.
-- [ ] Compare response records and URI categories with `filterDownloadableRepacks`; distinguish request failure, empty response, and filtered response.
-- [ ] Confirm or reject a matching defect with reproducible evidence before considering an app change.
-
-**Current disposition:** source coverage limitation is supported by screenshots; an application bug is not established. See [current state](../docs/CURRENT-STATE.md) and the [4 November handoff](checkpoints/2026-11-04-download-source-investigation.md).
-
-
-## Source collection inventory status — 4 November 2026
-
-The exact onlinefix and FitGirl JSON URLs are available in Hydra's local source records, but direct read-only GETs both returned HTTP 403. No JSON payload was parsed, so unique-title counts and source-level membership remain unknown. Do not try guessed URLs, mirrors, or alternate endpoints. Resume this item only with publisher-authorized access to the exact configured files; count titles and duplicates locally without retaining URI values. Existing sources and application checkout remain untouched.
-
-### 2026-11-04 — Return to security-first controlled download
-
-- [x] Preserve the earlier security checks as completed historical work; do not repeat them without an identified evidence gap.
-- [x] Record the latest OpenTTD availability check (“No downloads available”) and the fact that no suitable authorized artifact has yet been identified.
-- [x] Record that no download was started and that Defender/download-directory/free-space preparation checks were not performed.
-- [ ] Identify one exact, clearly authorized free/open-source artifact actually available through the existing Hydra configuration.
-- [ ] Verify publisher provenance and permission for the actual distribution route; do not assume OnlineFix or FitGirl entries are authorized.
-- [ ] After candidate identification, prepare a fresh read-only baseline and obtain user approval of the exact download-only plan.
-- [ ] Perform the approved download-only Hydra experiment; capture sanitized process/network/filesystem evidence and artifact metadata, hashes, signatures, Defender results, and static inspection.
-- [ ] Report evidence before considering any installation or execution; execution requires separate explicit approval and an isolated environment.
-
-
-### 2026-11-04 — Mindustry candidate review
-- [x] Record the supplied read-only candidate review and no-go decision for Mindustry (Steam app 1127400).
-- [x] Record that Hydra v4.1.4 showed one OnlineFix option but the specific payload/release and distribution authorization were not verified.
-- [x] Record OpenTTD's “No downloads available” result and that no qualifying candidate was found.
-- [ ] Continue read-only search for an exact authorized artifact available through the existing Hydra configuration; do not weaken criteria or change sources.
-- [ ] Only after a qualifying candidate is evidenced, prepare a fresh baseline and request explicit approval for a download-only Hydra test.
-
-See [Mindustry candidate review](checkpoints/2026-11-04-mindustry-candidate-review.md).
-
-**Priority correction:** catalogue coverage/missing-title work is no longer the main workstream. Resume it only when it directly helps identify an authorized test artifact. See [2026-11-04 security continuation checkpoint](checkpoints/2026-11-04-security-continuation.md).
+**Current disposition:** No test artifact is approved. This is a provenance/authorization blocker, not evidence that Hydra or a source is malicious. Catalogue coverage is not the main workstream unless a targeted read-only check helps identify a qualifying artifact. See [second candidate search](checkpoints/2026-11-04-second-candidate-search.md), [Mindustry review](checkpoints/2026-11-04-mindustry-candidate-review.md), and [security continuation checkpoint](checkpoints/2026-11-04-security-continuation.md).
