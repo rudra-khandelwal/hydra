@@ -167,3 +167,18 @@ A separate candidate-review checkpoint was added for potential static analysis o
 The checkpoint defines a read-only baseline and post-approval static-inspection procedure, and distinguishes direct official-publisher artifact analysis from Hydra download-path analysis. No artifact was downloaded, installed, or executed. No Hydra application source, configuration, or local checkout was modified. The Hydra download-path experiment remains blocked by the previously recorded source-distribution authorization gap.
 
 See [official-publisher candidate checkpoint](checkpoints/2026-11-04-official-publisher-static-analysis-candidates.md).
+
+
+### [RUDRA] PuTTY 0.85 download-only approval
+The user explicitly approved downloading only the official PuTTY 0.85 64-bit x86 standalone putty.exe for security analysis. The approval did not include installation or execution and did not authorize any changes to the Hydra application checkout, settings, or configured sources.
+
+### [CODEX REPORT] PuTTY 0.85 artifact and cryptographic verification
+The supplied report records putty.exe at 1,706,136 bytes with SHA-256 d01fdb5aae8f112526040a39b0bfb9e27d813003178645e65f8d1cfdb2a26c87, exactly matching the official w64/putty.exe manifest entry. Authenticode was Valid with signer Simon Tatham. The executable GPG signature was Good signature. The sha256sums.gpg file was initially passed to GPG using detached-signature syntax and failed; inspection identified it as a clear-signed PGP message, and verification using the correct format returned Good signature. Both GPG checks used fingerprint 1A07 DAC0 F220 CF12 248E A719 5C67 D0F8 8BC3 E5B5. GPG key trust remains uncertified in the local keyring. Defender's command-line scan reported no threats; Defender status could not be independently queried because the status cmdlet failed to load. PuTTY was not run or installed.
+
+### [CODEX REPORT] Static inspection unavailable
+The subsequent Codex pass confirmed the artifact size and hash and reported PuTTY 0.85 version metadata. PE inspection could not be performed because objdump, strings, dumpbin, llvm-readobj, and sigcheck were unavailable and Python was inaccessible. No tool was installed. No verified PE-section, import/export, embedded-string/endpoint, dependency, packing, or obfuscation findings exist. The work is pending until a trusted, already-available static-analysis toolchain can be used without running the artifact.
+
+### [CHATGPT] Five-message handoff review reconciled
+The repository's five-message cadence is manual, not an automatic background updater. The available repository and prior conversation context did not establish a specific reason or decision for pausing the report. The supported explanation is that the manual counter/checkpoint was not deliberately carried forward while the research focus moved through candidate provenance and PuTTY verification. The accumulated work has now been documented in a dated handoff; the cadence counter is reset to 0/5. This direct-publisher artifact analysis remains separate from the blocked Hydra download-path experiment.
+
+See [PuTTY artifact-analysis handoff](checkpoints/2026-11-04-putty-static-analysis-handoff.md).
