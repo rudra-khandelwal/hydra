@@ -55,7 +55,7 @@ The live guide is available at `https://rudra-khandelwal.github.io/hydra/` for d
 The latest Pages workflow run (#7) for commit `171fc032305750e1c35bad7952073cb8c3877155` completed successfully. The earlier failed deployment remains visible as historical deployment history in GitHub.
 
 ### [CHATGPT] Live guide data model
-The live HTML now treats GitHub as the source of truth: public repository metadata, recent commits, GitHub Actions status, repository file tree, and research diary/agenda/findings are fetched from GitHub when the page loads.
+The public HTML now treats GitHub as the source of truth: public repository metadata, recent commits, GitHub Actions status, repository file tree, and research diary/agenda/findings are fetched from GitHub when the page loads.
 
 ### [RUDRA] Main repository live-guide link
 The main GitHub repository README now exposes the public research guide directly at `https://rudra-khandelwal.github.io/hydra/` for easy visitor access.
@@ -64,7 +64,7 @@ The main GitHub repository README now exposes the public research guide directly
 The repository README was updated to prominently link the live GitHub Pages guide and document that GitHub is the source of truth for the live research record.
 
 ### [CHATGPT] Public guide restoration and favicon
-The public GitHub Pages guide was rebuilt from the earlier v4 research guide content, restoring the documented research checkpoint, daily research routine, verified Windows toolchain details, troubleshooting history, final clean command sequence, and a single copy-paste setup block. Private vault controls and encrypted credential material were not carried into the public site.
+The public GitHub Pages guide was rebuilt from the earlier v4 research guide content, restoring the documented research checkpoint, research routine, verified Windows toolchain details, troubleshooting history, final clean command sequence, and a single copy-paste setup block. Private vault controls and encrypted credential material were not carried into the public site.
 
 ### [RUDRA] Main README cleanup
 Removed the prominent live-guide banner from the main repository README as requested. The live guide remains the GitHub Pages site, while the HTML itself provides direct repository/research navigation.
@@ -85,7 +85,7 @@ The public guide navigation was corrected so desktop/tablet side navigation stay
 The responsive navigation was consolidated so desktop/tablet uses a single fixed sidebar model and mobile keeps the slide-out model. The duplicate desktop CSS override was removed, the old title-bar repository button was removed so only the hero GitHub button remains, and the Overview target received an explicit scroll offset. The GitHub→guide opener bridge now refreshes the originating GitHub tab once via reload and the hero repository button focuses that originating tab when available; direct opens fall back to the repository link in a new tab.
 
 ### [CHATGPT] Research notes editor redesign
-The public guide's Research Notes section was upgraded from a plain text note workflow to a rich editor. A saved note now creates a new numbered section after the original guide sections (17, 18, 19, …), with a user-defined section title and a corresponding sidebar entry.
+The Research Notes section was upgraded from a plain text note workflow to a rich editor. A saved note now creates a new numbered section after the original guide sections, with a user-defined section title and a corresponding sidebar entry.
 
 ### [CHATGPT] Created-section navigation
 Created research notes now render as full research-panel sections and are added to a dedicated sidebar group. New entries use the same navigation/entry animation language as the guide, and saving a note automatically scrolls to the newly created section. Only user-created sections can be deleted; the original guide sections remain protected.
@@ -108,101 +108,44 @@ Today's guide/editor work is considered complete for the day. Historical diary e
 ### Next checkpoint
 Verify the latest GitHub Pages deployment in a browser, test creating/formatting/deleting a research note on the live guide, then continue the controlled Hydra security research cycle and record the next substantive runtime test.
 
-
 ## 25 September 2026
 
 ### [CHATGPT] Fresh-session security checkpoint
-A new research day was started with a fresh Hydra runtime observation cycle. Existing historical diary entries were preserved rather than rewritten.
+A new research day was started with a fresh Hydra runtime observation cycle.
 
 ### [CHATGPT] Download-source API correlation
-Hydra requests to the game download-source endpoint were observed with source IDs `BVnaGLvo` and `w4nVajB6`. The API returned a concrete download-source record associated with `w4nVajB6` and the source name `FitGirl`, including URI/torrent metadata. The full magnet/tracker data was not copied into the public diary because it is unnecessary to the security finding.
+A Hydra API request and returned download-source metadata were correlated with the client handling path. This established an architectural trust boundary, not proof that a peer/tracker transfer occurred.
 
-### [CHATGPT] Source-code correlation
-Repository source inspection showed that Hydra maintains a local `downloadSources` store and synchronizes source definitions with the Hydra API. The client also exposes API-backed source creation and synchronization logic. This strengthens the architectural model in which the Hydra API is a trust boundary between the client and configured download-source metadata.
+### [CHATGPT] Antivirus/AMSI control observation
+The EICAR test string was blocked while being assigned in PowerShell. No valid EICAR file or Defender quarantine event was established; the result is limited to script/content interception.
 
-### [CHATGPT] Trust-boundary conclusion
-The current evidence demonstrates metadata flow from Hydra API responses into the Hydra client and local source storage. It does not establish peer/tracker communication or behavior of a downloaded executable. Those require a separate controlled download and analysis experiment.
+## 29 October 2026
 
-### [CHATGPT] Antivirus control result
-Windows antivirus/AMSI blocked the EICAR test string at the PowerShell command stage. Because the assignment was blocked before a valid test file was established, the result is recorded as an AV interception control rather than a completed EICAR-file quarantine test. No Defender threat-history record was displayed by the queried cmdlets in the captured output.
-
-### [RUDRA] Public-evidence handling
-The public research record will retain conclusions and reproducible methodology while avoiding publication of credentials, authentication data, raw sensitive logs, or unnecessary redistribution metadata.
-
-### Next checkpoint
-Perform a controlled download test with a legitimate free/open-source artifact, then compare process, network, filesystem, hash, and Defender observations before considering execution.
-
-
-### [CHATGPT] Responsive multi-environment guide foundation
-The public guide was upgraded to use a responsive foundation for desktop, laptop, tablet, and phone viewports while preserving the existing visual design and content. The layout now adapts navigation, spacing, typography, grids, tables, code blocks, research panels, and note-editor controls to available screen width.
-
-The mobile navigation becomes a touch-friendly slide-out menu with keyboard Escape support and automatic closing after navigation. Safe-area insets, dynamic viewport height, touch targets, reduced-motion preferences, forced-colors support, and horizontal overflow handling were added so the same guide can be used across mouse, keyboard, touch, and narrow-screen environments.
-
-### [CHATGPT] Responsive design basis
-The responsive changes follow the current web platform approach of flexible layouts, media/container-aware adaptation, responsive typography, touch interaction, accessibility, and overflow-safe components. The implementation keeps the guide as a single HTML page rather than creating separate desktop/mobile versions.
-
-
-### [CHATGPT] GitHub Actions runtime warning cleanup
-The GitHub Pages workflow was updated after a successful deployment still reported a Node.js 20 deprecation annotation. First-party actions were moved to Node 24-compatible current major versions: `checkout@v7`, `configure-pages@v6`, `upload-pages-artifact@v5`, and `deploy-pages@v5`. The runner was pinned to `ubuntu-24.04` so the repository is not silently moved by the upcoming `ubuntu-latest` → Ubuntu 26.04 migration. The warning was treated as maintenance debt rather than a deployment failure.
-
-### [CHATGPT] Project control structure established
-A canonical project-memory and repository-control layer was added so future work can continue from repository state rather than hidden conversation context. The new control set includes project memory, goal, repository map, change control, lessons/mistake prevention, and a validation matrix. The live guide now exposes these through section 17, Project Control Center; user-created notes are reserved for section 18 onward.
-
-### [CHATGPT] Public-state consistency audit
-Repository documentation was audited after the earlier public-visibility transition. Stale descriptions of the workspace as private were corrected in the project, security, contribution, upstream, and publication-safety documents. The duplicate case-variant checkpoint directories were consolidated to the canonical lowercase `research/checkpoints/` path because Windows filesystems commonly treat case variants as the same path.
-
-### [CHATGPT] Persistent change-control rule
-The project now explicitly distinguishes **Implemented**, **Deployed**, and **Live-verified** states. A green GitHub Actions run is not treated as clean without checking annotations and runtime warnings.
-
-
-### [CHATGPT] Full repository A-to-Z audit
-The current `main` tree was reviewed against the repository map, public-guide source, control documents, research records, security-research scaffolding, provenance notes, and the Pages workflow. The audit found and corrected two current-state documentation drifts: deployment references that still pointed to older Pages runs, and evidence-directory documentation that described reserved folders as if they already existed. The published guide source also contained a Project Map CSS rule that forced its labels to lowercase despite the documented title-case requirement; that rule was corrected and a redundant narrow-screen hide rule was removed.
-
-The latest GitHub Pages run (#108) for the then-current `main` commit completed successfully. Its deploy job log still contains the Node.js `DEP0040` punycode deprecation warning emitted during `actions/deploy-pages@v5`; this remains maintenance debt rather than a deployment failure. Source-level structure and secret-pattern checks were clean in the final audit. Browser-level live verification remains pending because the published page was not directly exercised in this audit pass.
-
-
-## 25 September 2026 — A-to-Z geometry correction
-
-### [CHATGPT] Secondary rail breakpoint audit
-A repository-wide static audit found one remaining layout edge case in the published guide: the Project Map was displayed from 1280px even though the centered 1180px page leaves insufficient outer margin for the 155px Project Map plus its 14px gap before the detailed 250px sidebar. The rail could therefore overlap the detailed sidebar at common desktop widths.
-
-### [CHATGPT] Correction
-The Project Map is now displayed only at viewport widths of 1536px and above. The detailed sidebar remains available at 881px and above, and the mobile slide-out behavior is unchanged.
-
-### Next checkpoint
-Inspect the newest Pages run for the geometry correction, then directly exercise the live guide at representative widths (phone, tablet, 1280px desktop, and 1536px+ wide desktop).
-
-
-### [CHATGPT] Geometry correction deployed
-GitHub Pages workflow run #118 completed successfully for commit `c2e441b7e31170b6151510513278a0650fcdacc2`. The deployment log retained the Node.js DEP0040/punycode warning already observed in earlier runs. Browser-level live verification remains pending because the published page still needs direct exercise.
-
+### [CHATGPT] Runtime and controlled-download handoff
+The project handoff separated build/configuration/API/catalogue questions from source trust, download behavior, and artifact safety. The prescribed next experiment was a download-only test of an authorized artifact, followed by static inspection. Installation/execution requires a separate approval and isolated environment.
 
 ## 4 November 2026
 
 ### [RUDRA] Download-source coverage screenshots
-Hydra v4.1.4 screenshots showed onlinefix (2,784 options) and FitGirl (7,127 options), both marked up to date. Granny: Escape Together appeared under onlinefix; Granny Remake displayed one option; original Granny displayed no downloads. Geometry Dash displayed no downloads and returned zero results under each source filter. These observations support limited source coverage for the tested entries. They do not capture the game-specific API response and do not establish a matching bug. See [dated handoff](checkpoints/2026-11-04-download-source-investigation.md).
+Hydra v4.1.4 screenshots showed onlinefix and FitGirl source counts/status and mixed availability across the tested game entries. These observations support limited source coverage for those entries; they do not by themselves establish an application bug or malicious behavior.
 
 ### [CHATGPT] Read-only code-path review
-The local checkout at `fdbc5272720f96a634428ea47e33143fe4d4d393` reads `MAIN_VITE_API_URL` and requests `/games/{shop}/{objectId}/download-sources`. The shared filter discards records whose URIs do not map to supported HTTPS host prefixes or magnet URIs. Big Picture maps request exceptions to the same `no-download-options` category as empty/unsupported results. No game-specific response was captured; no app file was changed and no content was downloaded.
-
-### [CHATGPT] Documentation continuity and cadence
-A current-state guide, dated handoff, and manual five-user-message checkpoint were added to the public docs workflow. The counter is 0/5 after this handoff. There is no reliable automatic cross-chat counter or background repository writer.
-
+The local checkout was reviewed read-only for API configuration, game-specific source requests, URI filtering, and user-facing availability state. A game-specific response was not captured; no application file was changed and no content was downloaded.
 
 ### [CHATGPT] Source collection inventory access blocked
-A read-only review of the configured source records confirmed exact JSON URLs were present locally; the URLs were not copied into this public diary. Hydra Settings showed onlinefix at 2,843 and FitGirl at 7,210 download options. Direct GET attempts to the exact configured URLs both returned HTTP 403 Forbidden. No URI fields were read or retained, and no alternate path was attempted. Unique-title, duplicate-title, overlap, and target-title counts therefore remain unknown. Next action is to obtain publisher-authorized read-only access/export for these same JSON files. No sources or app files changed; existing app worktree changes remain preserved.
+Direct GET requests to the exact configured source JSON URLs returned HTTP 403. No JSON payload was parsed and no alternate path, mirror, or bypass was attempted. Counts/overlap at the unique-title level therefore remain unknown.
 
-## 4 November 2026 — Security-first objective reaffirmed
+### [USER] Security-first objective reaffirmed
+The user confirmed that prior runtime, source/API, trust-boundary, code-inspection, and AV/AMSI observations should be treated as substantial completed historical work. The main remaining experiment is a controlled download-only test through Hydra, gated on an exact authorized artifact.
 
-### [USER] Existing security work and remaining experiment
-The user confirmed that the prior work should be treated as substantial completed security research. Existing records already document Windows runtime baseline collection, Hydra/Electron process and HTTPS observations, source/API metadata correlation, source trust-boundary review, client-code inspection, and the EICAR/AMSI interception observation. The EICAR string was blocked during PowerShell assignment; no valid EICAR file or quarantine event was established.
-
-### [CODEX REPORT] Artifact selection
-Hydra v4.1.4 was checked for OpenTTD, which displayed “No downloads available.” The report did not establish a clearly legitimate, free/open-source, authorized artifact through the existing OnlineFix and FitGirl sources. No download was started. Defender status, download location, free space, and fresh machine baseline were not checked during this pass.
-
-### [CHATGPT] Priority decision
-The catalogue/source-availability detour must not displace the original security objective. The next major experiment remains a download-only test through Hydra, but only after identifying one exact artifact with verifiable publisher provenance and clear permission for the distribution route. A direct publisher download may support a separate artifact-analysis experiment, but cannot be represented as a Hydra download-path test. No app code, settings, sources, or local checkout state were changed by this documentation entry.
-
+### [CODEX REPORT] Initial artifact selection
+OpenTTD displayed “No downloads available.” No suitable authorized artifact was identified and no download was started. Fresh Defender/download-directory/free-space checks were not done during that selection pass.
 
 ### [CODEX REPORT] Mindustry candidate review
-The read-only review found no candidate meeting all five eligibility conditions. Mindustry (Steam app 1127400) was the sole plausible candidate: Hydra v4.1.4 displayed one OnlineFix option, while the official project/repository and GPL-3.0 licence were identified. The specific OnlineFix payload/release could not be matched to an official Mindustry distribution and its authorization was not established. The option was not opened and its URI was not exposed. OpenTTD again showed “No downloads available.” No download, installation, execution, source/settings change, or application/local-checkout modification occurred. The candidate is not approved. See [candidate review](checkpoints/2026-11-04-mindustry-candidate-review.md).
+Hydra v4.1.4 displayed one OnlineFix option for Mindustry (Steam app 1127400). The official project/repository and GPL-3.0 licence were identified, but the specific OnlineFix payload/release and authorization of that distribution were not verified. The option was not opened and its URI was not exposed. OpenTTD again showed “No downloads available.” No download, installation, execution, source/settings change, or application/local-checkout modification occurred. Mindustry was not approved.
+
+### [CODEX REPORT] Second read-only candidate search
+The follow-up search checked Mindustry, OpenTTD, Hedgewars, Battle for Wesnoth, and SuperTuxKart. No title met all requirements. Mindustry remained the strongest lead but ineligible because the OnlineFix distribution could not be matched to an official release or otherwise authorized route. OpenTTD showed “No downloads available”; no current downloadable entry was established for Hedgewars, Battle for Wesnoth, or SuperTuxKart. The report described a focused search, not exhaustive enumeration. No download links were opened, no URI was exposed, and no download, installation, execution, settings/source change, or application/local-checkout modification occurred. See [second candidate search](checkpoints/2026-11-04-second-candidate-search.md).
+
+### [CHATGPT] Security decision
+No artifact is approved. The controlled Hydra download remains blocked on provenance/authorization evidence. Failure to meet the candidate gate is not evidence that Hydra or any configured source is malicious. The next useful step is narrow: verify one exact existing source record against official publisher/release evidence, without opening download links or changing configuration. Only after that should a fresh pre-download baseline and explicit download-only approval be considered.
