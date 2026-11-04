@@ -65,6 +65,13 @@ The repository now contains a persistent project-memory and verification layer s
 
 The live guide exposes these same controls through section **17 — Project Control Center**.
 
+## Current project state
+
+- [Current verified state and safe next steps](docs/CURRENT-STATE.md)
+- [Latest dated handoff](research/checkpoints/2026-11-04-download-source-investigation.md)
+- [AI quickstart](docs/AI-AGENT-QUICKSTART.md)
+- [Five-message handoff cadence](docs/HANDOFF-CADENCE.md)
+
 ## Attribution
 
 Research contributions are labelled where practical:

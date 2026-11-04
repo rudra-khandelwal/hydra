@@ -5,7 +5,7 @@
 **Public guide:** `https://rudra-khandelwal.github.io/hydra/`  
 **Default branch:** `main`  
 **Project status:** Active public research/development workspace  
-**Last memory review:** 25 September 2026
+**Last memory review:** 4 November 2026
 
 ## Purpose
 
@@ -296,3 +296,12 @@ The project remains a defensive Hydra Launcher build and security-research works
 
 ### AI handoff rule
 Future assistants must read docs/PROJECT-MEMORY.md, inspect current repository state, check research/VALIDATION.md, and continue from the documented state. Repository state and dated evidence outrank old conversation assumptions. Private model internals or hidden reasoning are not part of the repository record.
+
+
+## Current state reviewed 4 November 2026
+
+Read [CURRENT-STATE.md](CURRENT-STATE.md) and [the 4 November handoff](../research/checkpoints/2026-11-04-download-source-investigation.md) before continuing. The local app checkout is reported at `main` / `fdbc5272720f96a634428ea47e33143fe4d4d393`; user-reported modifications to `package.json`, `yarn.lock`, and untracked `security-research/` must be preserved. A local Git status attempt errored, so the modification state was not independently verified. No app changes were made.
+
+The source investigation currently supports **coverage limitations**, not a proven URI matching bug. Screenshots showed onlinefix (2,784 options) and FitGirl (7,127 options), both up to date; Escape Together under onlinefix; Granny Remake with one option; original Granny without options; Geometry Dash with zero source-filter results under both sources. No specific API payload was captured. Keep that distinction explicit.
+
+The 4 November report resets the manual user-message handoff counter to 0/5. Follow [HANDOFF-CADENCE.md](HANDOFF-CADENCE.md). No automatic cross-chat message counter exists.

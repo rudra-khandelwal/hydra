@@ -1,6 +1,6 @@
 # Hydra — Master Memory Lane
 
-Last consolidated: 2026-10-29
+Last consolidated: 2026-11-04
 
 ## Purpose
 Canonical handoff record for continuing the user's Hydra Launcher work across future chats. Read this before continuing Hydra work. Do not repeat setup that is already confirmed working. Prefer current repository files over old chat instructions when the project changes. Distinguish confirmed facts from assumptions, reports, and unresolved issues.
@@ -260,3 +260,8 @@ The dedicated copy/paste command and AI-agent setup guide is [docs/AI-AGENT-QUIC
 Important: Docker Engine was not reachable in the user's last supplied check, 2026-10-31. OpenHands installation/launch has not yet been verified. Treat previously suggested OpenHands image tags and container commands as unverified until checked against current official instructions and tested on the machine. Do not claim a one-click launcher exists until it is created and validated.
 
 End of Hydra Master Memory Lane.
+
+
+## Current-state pointer (4 November 2026)
+
+This master memory preserves historical build and setup context. For the current download-source investigation, exact app checkout state, screenshot observations, current API/code-path notes, and the safe next action, see [docs/CURRENT-STATE.md](../docs/CURRENT-STATE.md) and [the dated handoff](../research/checkpoints/2026-11-04-download-source-investigation.md). Their dated state supersedes older “no downloads for every game” descriptions. The current source-coverage evidence does not prove an application bug. Continue to preserve the local app checkout's user-reported modifications.

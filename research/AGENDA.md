@@ -95,3 +95,14 @@ Use the detailed handoff at [research/checkpoints/2026-10-29-hydra-chat-handoff.
 - [ ] Publish sanitized evidence and update `research/DIARY.md`, `research/FINDINGS.md`, `research/VALIDATION.md`, and this agenda as evidence becomes available.
 
 Why this phase exists: build success, API/catalogue success, source trust, download behavior, and the safety of downloaded files are separate questions. The research must distinguish them and preserve reproducible evidence without overstating conclusions.
+
+
+### 2026-11-04 — Download-source coverage investigation
+- [x] Record screenshots for source counts/status and the four named game entries.
+- [x] Inspect current local API configuration and the app request/filter paths read-only.
+- [x] Preserve app checkout and user-reported modifications; do not change application files.
+- [ ] Capture a sanitized, read-only game-specific API response for one listed and one unlisted catalogue entry.
+- [ ] Compare response records and URI categories with `filterDownloadableRepacks`; distinguish request failure, empty response, and filtered response.
+- [ ] Confirm or reject a matching defect with reproducible evidence before considering an app change.
+
+**Current disposition:** source coverage limitation is supported by screenshots; an application bug is not established. See [current state](../docs/CURRENT-STATE.md) and the [4 November handoff](checkpoints/2026-11-04-download-source-investigation.md).

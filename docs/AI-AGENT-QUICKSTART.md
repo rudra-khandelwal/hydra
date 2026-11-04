@@ -10,7 +10,10 @@ Copy/paste command reference for continuing the Hydra Launcher source-build and 
 - **Research, memory, and public live guide repository:** https://github.com/rudra-khandelwal/hydra
 - **Official upstream application:** https://github.com/hydralauncher/hydra
 - **Canonical project memory:** [Hydra-Memory/README.md](../Hydra-Memory/README.md)
-- **Detailed current handoff:** [2026-10-29 handoff](../research/checkpoints/2026-10-29-hydra-chat-handoff.md)
+- **Current state:** [CURRENT-STATE.md](CURRENT-STATE.md)
+- **Latest handoff:** [4 November 2026 handoff](../research/checkpoints/2026-11-04-download-source-investigation.md)
+- **Previous handoff:** [29 October handoff](../research/checkpoints/2026-10-29-hydra-chat-handoff.md)
+- **Five-message cadence:** [HANDOFF-CADENCE.md](HANDOFF-CADENCE.md)
 - **Research agenda:** [AGENDA.md](../research/AGENDA.md)
 
 The public GitHub repository is a research/documentation workspace, not the actual Hydra application checkout.
@@ -100,7 +103,7 @@ Do not create or use this launcher until the exact OpenHands image, container ar
 
 ## 8. Project purpose and immediate task
 
-We are investigating the Windows source build and runtime behavior of Hydra Launcher. The immediate unresolved issue is that Hydra displayed **“No download available” for every game**.
+We are investigating the Windows source build and runtime behavior of Hydra Launcher. The current issue is source coverage: the configured onlinefix and FitGirl lists contain some games but not original Granny or Geometry Dash in the supplied screenshots. This does not prove an app bug. Read [CURRENT-STATE.md](CURRENT-STATE.md) and the latest handoff for evidence and next steps.
 
 Diagnose the layers separately:
 1. Hydra application code and runtime.
@@ -150,7 +153,7 @@ C:\Users\rudra\Downloads\hydra
 
 The GitHub repository rudra-khandelwal/hydra is the research/documentation workspace, not the application source.
 
-First inspect the local checkout, branch, HEAD, git status, current configuration, and tests. Do not reinstall existing tools without evidence. The immediate issue is Hydra showing "No download available" for every game. Diagnose API configuration, catalogue response, source metadata, and source availability separately.
+First inspect the local checkout, branch, HEAD, git status, current configuration, and tests. Do not reinstall existing tools without evidence. The current evidence is that source coverage varies. Read docs/CURRENT-STATE.md and the latest dated handoff. Capture a sanitized read-only API response for one listed and one unlisted game before diagnosing a matching bug.
 
 Do not download/install games or execute downloaded binaries. Do not invent API endpoints. Work on a separate branch, request approval before destructive operations or external downloads, protect credentials, run tests, and report only verified results. Update the GitHub research handoff with sanitized evidence.
 ~~~
@@ -171,3 +174,8 @@ Do not download/install games or execute downloaded binaries. Do not invent API 
 
 ---
 Keep this document current. If a command changes, verify it on the actual machine and update this page and canonical project memory together.
+
+
+## 13. Five-message handoff checkpoint
+
+Before each project turn, read [HANDOFF-CADENCE.md](HANDOFF-CADENCE.md) and carry forward the count from the latest handoff. Update the current state and dated handoff after the fifth user message, or sooner if meaningful state changes or work pauses. This is a manual checkpoint; there is no reliable automatic counter across chats.
