@@ -30,7 +30,7 @@
 
 - The observed local directory is `C:\Users\rudra\Downloads\hydra`; it is distinct from the public docs repo and official upstream.
 - The local checkout reports branch `main`, HEAD `fdbc5272720f96a634428ea47e33143fe4d4d393`, release v4.1.4.
-- User reports pre-existing changes in `package.json`, `yarn.lock`, and untracked `security-research/`. The directory exists. Git status failed (“this operation must be run in a work tree”), so do not claim independent status confirmation. Preserve these changes and all other checkout contents.
+- At the initial 4 November handoff, the three changes were user-reported because Git status failed. A subsequent read-only check succeeded and independently confirmed `M package.json`, `M yarn.lock`, and `?? security-research/`; preserve them and all other checkout contents.
 - Do not switch branches, reset, clean, stash, overwrite, commit, or modify the app checkout. Do not merge, release, or tag.
 
 ### Environment and launch
@@ -86,6 +86,14 @@ Perform a read-only comparison using one exact game/source entry that the UI lis
 
 If a record is returned with an otherwise valid URI and gets filtered out, preserve a minimal sanitized fixture and investigate a targeted regression test. If response is empty, record a source/API coverage limitation. If request fails, record the status/error separately from source absence. Do not make app edits until the evidence supports a defect and the user approves the change.
 
+## 4 November follow-up — live request capture remains unresolved
+
+The current app checkout was checked read-only with git status --short --branch, git branch --show-current, git rev-parse HEAD, and git log -1 --format="%H%n%s". Results: branch main; HEAD fdbc5272720f96a634428ea47e33143fe4d4d393; message “Merge pull request #2819 from hydralauncher/release/v4.1.4”; status remains M package.json, M yarn.lock, and ?? security-research/. No checkout file was edited.
+
+Read-only source searches used: rg -n --glob '!*.map' 'download-sources|downloadSourceIds|downloadSources' src/main src/renderer src/shared src/big-picture; and rg -n --glob '!*.map' 'MAIN_VITE_API_URL|BASE_URL' src/main electron.vite.config.ts .env.example. No test suite was run. The running Hydra UI was observed at the Schedule I page, route steam/3164500, displaying 16 download options. This is UI evidence for a nonempty entry, not the captured API response and not yet confirmation of which configured source returned it. The DevTools window was listed, but its live state could not be inspected because the UI control reported the window minimized. No status code, body, source IDs, or URI scheme/host categories were obtained. No synthetic request was issued, and no game was downloaded or run.
+
+Finding remains unresolved. Next, restore/focus the running Hydra window, obtain the absent game's exact shop and object ID from its app page, then inspect the actual DevTools Network entries for both games. Sanitize request evidence; omit authorization/cookie headers, full download URLs, signed query strings, and personal data. Do not modify app code until this comparison identifies a concrete failing stage.
+
 ## Handoff counter
 
-**User-message count since this handoff: 0/5.** Follow [HANDOFF-CADENCE.md](../../docs/HANDOFF-CADENCE.md). Update the current state and dated checkpoint at the fifth project-related user message, and sooner for meaningful state changes or before pausing. This is a documented manual checkpoint; no reliable automatic cross-chat counter or background GitHub updater has been configured.
+**User-message count since this handoff: 1/5.** Follow [HANDOFF-CADENCE.md](../../docs/HANDOFF-CADENCE.md). Update the current state and dated checkpoint at the fifth project-related user message, and sooner for meaningful state changes or before pausing. This is a documented manual checkpoint; no reliable automatic cross-chat counter or background GitHub updater has been configured.
