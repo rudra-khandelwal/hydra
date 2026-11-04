@@ -71,3 +71,16 @@ Historical agenda entries and completed milestones are retained in the research 
 - [ ] Keep Hydra download-path research separate and blocked until an exact existing Hydra entry is independently verified as an official or explicitly authorized distribution.
 
 **Current disposition:** The candidate-review and static-analysis plan is documented, but there is no approved artifact and no download. Direct official-publisher analysis will not be represented as a Hydra download-path test. See [official-publisher candidate checkpoint](checkpoints/2026-11-04-official-publisher-static-analysis-candidates.md).
+
+
+### 2026-11-04 — PuTTY 0.85 official-publisher artifact analysis
+- [x] Obtain explicit approval for the exact official PuTTY 0.85 64-bit x86 standalone executable, download-only.
+- [x] Record file identity, size, SHA-256, and exact match to the official manifest.
+- [x] Verify Authenticode and executable GPG signatures; record signer and key-trust limitation.
+- [x] Resolve the manifest-signature issue by identifying sha256sums.gpg as a clear-signed PGP message and verifying it in the correct format.
+- [x] Record Defender scan result and the unavailable Defender status cmdlet limitation.
+- [x] Attempt static inspection without executing the artifact; record the tool-availability blocker.
+- [ ] Resume PE static inspection when a trusted, already-available parser and string tool are available; do not install tools or execute PuTTY as part of this pending task.
+- [ ] Keep the direct official-publisher artifact analysis distinct from the still-blocked Hydra download-path experiment.
+
+**Current disposition:** Cryptographic checks and the Defender command-line scan are recorded with limitations. Static inspection is incomplete because required tools were unavailable. No installation or execution occurred. The Hydra download-path experiment remains blocked by source provenance/authorization. See [PuTTY artifact-analysis handoff](checkpoints/2026-11-04-putty-static-analysis-handoff.md).
