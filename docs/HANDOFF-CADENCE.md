@@ -1,7 +1,7 @@
 # Five-Message Handoff Cadence
 
-**Current counter:** 0 of 5 user messages since the PuTTY artifact-analysis handoff.  
-**Current checkpoint:** [PuTTY artifact-analysis handoff](../research/checkpoints/2026-11-04-putty-static-analysis-handoff.md)
+**Current counter:** 1 of 5 user messages since the PuTTY artifact-analysis handoff (early checkpoint after new embedded-help findings).  
+**Current checkpoint:** [PuTTY embedded-help metadata checkpoint](../research/checkpoints/2026-11-04-putty-embedded-help-metadata.md)
 
 ## Required routine for every AI continuing this project
 
