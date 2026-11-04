@@ -89,3 +89,21 @@ No final security verdict has been established.
 **Limitations:** Defender status, download directory, available disk space, and a fresh process/network/filesystem baseline were not checked in the latest artifact-selection pass. No inference can be made about the safety of an artifact that was not downloaded and examined.
 
 **Next Action:** Identify one exact, clearly authorized free/open-source artifact available through the existing Hydra configuration. Verify its publisher and distribution permission. Present the candidate and download-only plan for user approval before downloading. Do not change app settings or sources, or install/execute anything.
+
+
+## F-006 — Mindustry OnlineFix option is not a verified authorized test artifact
+
+**Date:** 4 November 2026  
+**Status:** Candidate rejected pending provenance/authorization evidence
+
+**Fact:** The supplied read-only candidate report states that Hydra v4.1.4 displayed one OnlineFix download option for Mindustry (Steam app 1127400). The official project/repository and GPL-3.0 licence were identified, but the specific OnlineFix payload/release was not matched to an official project release and the distribution route was not verified as authorized.
+
+**Observation:** The presence of an option and the project's open-source licence do not establish the provenance or authorization of that particular third-party entry. The option was not opened and its URI was not exposed.
+
+**Finding:** Mindustry does not currently satisfy the test-artifact eligibility criteria. Do not approve a Hydra download based on the available evidence. This is not evidence that Hydra, OnlineFix, or Mindustry is malicious; it is an unresolved provenance/authorization gap.
+
+**Other checked title:** OpenTTD displayed “No downloads available” and is not an available candidate under the current Hydra configuration.
+
+**Limitations:** No payload/source file was downloaded or inspected. No installation/execution occurred.
+
+**Next Action:** Continue read-only candidate identification against the existing configuration. Preserve all eligibility criteria. Once a specific candidate and distribution route are evidenced as authorized, prepare the fresh baseline and request explicit approval for a download-only experiment. See [Mindustry candidate review](checkpoints/2026-11-04-mindustry-candidate-review.md).
