@@ -15,7 +15,7 @@ These are three different locations:
 2. `C:\Users\rudra\Downloads\hydra` is the local Hydra app checkout.
 3. `hydralauncher/hydra` is the upstream app repository.
 
-For this handoff, the app checkout reported current branch `main` and exact HEAD `fdbc5272720f96a634428ea47e33143fe4d4d393` (release v4.1.4 merge). The user explicitly reports pre-existing modifications to `package.json`, `yarn.lock`, and untracked `security-research/`; preserve all three. The directory is present. A local `git status` attempt failed with “this operation must be run in a work tree,” even though Git returned the branch and HEAD. Therefore the modification list is user-reported, not independently confirmed by a successful status/diff. Do not attempt to repair Git metadata as part of this task.
+At the initial 4 November handoff, Git status had failed and the three changes were user-reported. A later read-only check succeeded: branch `main`, HEAD `fdbc5272720f96a634428ea47e33143fe4d4d393`, with modified `package.json` and `yarn.lock` and untracked `security-research/`. These are independently confirmed pre-existing changes; preserve them. No Git metadata repair was attempted.
 
 **Hard boundary:** do not switch branches, reset, overwrite, stash, clean, commit, or otherwise modify the app checkout. All requested changes belong in this documentation repository. Do not merge, release, or tag.
 
@@ -86,9 +86,17 @@ No app code was changed and no game was downloaded. **Current conclusion:** the 
 6. Capture reproducible sanitized evidence before proposing code changes. If a defect is confirmed, then add a minimal regression test and request approval before changing the app checkout.
 7. Do not add untrusted sources, download commercial games, install, or execute downloaded content. The immediate task is metadata diagnosis only.
 
+## Live app follow-up — 4 November 2026
+
+- Read-only checks succeeded: git status --short --branch returned branch main, with package.json and yarn.lock modified and security-research/ untracked. git rev-parse HEAD returned fdbc5272720f96a634428ea47e33143fe4d4d393; git log -1 --format="%H%n%s" identified “Merge pull request #2819 from hydralauncher/release/v4.1.4”. These pre-existing changes were preserved.
+- Read-only code searches were run with: rg -n --glob '!*.map' 'download-sources|downloadSourceIds|downloadSources' src/main src/renderer src/shared src/big-picture; and rg -n --glob '!*.map' 'MAIN_VITE_API_URL|BASE_URL' src/main electron.vite.config.ts .env.example. Relevant source files already identified in this handoff remain the main API service, game-details context, Big Picture download-options hook, and shared URI filter.
+- The running app UI showed the Schedule I game page at the Steam route with object ID 3164500 and displayed 16 download options. This identifies a candidate nonempty game entry; the exact configured source membership and underlying API payload were not captured.
+- The Hydra and DevTools windows appeared in the app inventory, but the computer-use interface reported the target windows as minimized and did not expose their live state. No game-specific request status, response body, source IDs, or URI formats were captured. No direct API request was substituted, since configured source IDs and a comparison game's exact ID were not established from live evidence.
+- No game was downloaded, installed, or executed. No app files were changed. The UI still needs a fresh live capture with the exact absent-game ID taken from the app, followed by the listed-game comparison; record status, response shape/count, configured source IDs, and URI scheme/host category only.
+
 ## Five-message handoff checkpoint
 
-**Counter after this handoff: 0 of 5 user messages.** Each AI continuing the project must read [handoff cadence](HANDOFF-CADENCE.md), increment the counter for each new user message about this project, and update the current handoff plus diary/agenda when message 5 is reached. Record the new counter in the replacement handoff. Also update immediately for any material change or when work pauses. There is no verified background counter or automatic GitHub writer; do not claim that this cadence runs automatically.
+**Counter after this handoff: 1 of 5 user messages.** Each AI continuing the project must read [handoff cadence](HANDOFF-CADENCE.md), increment the counter for each new user message about this project, and update the current handoff plus diary/agenda when message 5 is reached. Record the new counter in the replacement handoff. Also update immediately for any material change or when work pauses. There is no verified background counter or automatic GitHub writer; do not claim that this cadence runs automatically.
 
 ## Public-repository review
 
