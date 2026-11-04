@@ -76,3 +76,22 @@ Never mark a live-browser behavior “verified” from source inspection alone.
 | Install/execute analysis | Not performed | Separate explicit approval and isolated environment required. |
 
 Direct-from-official-publisher analysis is a distinct experiment. It cannot be counted as evidence about Hydra's downloader or configured third-party sources. See [official-publisher candidate checkpoint](checkpoints/2026-11-04-official-publisher-static-analysis-candidates.md).
+
+
+## Official-publisher artifact analysis — PuTTY 0.85 (4 November 2026)
+
+| Check | Status | Evidence/limitation |
+|---|---|---|
+| Explicit download-only approval | Complete | User approved only the official 64-bit x86 standalone putty.exe; no install/execute approval. |
+| Artifact identity and size | Reported and recorded | putty.exe, PuTTY 0.85, 1,706,136 bytes. |
+| SHA-256 against official manifest | Match | d01fdb5aae8f112526040a39b0bfb9e27d813003178645e65f8d1cfdb2a26c87 matched w64/putty.exe. |
+| Authenticode | Valid | Windows reported signer Simon Tatham. |
+| Executable GPG signature | Good signature | PuTTY Releases key fingerprint 1A07 DAC0 F220 CF12 248E A719 5C67 D0F8 8BC3 E5B5; local GPG trust not certified. |
+| sha256sums.gpg manifest signature | Good signature | Original 17,124-byte file is clear-signed PGP, not detached; verified with correct GPG method. Key trust limitation remains. |
+| Windows Defender command-line scan | No threats found | Defender status cmdlet could not load; real-time protection state not independently confirmed. |
+| PE static inspection | Blocked / incomplete | objdump, strings, dumpbin, llvm-readobj, sigcheck unavailable; Python inaccessible; no tool installed. No verified PE structure/import/string/dependency/packing findings. |
+| Installation / execution | Not performed | Download-only approval did not authorize running or installing PuTTY. |
+| Hydra app checkout/settings/sources | Untouched | No changes made. |
+| Hydra download-path experiment | Still blocked | PuTTY is a direct official-publisher artifact, not an artifact obtained through Hydra. No existing Hydra source entry has verified authorization. |
+
+See [PuTTY artifact-analysis handoff](checkpoints/2026-11-04-putty-static-analysis-handoff.md).
