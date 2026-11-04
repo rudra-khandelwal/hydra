@@ -157,6 +157,6 @@ The guide preserves the earlier Claude visual design while incorporating the cur
 This repository is an independent research/development workspace. It is not an official Hydra repository and does not speak for the Hydra maintainers.
 
 ---
-Last maintained: 25 September 2026
+Last maintained: 4 November 2026
 
 The repository is public; all committed history should be treated as publicly readable.
