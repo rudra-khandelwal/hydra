@@ -215,3 +215,14 @@ Windows reported a valid Authenticode signature with signer Simon Tatham. The ex
 Codex attempted static inspection but could not proceed: objdump, strings, dumpbin, llvm-readobj, and sigcheck were unavailable, and Python was inaccessible. No analysis tool was installed. There are no verified findings for PE sections, imports/exports, resources beyond version/help metadata, embedded strings/endpoints, dependencies, packing, or obfuscation. Static inspection remains pending. PuTTY was not opened, executed, or installed. No app checkout, Hydra setting, or configured source was changed.
 
 This direct official-publisher artifact analysis is separate from the Hydra download-path experiment. The latter remains blocked because no exact existing Hydra source entry has been verified as an official or explicitly authorized distribution. See [PuTTY artifact-analysis handoff](../research/checkpoints/2026-11-04-putty-static-analysis-handoff.md).
+
+
+## PuTTY 0.85 static-analysis update — 4 November 2026
+
+The direct official-publisher analysis has advanced through PE structure, printable strings, section entropy, PE resources, and raw-byte metadata parsing of the embedded HTML Help container. See the [embedded-help metadata checkpoint](https://github.com/rudra-khandelwal/hydra/blob/main/research/checkpoints/2026-11-04-putty-embedded-help-metadata.md) for detailed results and limitations.
+
+**Artifact identity:** 1,706,136 bytes; SHA-256 `d01fdb5aae8e112526040a39b0bfb9e27d813003178645e65f8d1cfdb2a26c87`. The user-supplied Codex reports state that the hash and size remained unchanged across inspections. PuTTY was never loaded, launched, installed, or executed.
+
+**Static findings:** x64 Windows GUI PE; dumpbin header/import/export inspection completed; 10,241 ASCII and 1,045 UTF-16LE strings extracted; section entropy calculated; 24 PE resource leaves parsed with no malformed or out-of-bounds branches reported. The large resource type ID 2000 is 365,163 bytes and begins with ITSF. Its ITSF v3/ITSP v1 directory metadata was parsed directly from raw bytes, identifying 561 PMGL entries: 9 section-0 uncompressed entries and 552 section-1 MSCompressed/LZX entries. Names include `/index.html` as a filename-only landing-page candidate and `/chm.css`. No internal content was extracted, decompressed, rendered, or executed.
+
+The embedded compiled-help resource plausibly explains the high `.rsrc` entropy and is consistent with the version string “with embedded help.” No clearly malicious indicator was identified in the inspected evidence; this is not a safety verdict. Runtime behavior, help content/default topic, independent GPG key trust, and Defender real-time status remain unresolved. The Hydra download-path experiment remains separately blocked; direct publisher download does not test Hydra.
