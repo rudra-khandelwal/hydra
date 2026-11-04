@@ -94,7 +94,7 @@ Never mark a live-browser behavior “verified” from source inspection alone.
 | Trust-boundary review | Complete (architectural) | Hydra client, API, community metadata, and third-party infrastructure distinguished. |
 | Client-code inspection | Complete for prior scope | Relevant source storage, sync, request, and URI-filter paths inspected; not a full code security audit. |
 | EICAR/AMSI interception | Observed with limitation | EICAR string blocked during PowerShell assignment. No valid EICAR file or quarantine event established. |
-| Authorized artifact available through existing Hydra sources | Blocked / not established | OpenTTD showed “No downloads available”; no alternative authorized candidate verified. |
+| Authorized artifact available through existing Hydra sources | Blocked / not established | Mindustry showed one OnlineFix option, but the specific payload/release and distribution authorization were not verified; OpenTTD showed “No downloads available”. See the [candidate review](checkpoints/2026-11-04-mindustry-candidate-review.md). |
 | Fresh pre-download Defender/directory/disk/baseline preparation | Not performed for latest selection | Do only after a candidate is identified and before download. |
 | Controlled download through Hydra | Pending | No download started. |
 | Download-time process/network/filesystem differential | Pending | No controlled download experiment. |
