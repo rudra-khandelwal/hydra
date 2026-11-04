@@ -94,9 +94,42 @@ No app code was changed and no game was downloaded. **Current conclusion:** the 
 - The Hydra and DevTools windows appeared in the app inventory, but the computer-use interface reported the target windows as minimized and did not expose their live state. No game-specific request status, response body, source IDs, or URI formats were captured. No direct API request was substituted, since configured source IDs and a comparison game's exact ID were not established from live evidence.
 - No game was downloaded, installed, or executed. No app files were changed. The UI still needs a fresh live capture with the exact absent-game ID taken from the app, followed by the listed-game comparison; record status, response shape/count, configured source IDs, and URI scheme/host category only.
 
+
+## Live API capture — 4 November 2026
+
+### Evidence
+
+Hydra was open on Geometry Dash at route `/game/steam/322170`. Developer Tools Network had Preserve log enabled, Fetch/XHR selected, and the page was refreshed with a `download-sources` filter. No matching renderer Fetch/XHR appeared. This is consistent with the implementation: renderer `window.electron.hydraApi.get` crosses preload IPC and the main process performs Axios. The actual request and response were verified in the app's sanitized main-process network log. Full download URIs, credentials, cookies, authorization headers, and personal data were not copied.
+
+| Game | API path | HTTP response | Source IDs/names | URI scheme/category |
+|---|---|---|---|---|
+| Geometry Dash | `/games/steam/322170/download-sources` | 200; JSON `[]`; 0 records | Request included `BVnaGLvo` and `w4nVajB6`; no response records to identify a source | None |
+| Schedule I | `/games/steam/3164500/download-sources` | 200; JSON array; 16 records | All 16 response records identify `onlinefix` / `BVnaGLvo` | All 16 `magnet:`; full URIs redacted |
+
+Each page produced two identical logged calls. Settings showed source names onlinefix and FitGirl. The pairing `w4nVajB6` = FitGirl is inferred from the two-source list and the directly observed `onlinefix` ID; it was not independently confirmed from a response record.
+
+### Code trace and assessment
+
+1. `src/renderer/src/context/game-details/game-details.context.tsx` reads local source IDs and requests `/games/${shop}/${objectId}/download-sources` with `take: 100`, `skip: 0`; then `ensureArray`, `filterDownloadableRepacks`, and `setRepacks` process the response.
+2. `src/preload/index.ts` bridges `hydraApi.get` through IPC. `src/main/events/misc/hydra-api-call.ts` dispatches to `HydraApi.get`; `src/main/services/hydra-api.ts` performs Axios and logs network events.
+3. `src/shared/index.ts` filters repacks to those containing at least one URI recognized by a supported downloader. The successful empty Geometry Dash array means URI filtering did not cause its empty options. Schedule I's magnet URIs are accepted by the shared filter.
+4. `src/renderer/src/pages/game-details/modals/repacks-modal.tsx` renders the generic no-results state when filtered repacks are empty.
+
+**Confirmed immediate cause:** Geometry Dash's correctly routed Steam request returned HTTP 200 with an empty array. There was no request failure, response-shape mismatch, or URI filtering for those records (there were none). The response proves no matching source records were returned for this request; it does not establish whether the backend lacks coverage or applies a different server-side mapping/indexing rule.
+
+**Working comparison:** Schedule I returned 16 records from onlinefix, all magnet-scheme, which the app can display.
+
+### Commands and preservation
+
+Read-only commands included `git status --short`, `git rev-parse HEAD`, `git branch --show-current`, targeted `rg -n` searches, and focused `Get-Content` reads of request, filtering, and modal code. App checkout remains branch `main`, HEAD `fdbc5272720f96a634428ea47e33143fe4d4d393`; status remains `M package.json`, `M yarn.lock`, `?? security-research/`. No app files changed. No tests were run. No game was downloaded, installed, or executed.
+
+### Next step
+
+Check backend/source catalogue coverage and matching for Steam ID 322170 against the Schedule I record, using a documented read-only path. Do not change frontend filtering based on this evidence. Separately, the UI could report request errors, successful empty results, and all-filtered results distinctly; that UX improvement is not needed to explain this captured empty response.
+
 ## Five-message handoff checkpoint
 
-**Counter after this handoff: 1 of 5 user messages.** Each AI continuing the project must read [handoff cadence](HANDOFF-CADENCE.md), increment the counter for each new user message about this project, and update the current handoff plus diary/agenda when message 5 is reached. Record the new counter in the replacement handoff. Also update immediately for any material change or when work pauses. There is no verified background counter or automatic GitHub writer; do not claim that this cadence runs automatically.
+**Counter after this handoff: 2 of 5 user messages.** Each AI continuing the project must read [handoff cadence](HANDOFF-CADENCE.md), increment the counter for each new user message about this project, and update the current handoff plus diary/agenda when message 5 is reached. Record the new counter in the replacement handoff. Also update immediately for any material change or when work pauses. There is no verified background counter or automatic GitHub writer; do not claim that this cadence runs automatically.
 
 ## Public-repository review
 
