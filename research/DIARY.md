@@ -202,3 +202,7 @@ Hydra v4.1.4 was checked for OpenTTD, which displayed “No downloads available.
 
 ### [CHATGPT] Priority decision
 The catalogue/source-availability detour must not displace the original security objective. The next major experiment remains a download-only test through Hydra, but only after identifying one exact artifact with verifiable publisher provenance and clear permission for the distribution route. A direct publisher download may support a separate artifact-analysis experiment, but cannot be represented as a Hydra download-path test. No app code, settings, sources, or local checkout state were changed by this documentation entry.
+
+
+### [CODEX REPORT] Mindustry candidate review
+The read-only review found no candidate meeting all five eligibility conditions. Mindustry (Steam app 1127400) was the sole plausible candidate: Hydra v4.1.4 displayed one OnlineFix option, while the official project/repository and GPL-3.0 licence were identified. The specific OnlineFix payload/release could not be matched to an official Mindustry distribution and its authorization was not established. The option was not opened and its URI was not exposed. OpenTTD again showed “No downloads available.” No download, installation, execution, source/settings change, or application/local-checkout modification occurred. The candidate is not approved. See [candidate review](checkpoints/2026-11-04-mindustry-candidate-review.md).
