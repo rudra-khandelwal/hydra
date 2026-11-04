@@ -59,3 +59,20 @@ Direct download from an official publisher may be used for a separate artifact-a
 ## Rule
 
 Never mark a live-browser behavior “verified” from source inspection alone.
+
+
+## Official-publisher artifact-analysis preparation — 4 November 2026
+
+| Check | Status | Evidence/limitation |
+|---|---|---|
+| Separate official-publisher candidate review | Documented; evidence inherited from supplied report | PuTTY 0.85, 7-Zip 26.05, and Notepad++ 8.9.8.1 recorded with unresolved fields. |
+| Provisional candidate recommendation | PuTTY 0.85 (not approved) | Reported MIT licence and official GPG/Authenticode guidance; exact package size and package-specific signer/verification evidence still need confirmation. |
+| 7-Zip 26.05 | Candidate; not approved | Reported 1.6 MB x64 EXE and mixed LGPL/BSD/unRAR terms; exact installer signature/checksum not verified. |
+| Notepad++ 8.9.8.1 | Lead only; not approved | Reported Windows packages and SHA-256 metadata; release date/current stable status, size, and signature/publisher details unconfirmed. |
+| Fresh Windows/Defender/download-directory/disk/process/network baseline | Not performed | Perform only after a specific artifact is selected and before an explicitly approved download. |
+| Official-publisher artifact download | Not performed | Requires explicit approval for the exact package and URL. |
+| Hash/signature/Defender/static inspection | Not performed | No artifact downloaded. |
+| Hydra download-path experiment | Still blocked | No existing Hydra entry has been verified as an official or explicitly authorized distribution. |
+| Install/execute analysis | Not performed | Separate explicit approval and isolated environment required. |
+
+Direct-from-official-publisher analysis is a distinct experiment. It cannot be counted as evidence about Hydra's downloader or configured third-party sources. See [official-publisher candidate checkpoint](checkpoints/2026-11-04-official-publisher-static-analysis-candidates.md).
