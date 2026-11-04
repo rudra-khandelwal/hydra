@@ -159,3 +159,11 @@ Mindustry remains an unapproved lead only: Hydra v4.1.4 showed one OnlineFix opt
 The investigation stopped without opening download links, exposing URIs, bypassing HTTP 403, changing Hydra settings/sources, modifying the application checkout, downloading, installing, or executing anything. No new malware or safety conclusion follows from this candidate-selection result.
 
 **Disposition:** Keep the Hydra download-path experiment blocked until new exact-source provenance and authorization evidence is available. Do not broaden catalogue searches by default. A direct-from-official-publisher artifact analysis, if separately approved later, would not test Hydra's download path.
+
+
+### [CHATGPT] Official-publisher artifact-analysis candidate checkpoint
+A separate candidate-review checkpoint was added for potential static analysis of software obtained directly from its official publisher. The user-supplied research report identified PuTTY 0.85, 7-Zip 26.05, and Notepad++ 8.9.8.1 as candidates with differing evidence gaps. PuTTY is recorded as a provisional preference based on the reported MIT licence and official GPG/Authenticode guidance; its exact selected package size and package-specific signing details remain unverified. 7-Zip's reported x64 installer is approximately 1.6 MB, but its licence is mixed and the specific installer's signature/checksum was not verified. Notepad++'s release date/current stable status, package size, and publisher/signature details remain unresolved.
+
+The checkpoint defines a read-only baseline and post-approval static-inspection procedure, and distinguishes direct official-publisher artifact analysis from Hydra download-path analysis. No artifact was downloaded, installed, or executed. No Hydra application source, configuration, or local checkout was modified. The Hydra download-path experiment remains blocked by the previously recorded source-distribution authorization gap.
+
+See [official-publisher candidate checkpoint](checkpoints/2026-11-04-official-publisher-static-analysis-candidates.md).
