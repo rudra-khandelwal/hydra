@@ -84,3 +84,16 @@ Historical agenda entries and completed milestones are retained in the research 
 - [ ] Keep the direct official-publisher artifact analysis distinct from the still-blocked Hydra download-path experiment.
 
 **Current disposition:** Cryptographic checks and the Defender command-line scan are recorded with limitations. Static inspection is incomplete because required tools were unavailable. No installation or execution occurred. The Hydra download-path experiment remains blocked by source provenance/authorization. See [PuTTY artifact-analysis handoff](checkpoints/2026-11-04-putty-static-analysis-handoff.md).
+
+
+### 2026-11-04 — PuTTY 0.85 embedded-help static analysis
+- [x] Inspect PE headers, sections, imports, and exports with already-installed Visual Studio dumpbin.
+- [x] Extract and review printable ASCII and UTF-16LE strings from raw bytes without executing the target.
+- [x] Calculate section entropy and distinguish indicators from proof of packing.
+- [x] Parse PE resources and validate resource-directory bounds; record version and manifest metadata.
+- [x] Parse ITSF/ITSP and PMGL directory metadata for embedded HTML Help without decompressing or reading internal file contents.
+- [x] Publish the evidence-qualified result and limitations in a dated checkpoint.
+- [ ] Consider whether separately approved content-level help inspection is necessary; do not decompress, render, or open embedded content by default.
+- [ ] Keep the Hydra download-path experiment blocked until exact provenance and authorization evidence for an existing configured source entry is obtained.
+
+**Current disposition:** The reported static checks have not identified a clearly malicious indicator, but they do not prove safety. The high-entropy resource is plausibly explained by compiled HTML Help. No runtime testing occurred. See the [PuTTY embedded-help metadata checkpoint](https://github.com/rudra-khandelwal/hydra/blob/main/research/checkpoints/2026-11-04-putty-embedded-help-metadata.md).
