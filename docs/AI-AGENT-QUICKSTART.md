@@ -11,7 +11,7 @@ Copy/paste command reference for continuing the Hydra Launcher source-build and 
 - **Official upstream application:** https://github.com/hydralauncher/hydra
 - **Canonical project memory:** [Hydra-Memory/README.md](../Hydra-Memory/README.md)
 - **Current state:** [CURRENT-STATE.md](CURRENT-STATE.md)
-- **Latest handoff:** [4 November 2026 handoff](../research/checkpoints/2026-11-04-download-source-investigation.md)
+- **Latest handoff:** [PuTTY artifact-analysis handoff](../research/checkpoints/2026-11-04-putty-static-analysis-handoff.md)
 - **Previous handoff:** [29 October handoff](../research/checkpoints/2026-10-29-hydra-chat-handoff.md)
 - **Five-message cadence:** [HANDOFF-CADENCE.md](HANDOFF-CADENCE.md)
 - **Research agenda:** [AGENDA.md](../research/AGENDA.md)
