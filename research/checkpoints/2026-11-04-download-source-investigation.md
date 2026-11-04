@@ -127,6 +127,29 @@ Read-only commands included `git status --short`, `git rev-parse HEAD`, `git bra
 
 Check backend/source catalogue coverage and matching for Steam ID 322170 against the Schedule I record, using a documented read-only path. Do not change frontend filtering based on this evidence. Separately, the UI could report request errors, successful empty results, and all-filtered results distinctly; that UX improvement is not needed to explain this captured empty response.
 
+
+## Public backend and matching investigation — 4 November 2026
+
+### Confirmed public evidence
+
+- The official upstream [FAQ](https://github.com/hydralauncher/hydra/wiki/FAQ) says Hydra cannot exactly match a game to a download option and instead matches by title; it notes title-match inconsistencies. This is upstream documentation, edited 22 April 2025. It supports title-based matching as the intended behavior, but does not specify current matching normalization, aliases, or backend query rules.
+- The public client schema in `src/types/index.ts` defines source JSON records (`DownloadSourceDownload`) with `title`, `uris`, `uploadDate`, and `fileSize`; there is no Steam ID, shop ID, or alias field in that shape. API-returned `GameRepack` adds `downloadSourceId` and `downloadSourceName`, also without a game ID.
+- The client calls `/games/${shop}/${objectId}/download-sources` and passes the locally configured source IDs. Source sync sends those IDs to `/download-sources/sync`; adding a source registers its public URL at `/download-sources`. These client requests confirm the two configured IDs are sent, not how the service indexes source contents.
+- In the captured Schedule I response, all 16 records directly associate `onlinefix` with `BVnaGLvo`. `w4nVajB6` remains only an inferred FitGirl ID based on the settings names. Geometry Dash returned no records, so that response cannot associate either ID with an entry.
+- In public upstream issue [#2381](https://github.com/hydralauncher/hydra/issues/2381#issuecomment-4761820746), a maintainer states the production backend and infrastructure will not be open-sourced or self-hostable. This is evidence that the matching implementation cannot be audited in the public app repo; it is not a statement about this particular game.
+
+### What remains unknown
+
+No public source JSON URL for the two configured local source records is present in this documentation or the captured API response, and no source metadata file was inspected. Therefore we cannot confirm whether Geometry Dash appears under an alternate title in either source, whether a title alias exists, or whether the private service maps titles to Steam 322170. The source IDs were sent in the request; the empty response does not reveal per-source indexing or exclusion reasons. No alternate Geometry Dash ID mapping was found in the inspected client-side types or request path, but that does not rule out private backend aliases.
+
+### Assessment and next action
+
+The best supported explanation class is source-title matching/coverage: upstream documentation confirms title matching rather than exact identity matching, and the source JSON shape provides a title but no game identifier. This is explanatory context, not a confirmed root cause for Geometry Dash. The confirmed immediate cause remains the successful empty API response.
+
+Next, compare the exact public JSON metadata files referenced by the two configured sources for titles/aliases corresponding to Geometry Dash and Schedule I. This requires the exact source URLs (or the user providing them); do not substitute similarly named community URLs. Inspect only title and source identifiers, redact all URIs. If the entries do not explain the difference, the remaining step requires a documented service response or maintainer clarification; do not probe private endpoints or bypass access controls. Keep frontend filtering unchanged.
+
+Read-only inspection in this pass: `rg` targeted searches in `src/main`, `src/types`, and renderer source; `Get-Content` of `src/main/events/download-sources/{add-download-source,sync-download-sources}.ts`, `src/main/services/user/sync-download-sources.ts`, `src/types/index.ts`, and the game-details request block; public upstream FAQ and issue #2381/comment review; and `git status --short`, `git rev-parse HEAD`, `git branch --show-current`. No tests were run; no app files were changed; the working-tree changes remain preserved.
+
 ## Handoff counter
 
-**User-message count since this handoff: 2/5.** Follow [HANDOFF-CADENCE.md](../../docs/HANDOFF-CADENCE.md). Update the current state and dated checkpoint at the fifth project-related user message, and sooner for meaningful state changes or before pausing. This is a documented manual checkpoint; no reliable automatic cross-chat counter or background GitHub updater has been configured.
+**User-message count since this handoff: 3/5.** Follow [HANDOFF-CADENCE.md](../../docs/HANDOFF-CADENCE.md). Update the current state and dated checkpoint at the fifth project-related user message, and sooner for meaningful state changes or before pausing. This is a documented manual checkpoint; no reliable automatic cross-chat counter or background GitHub updater has been configured.
