@@ -47,3 +47,14 @@ Historical agenda entries and completed milestones are retained in the research 
 - [ ] Report evidence before considering installation or execution; that requires a separate explicit approval and isolated environment.
 
 **Current disposition:** No test artifact is approved. This is a provenance/authorization blocker, not evidence that Hydra or a source is malicious. Catalogue coverage is not the main workstream unless a targeted read-only check helps identify a qualifying artifact. See [second candidate search](checkpoints/2026-11-04-second-candidate-search.md), [Mindustry review](checkpoints/2026-11-04-mindustry-candidate-review.md), and [security continuation checkpoint](checkpoints/2026-11-04-security-continuation.md).
+
+
+### 2026-11-04 — Final targeted provenance check
+- [x] Perform the final focused, read-only check of existing Hydra download entries against official free/open-source release identity or explicitly authorized distributor evidence.
+- [x] Record the outcome: no qualifying test artifact was identified in the checked existing Hydra sources.
+- [x] Retain Mindustry only as an unapproved lead: Hydra v4.1.4 showed one OnlineFix option, but no official project evidence linked or authorized that specific distribution. GPL-3.0 alone does not establish authorization for that entry.
+- [x] Stop candidate discovery without opening download links, exposing URIs, bypassing HTTP 403, changing sources/settings, downloading, installing, or executing.
+- [ ] Resume only if new evidence identifies an exact existing source record and establishes the specific distribution as official or explicitly authorized.
+- [ ] If that gate is met, prepare a fresh read-only pre-download baseline and request explicit approval for a precisely scoped download-only Hydra test.
+
+**Final disposition (4 November 2026):** No approved artifact is available from the existing Hydra sources based on the completed focused checks. The Hydra download-path experiment remains blocked. This is an evidence/authorization limitation, not a malware finding or a safety verdict about Hydra or any source. Do not broaden catalogue searches by default. A separate direct-from-official-publisher artifact analysis could be considered later, but it would not test Hydra's download path.
