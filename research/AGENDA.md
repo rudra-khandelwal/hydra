@@ -97,3 +97,16 @@ Historical agenda entries and completed milestones are retained in the research 
 - [ ] Keep the Hydra download-path experiment blocked until exact provenance and authorization evidence for an existing configured source entry is obtained.
 
 **Current disposition:** The reported static checks have not identified a clearly malicious indicator, but they do not prove safety. The high-entropy resource is plausibly explained by compiled HTML Help. No runtime testing occurred. See the [PuTTY embedded-help metadata checkpoint](https://github.com/rudra-khandelwal/hydra/blob/main/research/checkpoints/2026-11-04-putty-embedded-help-metadata.md).
+
+
+### 2026-11-13 — Controlled Hydra Mindustry download and scan
+- [x] Select a small game actually shown by the existing Hydra configuration after the user explicitly chose a sample for malware investigation.
+- [x] Download the Hydra v4.1.4 OnlineFix Mindustry option with the Torrent downloader; automatic extraction and archive deletion were off.
+- [x] Record both downloaded RAR5 files, their sizes, SHA-256 hashes, and Defender custom-scan outputs.
+- [x] Use the exact OnlineFix Mindustry page only to cross-check its stated build/password metadata; use the source-provided password solely to list archive headers and member names, not to extract files.
+- [x] Record the archive member inventory and unresolved Build 06032021 vs 23122020 filename/timestamp discrepancy.
+- [ ] Obtain an isolated offline analysis environment before extracting any member for static inspection.
+- [ ] In that environment, extract only for static inspection, rescan/hash member files, verify signatures where applicable, and inspect PE metadata/imports/strings without running any game files.
+- [ ] Keep execution as a separate decision requiring explicit approval and isolation.
+
+**Current disposition (13 November):** The controlled Hydra download occurred using an unverified community distribution at the user's direction. Defender reported no threats in the archive files, but encrypted archive members were not extracted or independently scanned. This does not establish safety, maliciousness, official provenance, or authorization. The exact build remains uncertain. Prior 4 November candidate-selection entries remain historical and are superseded for current task status by this checkpoint; source authorization remains unresolved. Do not extract on the everyday host or launch any included executable.
