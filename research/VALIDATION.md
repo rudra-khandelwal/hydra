@@ -113,3 +113,20 @@ See [PuTTY artifact-analysis handoff](checkpoints/2026-11-04-putty-static-analys
 | Hydra download-path experiment | Still blocked | PuTTY came directly from official publisher, not through Hydra; authorization/provenance of an existing configured source entry remains unverified. |
 
 See the [PuTTY embedded-help metadata checkpoint](https://github.com/rudra-khandelwal/hydra/blob/main/research/checkpoints/2026-11-04-putty-embedded-help-metadata.md).
+
+
+## Controlled Hydra download — 13 November 2026
+
+| Check | Status | Evidence/limitation |
+|---|---|---|
+| Existing source and game option | Observed in Hydra v4.1.4 | Mindustry (Steam app 1127400), option “Build 06032021,” 103.9 MB, onlinefix; Torrent selected. Distribution authorization is not established. |
+| Automatic extraction/deletion settings | Verified off before download | UI state observed before selecting Download now. |
+| Download completion | Complete | Hydra Downloads page showed one completed 103.9 MB Torrent item. No process/network/filesystem differential was captured. |
+| Downloaded files and hashes | Recorded | Two RAR5 archives and SHA-256 values are recorded in [the checkpoint](checkpoints/2026-11-13-hydra-mindustry-download-scan.md). Hashes were unchanged after scanning. |
+| Defender custom scan | No threats reported | MpCmdRun scans of folder and both archives returned 0 and “found no threats.” The output does not establish scanning of encrypted archive members. User reported real-time protection on; status was not independently queried. |
+| Archive member inventory | Metadata-only listing complete | Existing UnRAR 7.23 listed encrypted RAR5 headers and names/sizes. No extraction. Main archive lists Mindustry.exe, bundled JRE, Steam API and OnlineFix files. |
+| Exact build/provenance | Unresolved | Hydra option and OnlineFix page say Build 06032021; archive name includes 23122020 and file timestamps are mainly Dec 2020. Specific payload is not matched to an official release or authorized distribution. |
+| Static inspection of members | Pending isolation | No extraction, member hashes/signatures, or PE/string inspection. Windows Sandbox and common VM executable paths checked were not found. |
+| Installation or execution | Not performed | Requires a separate explicit decision and isolated environment. |
+| Overall safety verdict | Not established | Clean outer-archive scan is not proof of safe contents. |
+
