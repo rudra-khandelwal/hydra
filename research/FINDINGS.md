@@ -121,6 +121,8 @@ No final security verdict has been established.
 
 ## F-008 — Hydra Mindustry download completed; archive contents remain unverified
 
+See the [dated download and scan checkpoint](checkpoints/2026-11-13-hydra-mindustry-download-scan.md) for artifact hashes and sanitized command results.
+
 **Date:** 12 November 2026  
 **Status:** Download and outer-archive scan complete; member analysis pending isolation
 
