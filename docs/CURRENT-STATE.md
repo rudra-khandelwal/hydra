@@ -1,9 +1,14 @@
 # Hydra Project Current State
 
-**Reviewed:** 4 November 2026 (Asia/Calcutta)  
+**Reviewed:** 13 November 2026 (Asia/Calcutta)  
 **Documentation repository:** [rudra-khandelwal/hydra](https://github.com/rudra-khandelwal/hydra), public, default branch `main`  
 **Application checkout:** `C:\Users\rudra\Downloads\hydra`  
 **Official upstream:** [hydralauncher/hydra](https://github.com/hydralauncher/hydra)
+
+
+## Latest verified update — 13 November 2026
+
+A controlled download of Mindustry through Hydra v4.1.4's existing OnlineFix entry completed. Defender reported no threats in the two downloaded RAR files, but their encrypted contents have not been extracted or independently inspected. The OnlineFix package's exact build and authorization remain unverified. No game was installed or executed. See the [13 November download and scan checkpoint](../research/checkpoints/2026-11-13-hydra-mindustry-download-scan.md). This update supersedes the earlier “no download started” status below; older sections remain historical.
 
 This is the current-state companion to the historical project memory and diary. Treat it as a dated snapshot; inspect the repositories again before acting.
 
