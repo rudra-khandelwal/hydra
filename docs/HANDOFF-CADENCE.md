@@ -1,7 +1,7 @@
 # Five-Message Handoff Cadence
 
-**Current counter:** 1 of 5 user messages since the PuTTY artifact-analysis handoff (early checkpoint after new embedded-help findings).  
-**Current checkpoint:** [PuTTY embedded-help metadata checkpoint](../research/checkpoints/2026-11-04-putty-embedded-help-metadata.md)
+**Current counter:** 0 of 5 user messages since the 13 November 2026 controlled-download checkpoint; this checkpoint closes the overdue handoff cycle.  
+**Current checkpoint:** [Mindustry download and scan checkpoint](../research/checkpoints/2026-11-13-hydra-mindustry-download-scan.md)
 
 ## Required routine for every AI continuing this project
 
