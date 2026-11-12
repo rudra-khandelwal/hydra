@@ -117,3 +117,19 @@ No final security verdict has been established.
 **Limitations:** The report says no download link was opened and no URI exposed. No download, installation, execution, artifact hash/signature/AV/static analysis, or controlled download-time process/network/filesystem differential was performed.
 
 **Next Action:** Do not continue broad catalogue searching by default. If useful, perform one narrow read-only provenance check of an exact existing source record against official project release data. If that evidence cannot establish authorization, stop candidate selection and preserve the blocker. Any later download requires a fresh baseline and explicit user approval; installation/execution requires separate approval and isolation.
+
+
+## F-008 — Hydra Mindustry download completed; archive contents remain unverified
+
+**Date:** 12 November 2026  
+**Status:** Download and outer-archive scan complete; member analysis pending isolation
+
+**Fact:** Hydra v4.1.4 displayed “Mindustry Build 06032021” (Steam app 1127400), 103.9 MB, from the existing onlinefix source. A Torrent download completed with automatic extraction and archive deletion disabled. It produced two RAR5 files; sizes and SHA-256 values are in the [dated checkpoint](checkpoints/2026-11-13-hydra-mindustry-download-scan.md).
+
+**Observation:** Microsoft Defender custom scans of the folder and each archive returned exit code 0 and “found no threats.” The user reported real-time protection enabled, but this was not independently confirmed during the pass. The archives report encrypted headers. A metadata-only UnRAR listing (existing version 7.23 x64) shows a bundled Mindustry executable/runtime and third-party OnlineFix DLL/configuration files. No member was extracted or executed.
+
+**Finding:** The Defender result applies to the archive files as scanned and does not establish that encrypted members are clean. The OnlineFix source page identifies Build 06032021, while the downloaded filename contains 23122020 and listed member timestamps are primarily 25 December 2020; the exact build remains unresolved. The specific distribution is not verified as an official or authorized release. No malware finding or safety verdict is made.
+
+**Limitations:** No process/network/filesystem differential was captured during the transfer. No member hash, signature, PE/string analysis, or individual member scan was performed. No isolated VM/Sandbox was detected in the checked locations. No extraction, installation, launch, or execution occurred.
+
+**Next Action:** Keep the files unopened on the everyday host. Obtain an isolated offline analysis environment before extraction. Then extract for static inspection and scan/hash each member there; any execution remains a separate explicitly approved experiment.
